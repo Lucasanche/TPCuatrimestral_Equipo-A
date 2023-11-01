@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Clientes.aspx.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Clientes.aspx.designer.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
@@ -127,6 +128,20 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Business\Business.csproj">
+      <Project>{07dadff2-8cb1-43d4-9788-c828621d0f88}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="Data\Data.csproj">
+      <Project>{d8c24556-2dca-46c2-8b35-8c6464cbe6a5}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="Domain\Domain.csproj">
+      <Project>{5a1edc1b-7862-4402-a380-912a328f4f5a}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

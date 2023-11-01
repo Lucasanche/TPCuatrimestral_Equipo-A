@@ -1,9 +1,3 @@
-/*
-Base de datos destinada a una aplicacion de call center que registre domicilios, clientes, reclamos, usuarios, permisos, etc.
-Se hace la relacion muchos a muchos sobre los Clientes y sus domicilios (y visceversa).
-Tambien se cargan las provincias y localidades en distintas tablas.
-*/
-
 CREATE DATABASE CALL_CENTER
 GO
 USE CALL_CENTER
@@ -36,7 +30,7 @@ CREATE TABLE DOMICILIOS(
 GO
 CREATE TABLE ROLES(
     ID TINYINT PRIMARY KEY NOT NULL IDENTITY(1,1),
-    DESCRIPCION_ROL VARCHAR(20) NOT NULL,
+    DESCRIPCION VARCHAR(20) NOT NULL,
     ESTADO BIT DEFAULT 1 NOT NULL
 )
 GO
@@ -106,4 +100,3 @@ CREATE TABLE CLIENTES_X_DOMICILIOS (
     ESTADO BIT DEFAULT 1 NOT NULL
 )
 GO
-

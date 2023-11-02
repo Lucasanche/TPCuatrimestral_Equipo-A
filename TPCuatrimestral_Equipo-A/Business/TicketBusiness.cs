@@ -32,7 +32,7 @@ namespace Business
                                 FECHA_FIN,
                                 ID_ESTADO,
                                 ESTADO
-                                FROM CLIENTES");
+                                FROM RECLAMOS");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())

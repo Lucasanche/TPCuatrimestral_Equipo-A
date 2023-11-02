@@ -31,5 +31,5 @@ namespace Domain
     //                               FECHA_FIN,
     //                               ID_ESTADO,
     //                               ESTADO
-    //                        FROM CLIENTES");
+    //                        FROM RECLAMOS");
 }

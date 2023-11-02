@@ -69,7 +69,7 @@ namespace Business
             List<SqlParameter> parameters = new List<SqlParameter>();
             try
             {
-                string query = "DELETE FROM ARTICULOS WHERE Id = @Id";
+                string query = "DELETE FROM CLIENTES WHERE ID = @Id";
                 parameters.Add(new SqlParameter("@Id", cliente.ID));
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
@@ -83,24 +83,24 @@ namespace Business
                 data.Close();
             }
         }
-        public static int GetMaxID()
-        {
-            AccessData data = new AccessData();
-            try
-            {
-                data.SetQuery(@"SELECT MAX(Id) FROM CLIENTES");
-                data.ExecuteQuery();
-                data.Reader.Read();
-                return (int)data.Reader.GetInt32(0);
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-            finally
-            {
-                data.Close();
-            }
-        }
+        //public static int GetMaxID()
+        //{
+        //    AccessData data = new AccessData();
+        //    try
+        //    {
+        //        data.SetQuery(@"SELECT MAX(Id) FROM CLIENTES");
+        //        data.ExecuteQuery();
+        //        data.Reader.Read();
+        //        return (int)data.Reader.GetInt32(0);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return -1;
+        //    }
+        //    finally
+        //    {
+        //        data.Close();
+        //    }
+        //}
     }
 }

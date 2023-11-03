@@ -1,7 +1,6 @@
 namespace Domain
 {
     using System;
-    using System.Security.Cryptography.Xml;
 
     public partial class Ticket
     {

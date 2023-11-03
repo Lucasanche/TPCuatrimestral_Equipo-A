@@ -27,7 +27,7 @@ namespace Business
                                 FECHA_FIN,
                                 ID_ESTADO,
                                 ESTADO
-                                FROM RECLAMOS");
+                                FROM TICKE");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
@@ -65,8 +65,8 @@ namespace Business
             AccessData data = new AccessData();
             List<SqlParameter> parameters = new List<SqlParameter>();
             try
-            {//cambiar nombre de la base de RECLAMOS  a TICKETS
-                string query = "DELETE FROM RECLAMOS WHERE ID = @Id";
+            {
+                string query = "DELETE FROM TICKETS WHERE ID = @Id";
                 parameters.Add(new SqlParameter("@Id", ticket.ID));
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
@@ -84,8 +84,8 @@ namespace Business
         {
             AccessData data = new AccessData();
             try
-            {//Cambiar nombre de RECLAMOS a TICKETS en SQL
-                data.SetQuery(@"SELECT MIN(FECHA_INICIO) FROM RECLAMOS");
+            {
+                data.SetQuery(@"SELECT MIN(FECHA_INICIO) FROM TICKETS");
                 data.ExecuteQuery();
                 data.Reader.Read();
                 return (int)data.Reader.GetInt32(0);

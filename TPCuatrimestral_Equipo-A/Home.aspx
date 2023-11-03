@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="TPCuatrimestral_Equipo_A.WebForm1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="estilos/home.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <!--Importar estilos de estilos/home.css que corresponde a esta hoja de estilos-->
     <div class="container">
         <div class="div-principal">
             <div class="form-login">
@@ -14,18 +14,18 @@
                     <div class="imagen-span">
                         <div class="container-icono">
                             <span class="icono">
-                            <i class="icono-img-usr"></i>
+                                <i class="icono-img-usr"></i>
                             </span>
                         </div>
                         <input type="text" class="input-texto" placeholder="Usuario">
                     </div>
                     <div class="imagen-span">
-                    <div class="container-icono">
-                        <span class="icono">
-                        <i class="icono-img-password"></i>
-                        </span>
-                    </div>
-                    <input type="password" class="input-texto" placeholder="Contraseña...">
+                        <div class="container-icono">
+                            <span class="icono">
+                                <i class="icono-img-password"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="input-texto" placeholder="Contraseña...">
                     </div>
                 </div>
                 <div class="container-btn">
@@ -34,5 +34,4 @@
             </div>
         </div>
     </div>
-
 </asp:Content>

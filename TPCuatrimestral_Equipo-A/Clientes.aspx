@@ -2,5 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:GridView ID="ClientesGV" runat="server" CssClass="uk-table uk-table-divider"></asp:GridView>
+    <div class="uk-container">
+        <asp:GridView ID="ClientesGV" runat="server" CssClass="uk-table uk-table-divider"></asp:GridView>
+    </div>
 </asp:Content>

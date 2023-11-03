@@ -16,19 +16,4 @@ namespace Domain
         public byte? IDEstado { get; set; }
         public bool Estado { get; set; }
     }
-    //data.SetQuery(@"SELECT ID, 
-    //                               ID_TIPO,
-    //                               ISNULL(ID_TIPO, 'Otro'),
-    //                               ID_PRIORIDAD,
-    //                               ISNULL(ID_PRIORIDAD, 0),
-    //                               DESCRIPCION_INICIAL,
-    //                               DESCRIPCION_CIERRE, 
-    //                               ISNULL(DESCRIPCION_CIERRE, 'Cerrado sin descripcion'),
-    //                               USUARIO_ASIGNADO, 
-    //                               CLIENTE_AFECTADO,
-    //                               FECHA_INICIO,
-    //                               FECHA_FIN,
-    //                               ID_ESTADO,
-    //                               ESTADO
-    //                        FROM RECLAMOS");
 }

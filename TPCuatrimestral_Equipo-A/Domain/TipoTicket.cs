@@ -1,6 +1,6 @@
 namespace Domain
 {
-    public partial class Tipo
+    public partial class TipoTicket
     {
         public byte ID { get; set; }
         public string Nombre { get; set; }

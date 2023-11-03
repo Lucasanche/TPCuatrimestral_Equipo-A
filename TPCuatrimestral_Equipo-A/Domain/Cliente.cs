@@ -14,17 +14,6 @@ namespace Domain
         public DateTime FechaAlta { get; set; }
         public DateTime? FechaBaja { get; set; }
         public bool Estado { get; set; }
-        //data.SetQuery(@"SELECT ID, 
-        //                               DNI, 
-        //                               NOMBRE, 
-        //                               APELIIDO,
-        //                               EMAIL, 
-        //                               TELEFONO_1, 
-        //                               ISNULL(TELEFONO_2, 'Sin asignar'),
-        //                               FECHA_NACIMIENTO,
-        //                               FECHA_ALTA,
-        //                               ISNULL(FECHA_BAJA, 'Sin asignar'),
-        //                               ESTADO 
-        //                        FROM CLIENTES");
+
     }
 }

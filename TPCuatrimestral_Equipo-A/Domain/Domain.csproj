@@ -81,7 +81,7 @@
     <Compile Include="Provincia.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="Rol.cs" />
-    <Compile Include="Tipo.cs" />
+    <Compile Include="TipoTicket.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>

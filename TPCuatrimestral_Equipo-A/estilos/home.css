@@ -1,0 +1,118 @@
+body {
+    height: 100vh;
+    width: auto;
+    background: linear-gradient(42deg, black, #200a27, #33120b);
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+/*container gral*/
+.container {
+    height: 45vh;
+    background: linear-gradient(180deg, #3d3333, #372e2e00);
+    font-family: "Open Sans", Arial, sans-serif;
+    line-height: 1.8;
+    border: #bfbfbf;
+    border-color: #495057;
+    border-width: 10px;
+    width: 50vh;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*Cuerpo de login*/
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+/*boton*/
+.container-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    border-radius: 40px;
+    color: #fff;
+    background-color: #7c147d;
+    /* border-color: #ed0cef; */
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    width: 20%;
+    text-decoration: none;
+}
+
+/*Titulo*/
+.titulo-login {
+    color: #fff;
+    background: transparent;
+    text-align: center !important;
+    padding: 0.75rem 1.25rem;
+}
+
+/*Icono pequeño usr y contraseña*/
+.container-icono {
+    margin-right: -1px;
+    display: flex;
+}
+
+.icono {
+    width: 40px;
+    border: none;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icono-img-usr {
+    background-image: url('usuario.svg');
+    width: 23px;
+    height: 24px;
+    background-size: cover;
+}
+
+.icono-img-password {
+    background-image: url('candado.svg');
+    width: 40px;
+    height: 25px;
+    background-size: cover;
+}
+
+/*Grupo imagen + contraseña o usuario*/
+.imagen-span {
+    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+/*container de texto contraseña y usuario*/
+.input-texto {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    margin-left: -1px;
+    flex: 1 1 auto;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0px 15px;
+    font-family: inherit;
+    border-left: revert-layer;
+}

@@ -72,10 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
-    <Compile Include="ClienteXDomicilio.cs" />
     <Compile Include="Domicilio.cs" />
     <Compile Include="EstadoReclamo.cs" />
-    <Compile Include="Localidad.cs" />
     <Compile Include="Prioridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provincia.cs" />

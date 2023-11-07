@@ -32,19 +32,19 @@ namespace Business
 
                 while (data.Reader.Read())
                 {
-                    Ticket ticketAux = new Ticket();
-                    //{
-                    ticketAux.ID = (int)data.Reader["Id"];
-                    ticketAux.tipo_id = (byte)data.Reader["ID_TIPO"];
-                    ticketAux.IDPrioridad = (byte)data.Reader["ID_PRIORIDAD"];
-                    ticketAux.DescripcionIncial = data.Reader["DESCRIPCION_INICIAL"].ToString();
-                    ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
-                    ticketAux.UsuarioAsignado = (int)data.Reader["USUARIO_ASIGNADO"];
-                    ticketAux.ClienteAfectado = (int)data.Reader["CLIENTE_AFECTADO"];
-                    ticketAux.FechaInicio = (DateTime)data.Reader["FECHA_INICIO"];
-                    ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];
-                    ticketAux.IDEstado = (byte)data.Reader["ID_ESTADO"];
-                    ticketAux.Estado = (bool)data.Reader["ESTADO"];
+                    //Ticket ticketAux = new Ticket();
+                    ////{
+                    //ticketAux.ID = (int)data.Reader["Id"];
+                    //ticketAux.tipo_id = (byte)data.Reader["ID_TIPO"];
+                    //ticketAux.IDPrioridad = (byte)data.Reader["ID_PRIORIDAD"];
+                    //ticketAux.DescripcionIncial = data.Reader["DESCRIPCION_INICIAL"].ToString();
+                    //ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
+                    //ticketAux.UsuarioAsignado = (int)data.Reader["USUARIO_ASIGNADO"];
+                    //ticketAux.ClienteAfectado = (int)data.Reader["CLIENTE_AFECTADO"];
+                    //ticketAux.FechaInicio = (DateTime)data.Reader["FECHA_INICIO"];
+                    //ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];
+                    //ticketAux.IDEstado = (byte)data.Reader["ID_ESTADO"];
+                    //ticketAux.Estado = (bool)data.Reader["ESTADO"];
                     //};
                     ticketLista.Add(ticketAux);
                 }

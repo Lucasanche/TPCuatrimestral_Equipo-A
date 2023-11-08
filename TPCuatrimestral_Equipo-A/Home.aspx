@@ -8,7 +8,7 @@
         <div class="div-principal">
             <div class="form-login">
                 <div class="titulo-login">
-                    <h1 style="font-size: 45px;font-weight: 650;color: #7c83d785;">Call Center</h1>
+                    <h1 style="font-size: 45px;font-weight: 600;color: #7c83d785;">Call Center</h1>
                 </div>
                 <div class="card-body pb-4 pt-2">
                     <div class="imagen-span">

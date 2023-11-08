@@ -8,8 +8,10 @@ namespace TPCuatrimestral_Equipo_A
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
             ClientesGV.DataSource = ClientesBusiness.List();
             ClientesGV.DataBind();
+            */
         }
     }
 }

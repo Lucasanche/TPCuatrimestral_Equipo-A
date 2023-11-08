@@ -46,7 +46,7 @@ namespace Business
                     ticketAux.IDEstado = (byte)data.Reader["ID_ESTADO"];
                     ticketAux.Estado = (bool)data.Reader["ESTADO"];
                     //};
-                    ticketLista.Add(ticketAux);
+                    //ticketLista.Add(ticketAux);
                 }
                 return ticketLista;
             }

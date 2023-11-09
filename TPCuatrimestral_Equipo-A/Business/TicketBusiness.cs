@@ -50,19 +50,19 @@ namespace Business
                         ID = (byte)data.Reader["ID_PRIORIDAD"],
                         Nombre = data.Reader["PRIORIDAD"].ToString()
                     };
-                    ticketAux.DescripcionIncial = data.Reader["DESCRIPCION_INICIAL"].ToString();
+                    ticketAux.DescripcionInicial = data.Reader["DESCRIPCION_INICIAL"].ToString();
                     ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
                     ticketAux.LegajoUsuario = data.Reader["LEGAJO_USUARIO"].ToString();
                     ticketAux.NombreUsuario = data.Reader["USUARIO"].ToString();
                     ticketAux.ClienteAfectado = ClientesBusiness.ClientePorID((int)data.Reader["CLIENTE_AFECTADO"]);
-                    ticketAux.FechaInicio = (DateTime)data.Reader["FECHA_INICIO"];
+                    ticketAux.FechaCreacion = (DateTime)data.Reader["FECHA_INICIO"];
                     if (!data.Reader.IsDBNull(data.Reader.GetOrdinal("FECHA_FIN")))
                     {
-                        ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];
+                        ticketAux.FechaCierre = (DateTime)data.Reader["FECHA_FIN"];
                     }
                     else
                     {
-                        ticketAux.FechaFin = null;
+                        ticketAux.FechaCierre = null;
                     }
                     ticketAux.Estado = new EstadoReclamo()
                     {

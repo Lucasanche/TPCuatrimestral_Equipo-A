@@ -12,7 +12,7 @@ namespace Domain
         [DisplayName("Prioridad")]
         public Prioridad Prioridad { get; set; }
         [DisplayName("Descripción")]
-        public string DescripcionIncial { get; set; }
+        public string DescripcionInicial { get; set; }
         [DisplayName("Descripción al cierre")]
         public string DescripcionCierre { get; set; }
         [DisplayName("Legajo de usuario asignado")]
@@ -22,9 +22,9 @@ namespace Domain
         [DisplayName("Cliente afectado")]
         public Cliente ClienteAfectado { get; set; }
         [DisplayName("Fecha de creación")]
-        public DateTime FechaInicio { get; set; }
+        public DateTime FechaCreacion { get; set; }
         [DisplayName("Fecha de cierre")]
-        public DateTime? FechaFin { get; set; }
+        public DateTime? FechaCierre { get; set; }
         [DisplayName("Estado")]
         public EstadoReclamo Estado { get; set; }
     }

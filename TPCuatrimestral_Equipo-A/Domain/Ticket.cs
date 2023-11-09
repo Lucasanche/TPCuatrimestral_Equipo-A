@@ -9,7 +9,8 @@ namespace Domain
         public Prioridad Prioridad { get; set; }
         public string DescripcionIncial { get; set; }
         public string DescripcionCierre { get; set; }
-        public Usuario UsuarioAsignado { get; set; }
+        public string LegajoUsuario { get; set; }
+        public string NombreUsuario { get; set; }
         public Cliente ClienteAfectado { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime? FechaFin { get; set; }

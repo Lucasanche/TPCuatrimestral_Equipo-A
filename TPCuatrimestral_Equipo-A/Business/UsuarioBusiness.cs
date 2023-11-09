@@ -11,7 +11,7 @@ namespace Business
 {
     public class UsuarioBusiness
     {
-        public static List<Usuario> List()
+        public static List<Cliente> List()
         {
             List<Cliente> clienteLista = new List<Cliente>();
             AccessData data = new AccessData();

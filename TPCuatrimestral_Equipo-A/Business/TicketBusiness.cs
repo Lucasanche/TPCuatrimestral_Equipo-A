@@ -16,22 +16,23 @@ namespace Business
             {
                 data.SetQuery(@"SELECT 
                                 ticket.ID
-                                , tipo.ID as ID_TIPO
-                                , tipo.NOMBRE as TIPO
-                                , priori.ID as ID_PRIORIDAD
-                                , priori.NOMBRE as PRIORIDAD
+                                , tipo.ID AS ID_TIPO
+                                , tipo.NOMBRE AS TIPO
+                                , priori.ID AS ID_PRIORIDAD
+                                , priori.NOMBRE AS PRIORIDAD
                                 , ticket.DESCRIPCION_INICIAL
                                 , ISNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE
-                                , USUARIO_ASIGNADO
-                                , CLIENTE_AFECTADO
-                                , FECHA_INICIO
+                                , usuario.LEGAJO AS LEGAJO_USUARIO
+                                , CONCAT(usuario.NOMBRE,' ', usuario.APELLIDO) AS USUARIO
+                                , ticket.FECHA_INICIO
                                 , FECHA_FIN
-                                , estado.ID as ID_ESTADO
-                                , estado.NOMBRE as ESTADO
+                                , estado.ID AS ID_ESTADO
+                                , estado.NOMBRE AS ESTADO
                                 FROM TICKETS ticket
-                                LEFT JOIN TIPOS_INCIDENCIA as tipo ON ticket.ID_TIPO = tipo.ID
-                                LEFT JOIN PRIORIDADES as priori ON ticket.ID_PRIORIDAD = priori.ID
-                                LEFT JOIN ESTADOS_TICKET as estado ON ticket.ID_ESTADO = estado.ID");
+                                LEFT JOIN TIPOS_INCIDENCIA AS tipo ON ticket.ID_TIPO = tipo.ID
+                                LEFT JOIN PRIORIDADES AS priori ON ticket.ID_PRIORIDAD = priori.ID
+                                LEFT JOIN ESTADOS_TICKET AS estado ON ticket.ID_ESTADO = estado.ID
+                                LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.LEGAJO");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
@@ -50,7 +51,8 @@ namespace Business
                     };
                     ticketAux.DescripcionIncial = data.Reader["DESCRIPCION_INICIAL"].ToString();
                     ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
-                    //ticketAux.UsuarioAsignado = //TODO: read by ID user
+                    ticketAux.LegajoUsuario = data.Reader["LEGAJO_USUARIO"].ToString();
+                    ticketAux.NombreUsuario = data.Reader["USUARIO"].ToString();
                     ticketAux.ClienteAfectado = ClientesBusiness.ClientePorID((int)data.Reader["CLIENTE_AFECTADO"]);
                     ticketAux.FechaInicio = (DateTime)data.Reader["FECHA_INICIO"];
                     ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];

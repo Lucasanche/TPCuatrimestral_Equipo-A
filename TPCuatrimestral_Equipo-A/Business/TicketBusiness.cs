@@ -14,38 +14,51 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT ID, 
-                                ID_TIPO,
-                                ID_PRIORIDAD,
-                                ISNULL(ID_PRIORIDAD, 0),
-                                DESCRIPCION_INICIAL,
-                                DESCRIPCION_CIERRE, 
-                                ISNULL(DESCRIPCION_CIERRE, 'Cerrado sin descripcion'),
-                                USUARIO_ASIGNADO, 
-                                CLIENTE_AFECTADO,
-                                FECHA_INICIO,
-                                FECHA_FIN,
-                                ID_ESTADO,
-                                ESTADO
-                                FROM TICKE");
+                data.SetQuery(@"SELECT 
+                                ticket.ID
+                                , tipo.ID as ID_TIPO
+                                , tipo.NOMBRE as TIPO
+                                , priori.ID as ID_PRIORIDAD
+                                , priori.NOMBRE as PRIORIDAD
+                                , ticket.DESCRIPCION_INICIAL
+                                , ISNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE
+                                , USUARIO_ASIGNADO
+                                , CLIENTE_AFECTADO
+                                , FECHA_INICIO
+                                , FECHA_FIN
+                                , estado.ID as ID_ESTADO
+                                , estado.NOMBRE as ESTADO
+                                FROM TICKETS ticket
+                                LEFT JOIN TIPOS_INCIDENCIA as tipo ON ticket.ID_TIPO = tipo.ID
+                                LEFT JOIN PRIORIDADES as priori ON ticket.ID_PRIORIDAD = priori.ID
+                                LEFT JOIN ESTADOS_TICKET as estado ON ticket.ID_ESTADO = estado.ID");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
-                    //Ticket ticketAux = new Ticket();
-                    ////{
-                    //ticketAux.ID = (int)data.Reader["Id"];
-                    //ticketAux.tipo_id = (byte)data.Reader["ID_TIPO"];
-                    //ticketAux.IDPrioridad = (byte)data.Reader["ID_PRIORIDAD"];
-                    //ticketAux.DescripcionIncial = data.Reader["DESCRIPCION_INICIAL"].ToString();
-                    //ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
-                    //ticketAux.UsuarioAsignado = (int)data.Reader["USUARIO_ASIGNADO"];
-                    //ticketAux.ClienteAfectado = (int)data.Reader["CLIENTE_AFECTADO"];
-                    //ticketAux.FechaInicio = (DateTime)data.Reader["FECHA_INICIO"];
-                    //ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];
-                    //ticketAux.IDEstado = (byte)data.Reader["ID_ESTADO"];
-                    //ticketAux.Estado = (bool)data.Reader["ESTADO"];
-                    //};
+                    Ticket ticketAux = new Ticket();
+                    ticketAux.ID = (int)data.Reader["Id"];
+                    ticketAux.Tipo = new TipoTicket
+                    {
+                        ID = (byte)data.Reader["ID_TIPO"],
+                        Nombre = data.Reader["TIPO"].ToString()
+                    };
+                    ticketAux.Prioridad = new Prioridad
+                    {
+                        ID = (byte)data.Reader["ID_PRIORIDAD"],
+                        Nombre = data.Reader["PRIORIDAD"].ToString()
+                    };
+                    ticketAux.DescripcionIncial = data.Reader["DESCRIPCION_INICIAL"].ToString();
+                    ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
+                    //ticketAux.UsuarioAsignado = //TODO: read by ID user
+                    ticketAux.ClienteAfectado = ClientesBusiness.ClientePorID((int)data.Reader["CLIENTE_AFECTADO"]);
+                    ticketAux.FechaInicio = (DateTime)data.Reader["FECHA_INICIO"];
+                    ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];
+                    ticketAux.Estado = new EstadoReclamo()
+                    {
+                        ID = (byte)data.Reader["ID_ESTADO"],
+                        Nombre = data.Reader["ESTADO"].ToString()
+                    };
                     ticketLista.Add(ticketAux);
                 }
                 return ticketLista;

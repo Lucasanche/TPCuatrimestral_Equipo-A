@@ -6,7 +6,7 @@ namespace Domain
     {
         public int ID { get; set; }
         public TipoTicket Tipo { get; set; }
-        public byte IDPrioridad { get; set; }
+        public Prioridad Prioridad { get; set; }
         public string DescripcionIncial { get; set; }
         public string DescripcionCierre { get; set; }
         public Usuario UsuarioAsignado { get; set; }

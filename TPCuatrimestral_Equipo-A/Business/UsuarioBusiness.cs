@@ -3,23 +3,29 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Business
 {
-    public class ClientesBusiness
+    public class UsuarioBusiness
     {
-        public static List<Cliente> List()
+        public static List<Usuario> List()
         {
             List<Cliente> clienteLista = new List<Cliente>();
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT ID, 
-                                       DNI, 
+                data.SetQuery(@"SELECT LEGAJO
+                                       , NOMBRE
+                                       , APELLIDO
+                                       , EMAIL
+                                       , PASSWORD
                                        NOMBRE, 
                                        APELLIDO,
-                                       EMAIL, 
-                                       TELEFONO_1, 
+                                       EMAIL,
+                                       TELEFONO_1,
                                        ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2,
                                        FECHA_NACIMIENTO,
                                        FECHA_ALTA,
@@ -125,4 +131,3 @@ namespace Business
             }
         }
     }
-}

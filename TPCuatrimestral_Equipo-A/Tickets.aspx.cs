@@ -7,6 +7,8 @@ namespace TPCuatrimestral_Equipo_A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            TicketsGV.DataSource = TicketBusiness.List();
+            TicketsGV.DataBind();
         }
     }
 }

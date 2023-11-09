@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Business
 {
-    internal class TicketBusiness
+    public class TicketBusiness
     {
         public static List<Ticket> List()
         {
@@ -24,6 +24,7 @@ namespace Business
                                 , ISNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE
                                 , usuario.LEGAJO AS LEGAJO_USUARIO
                                 , CONCAT(usuario.NOMBRE,' ', usuario.APELLIDO) AS USUARIO
+                                , CLIENTE_AFECTADO
                                 , ticket.FECHA_INICIO
                                 , FECHA_FIN
                                 , estado.ID AS ID_ESTADO
@@ -55,7 +56,14 @@ namespace Business
                     ticketAux.NombreUsuario = data.Reader["USUARIO"].ToString();
                     ticketAux.ClienteAfectado = ClientesBusiness.ClientePorID((int)data.Reader["CLIENTE_AFECTADO"]);
                     ticketAux.FechaInicio = (DateTime)data.Reader["FECHA_INICIO"];
-                    ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];
+                    if (!data.Reader.IsDBNull(data.Reader.GetOrdinal("FECHA_FIN")))
+                    {
+                        ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];
+                    }
+                    else
+                    {
+                        ticketAux.FechaFin = null;
+                    }
                     ticketAux.Estado = new EstadoReclamo()
                     {
                         ID = (byte)data.Reader["ID_ESTADO"],

@@ -98,6 +98,8 @@
     <Content Include="Clientes.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="estilos\home.css" />
+    <Content Include="imagenes\abrir-documento.svg" />
+    <Content Include="imagenes\ojo.svg" />
     <Content Include="Tickets.aspx" />
     <Content Include="Usuario.aspx" />
     <Content Include="Web.config" />

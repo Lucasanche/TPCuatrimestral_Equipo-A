@@ -92,9 +92,9 @@
     </table>
 
 
-    <!--
-    <asp:GridView ID="TicketsGV" runat="server" CssClass="uk-table uk-table-divider"></asp:GridView>
-    -->
+
+    <asp:GridView ID="TicketsGV" runat="server" CssClass="uk-table uk-table-striped uk-table-hover"></asp:GridView>
+
 
 
 

@@ -103,6 +103,95 @@ namespace Business
                 data.Close();
             }
         }
+        public static int Agregar(Ticket ticket)
+        {
+            AccessData data = new AccessData();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            try
+            {
+                string columns, values;
+                columns = values = "";
+                if (ticket.Tipo != null)
+                {
+                    columns += "ID_TIPO,";
+                    values += $"@Id_tipo,";
+                    parameters.Add(new SqlParameter("@Id_tipo", ticket.Tipo.ID));
+                }
+                else
+                {
+                    return -1;
+                }
+                if (ticket.Prioridad != null)
+                {
+                    columns += "ID_PRIORIDAD,";
+                    values += $"@Id_prioridad,";
+                    parameters.Add(new SqlParameter("@Id_prioridad", ticket.Prioridad.ID));
+                }
+                else
+                {
+                    return -1;
+                }
+                if (ticket.DescripcionInicial != null && ticket.DescripcionInicial != "")
+                {
+                    columns += "DESCRIPCION_INICIAL,";
+                    values += $"@Descripcion_inicial,";
+                    parameters.Add(new SqlParameter("@Descripcion_inicial", ticket.DescripcionInicial));
+                }
+                else { return -1; }
+                if (ticket.DescripcionCierre != null && ticket.DescripcionCierre != "")
+                {
+                    columns += "DESCRIPCION_CIERRE,";
+                    values += $"@Descripcion_cierre,";
+                    parameters.Add(new SqlParameter("@Descripcion_cierre", ticket.DescripcionCierre));
+                }
+                if (ticket.LegajoUsuario != null && ticket.LegajoUsuario != "")
+                {
+                    columns += "LEGAJO_USUARIO,";
+                    values += $"@Legajo_usuario,";
+                    parameters.Add(new SqlParameter("@Legajo_usuario", ticket.LegajoUsuario));
+                }
+                else { return -1; }
+                if (ticket.ClienteAfectado != null)
+                {
+                    columns += "CLIENTE_AFECTADO,";
+                    values += $"@Cliente_afectado,";
+                    parameters.Add(new SqlParameter("@Cliente_afectado", ticket.ClienteAfectado.ID));
+                }
+                else { return -1; }
+                // Se crea por default - Lucas
+                //if (ticket.FechaCreacion != null)
+                //{
+                //    columns += "FECHA_CREACION,";
+                //    values += $"@Descripcion_cierre,";
+                //    parameters.Add(new SqlParameter("@Descripcion_cierre", ticket.DescripcionCierre));
+                //}
+                if (ticket.Estado != null)
+                {
+                    columns += "ID_ESTADO,";
+                    values += $"@Id_estado,";
+                    parameters.Add(new SqlParameter("@Id_estado", ticket.Estado.ID));
+                }
+                else { return -1; }
+
+
+                string query = $@"
+                    INSERT INTO TICKETS 
+                        ({columns})
+                    VALUES
+                        ({values})";
+
+                data.SetQuery(query, parameters);
+                return data.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
         public static int GetIdTicketMasViejo()
         {
             AccessData data = new AccessData();

@@ -63,9 +63,7 @@
                     </div>
                 </div>
 
-                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" />
-            
-
+                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" AutoPostBack="false" UseSubmitBehavior="False"/>
             </div>
         </div>
     </div>

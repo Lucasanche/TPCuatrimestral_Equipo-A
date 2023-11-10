@@ -51,7 +51,6 @@ namespace Business
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -113,7 +112,6 @@ namespace Business
             try
             {
                 // guardar cliente en la base de datos.
-                Cliente cliente = new Cliente();
                 data.SetQuery("INSERT INTO Clientes (Nombre, Apellido, DNI, Email, Telefono) VALUES (@Nombre, @Apellido, @Dni, @Email, @Telefono)");
                 data.AddParameter("@Nombre", nombre);
                 data.AddParameter("@Apellido", apellido);
@@ -133,16 +131,22 @@ namespace Business
                 data.Close();
             }
         }
-        public static int Remove(Cliente cliente)
+        public static string BuscarPor(string parametro, string valor)
         {
+            string DNIcliente = "";
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            string query = $"SELECT DNI FROM CLIENTES WHERE {parametro} = {valor}";
+
             try
             {
-                string query = "DELETE FROM CLIENTES WHERE ID = @Id";
-                parameters.Add(new SqlParameter("@Id", cliente.ID));
-                data.SetQuery(query, parameters);
-                return data.ExecuteNonQuery();
+                data.SetQuery(query);
+                data.ExecuteQuery();
+
+                while (data.Reader.Read())
+                {
+                    DNIcliente = data.Reader["DNI"].ToString();
+                }
+                return DNIcliente;
             }
             catch (Exception ex)
             {
@@ -153,5 +157,25 @@ namespace Business
                 data.Close();
             }
         }
+        public static int Remove(Cliente cliente)
+{
+    AccessData data = new AccessData();
+    List<SqlParameter> parameters = new List<SqlParameter>();
+    try
+    {
+        string query = "DELETE FROM CLIENTES WHERE ID = @Id";
+        parameters.Add(new SqlParameter("@Id", cliente.ID));
+        data.SetQuery(query, parameters);
+        return data.ExecuteNonQuery();
+    }
+    catch (Exception ex)
+    {
+        throw ex;
+    }
+    finally
+    {
+        data.Close();
+    }
+}
     }
 }

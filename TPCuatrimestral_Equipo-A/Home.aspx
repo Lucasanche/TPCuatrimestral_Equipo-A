@@ -17,7 +17,7 @@
                                 <i class="icono-img-usr"></i>
                             </span>
                         </div>
-                        <input type="text" class="input-texto" placeholder="Usuario">
+                        <asp:TextBox runat="server" type="text" CssClass="input-texto" placeholder="Email..." ID="TextEmailUsuario"/>
                     </div>
                     <div class="imagen-span">
                         <div class="container-icono">
@@ -25,12 +25,16 @@
                                 <i class="icono-img-password"></i>
                             </span>
                         </div>
-                        <input type="password" class="input-texto" placeholder="Contraseña...">
+                        <asp:TextBox runat="server" type="password" CssClass="input-texto" placeholder="Contraseña..." ID="TextPassword"/>
                     </div>
                 </div>
                 <div class="container-btn">
-                    <a href="#" class="btn">Ingresar</a>
+                    <asp:Button Text="Ingresar" CssClass="btn" runat="server" ID="btnIngresar" OnClick="btnIngresar_Click"/>
                 </div>
+                <div>
+                    <asp:Label ID="Error" runat="server" Text="El usuario no existe" Visible="false"></asp:Label>
+                </div>
+
             </div>
         </div>
     </div>

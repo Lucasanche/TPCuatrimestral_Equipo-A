@@ -57,7 +57,6 @@ namespace Business
                 data.Close();
             }
         }
-
         public static Usuario UsuarioPorLegajo(string legajo)
         {
             Usuario usuario = new Usuario();
@@ -99,6 +98,52 @@ namespace Business
                 data.Close();
             }
             return usuario;
+        }
+        public static Usuario UsuarioPorEmail(string email, string password)
+        {
+            Usuario usuario = new Usuario();
+            AccessData data = new AccessData();
+            string query = $"SELECT * FROM USUARIOS WHERE EMAIL = '{email}' AND PASSWORD = '{password}'";
+            try
+            {
+                data.SetQuery(query);
+                data.ExecuteQuery();
+                if(data.Reader !=  null) {
+                    while (data.Reader.Read())
+                    {
+                        usuario.Legajo = data.Reader["LEGAJO"].ToString();
+                        usuario.Nombre = data.Reader["NOMBRE"].ToString();
+                        usuario.Apellido = data.Reader["APELLIDO"].ToString();
+                        usuario.Email = data.Reader["EMAIL"].ToString();
+                        usuario.Password = data.Reader["PASSWORD"].ToString();
+                        usuario.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
+                        usuario.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
+                        usuario.Estado = (bool)data.Reader["ESTADO"];
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+            if(usuario.Legajo == null)
+            {
+                return null;
+            }
+            else
+            {
+                return usuario;
+            }
         }
         public static int Remove(Usuario usuario)
         {

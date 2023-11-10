@@ -97,7 +97,7 @@ VALUES
 ('7891234560', 'Ana', 'Rodríguez', 'ana@example.com', 'password', '2023-11-06', 3, 1),
 ('2345678901', 'Carlos', 'Sánchez', 'carlos@example.com', 'password', '2023-11-06', 3, 1);
 
-
+SELECT * FROM CLIENTES
 
 -- Insertar domicilios relacionados con provincias
 INSERT INTO [dbo].[DOMICILIOS] (ID_PROVINCIA, CIUDAD, NOMBRE_CALLE, NUMERO, PISO, DEPARTAMENTO, ENTRECALLE_1, ENTRECALLE_2, OBSERVACION)
@@ -126,3 +126,18 @@ VALUES
 (11, 13, 1),
 (12, 14, 1),
 (13, 15, 1);
+
+
+INSERT INTO [dbo].[TICKETS] (ID_TIPO, ID_PRIORIDAD, DESCRIPCION_INICIAL, USUARIO_ASIGNADO, CLIENTE_AFECTADO, FECHA_INICIO, FECHA_FIN, ID_ESTADO)
+VALUES
+  (1, 1, 'Problema con el correo', 2, 6, '2023-11-06', NULL, 2),
+  (2, 2, 'Error en el software', 1, 7, '2023-11-06', NULL, 1),
+  (3, 1, 'Solicitud de asistencia', 4, 8, '2023-11-06', NULL, 3),
+  (1, 3, 'Problema de red', 3, 11, '2023-11-06', NULL, 2),
+  (2, 2, 'Problema con la impresora', 2, 12, '2023-11-06', NULL, 1),
+  (3, 1, 'Solicitud de información', 1, 15, '2023-11-06', NULL, 3),
+  (1, 2, 'Error en el sitio web', 3, 16, '2023-11-06', NULL, 2),
+  (2, 3, 'Solicitud de mantenimiento', 4, 10, '2023-11-06', NULL, 1),
+  (3, 2, 'Problema con el servidor', 2, 10, '2023-11-06', NULL, 3),
+  (1, 1, 'Solicitud de soporte técnico', 1, 4, '2023-11-06', NULL, 2);
+ 

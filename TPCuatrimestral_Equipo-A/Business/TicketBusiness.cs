@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Business
 {
-    internal class TicketBusiness
+    public class TicketBusiness
     {
         public static List<Ticket> List()
         {
@@ -14,39 +14,62 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT ID, 
-                                ID_TIPO,
-                                ID_PRIORIDAD,
-                                ISNULL(ID_PRIORIDAD, 0),
-                                DESCRIPCION_INICIAL,
-                                DESCRIPCION_CIERRE, 
-                                ISNULL(DESCRIPCION_CIERRE, 'Cerrado sin descripcion'),
-                                USUARIO_ASIGNADO, 
-                                CLIENTE_AFECTADO,
-                                FECHA_INICIO,
-                                FECHA_FIN,
-                                ID_ESTADO,
-                                ESTADO
-                                FROM TICKE");
+                data.SetQuery(@"SELECT 
+                                ticket.ID
+                                , tipo.ID AS ID_TIPO
+                                , tipo.NOMBRE AS TIPO
+                                , priori.ID AS ID_PRIORIDAD
+                                , priori.NOMBRE AS PRIORIDAD
+                                , ticket.DESCRIPCION_INICIAL
+                                , ISNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE
+                                , usuario.LEGAJO AS LEGAJO_USUARIO
+                                , CONCAT(usuario.NOMBRE,' ', usuario.APELLIDO) AS USUARIO
+                                , CLIENTE_AFECTADO
+                                , ticket.FECHA_INICIO
+                                , FECHA_FIN
+                                , estado.ID AS ID_ESTADO
+                                , estado.NOMBRE AS ESTADO
+                                FROM TICKETS ticket
+                                LEFT JOIN TIPOS_INCIDENCIA AS tipo ON ticket.ID_TIPO = tipo.ID
+                                LEFT JOIN PRIORIDADES AS priori ON ticket.ID_PRIORIDAD = priori.ID
+                                LEFT JOIN ESTADOS_TICKET AS estado ON ticket.ID_ESTADO = estado.ID
+                                LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.LEGAJO");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
-                    //Ticket ticketAux = new Ticket();
-                    ////{
-                    //ticketAux.ID = (int)data.Reader["Id"];
-                    //ticketAux.tipo_id = (byte)data.Reader["ID_TIPO"];
-                    //ticketAux.IDPrioridad = (byte)data.Reader["ID_PRIORIDAD"];
-                    //ticketAux.DescripcionIncial = data.Reader["DESCRIPCION_INICIAL"].ToString();
-                    //ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
-                    //ticketAux.UsuarioAsignado = (int)data.Reader["USUARIO_ASIGNADO"];
-                    //ticketAux.ClienteAfectado = (int)data.Reader["CLIENTE_AFECTADO"];
-                    //ticketAux.FechaInicio = (DateTime)data.Reader["FECHA_INICIO"];
-                    //ticketAux.FechaFin = (DateTime)data.Reader["FECHA_FIN"];
-                    //ticketAux.IDEstado = (byte)data.Reader["ID_ESTADO"];
-                    //ticketAux.Estado = (bool)data.Reader["ESTADO"];
-                    //};
-                    //ticketLista.Add(ticketAux);
+                    Ticket ticketAux = new Ticket();
+                    ticketAux.ID = (int)data.Reader["Id"];
+                    ticketAux.Tipo = new TipoTicket
+                    {
+                        ID = (byte)data.Reader["ID_TIPO"],
+                        Nombre = data.Reader["TIPO"].ToString()
+                    };
+                    ticketAux.Prioridad = new Prioridad
+                    {
+                        ID = (byte)data.Reader["ID_PRIORIDAD"],
+                        Nombre = data.Reader["PRIORIDAD"].ToString()
+                    };
+                    ticketAux.DescripcionInicial = data.Reader["DESCRIPCION_INICIAL"].ToString();
+                    ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
+                    ticketAux.LegajoUsuario = data.Reader["LEGAJO_USUARIO"].ToString();
+                    ticketAux.NombreUsuario = data.Reader["USUARIO"].ToString();
+                    ticketAux.ClienteAfectado = ClientesBusiness.ClientePorID((int)data.Reader["CLIENTE_AFECTADO"]);
+                    ticketAux.FechaCreacion = (DateTime)data.Reader["FECHA_INICIO"];
+                    if (!data.Reader.IsDBNull(data.Reader.GetOrdinal("FECHA_FIN")))
+                    {
+                        ticketAux.FechaCierre = (DateTime)data.Reader["FECHA_FIN"];
+                    }
+                    else
+                    {
+                        ticketAux.FechaCierre = null;
+                    }
+                    ticketAux.Estado = new EstadoReclamo()
+                    {
+                        ID = (byte)data.Reader["ID_ESTADO"],
+                        Nombre = data.Reader["ESTADO"].ToString()
+                    };
+                    ticketLista.Add(ticketAux);
                 }
                 return ticketLista;
             }

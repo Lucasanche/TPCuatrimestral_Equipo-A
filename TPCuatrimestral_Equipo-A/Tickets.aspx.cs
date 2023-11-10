@@ -12,8 +12,6 @@ namespace TPCuatrimestral_Equipo_A
         protected void Page_Load(object sender, EventArgs e)
         {
             TicketsGV.AutoGenerateColumns = true;
-
-
             BindingSource bs = new BindingSource();
             bs.DataSource = TicketBusiness.List();
             TicketsGV.AutoGenerateColumns = false;

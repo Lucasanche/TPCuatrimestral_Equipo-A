@@ -11,48 +11,41 @@ namespace Business
 {
     public class UsuarioBusiness
     {
-        public static List<Cliente> List()
+        public static List<Usuario> List()
         {
-            List<Cliente> clienteLista = new List<Cliente>();
+            List<Usuario> usuarioLista = new List<Usuario>();
             AccessData data = new AccessData();
             try
             {
                 data.SetQuery(@"SELECT LEGAJO
-                                       , NOMBRE
-                                       , APELLIDO
-                                       , EMAIL
-                                       , PASSWORD
-                                       NOMBRE, 
-                                       APELLIDO,
-                                       EMAIL,
-                                       TELEFONO_1,
-                                       ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2,
-                                       FECHA_NACIMIENTO,
-                                       FECHA_ALTA,
-                                       FECHA_BAJA,
-                                       ESTADO 
-                                FROM CLIENTES");
+                                     , NOMBRE
+                                     , APELLIDO
+                                     , EMAIL
+                                     , PASSWORD
+                                     , NOMBRE
+                                     , APELLIDO
+                                     , EMAIL
+                                     , FECHA_BAJA
+                                     , FECHA_ALTA
+                                     , ESTADO 
+                                     FROM USUARIOS");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
-                    Cliente clienteAux = new Cliente();
+                    Usuario usuarioAux = new Usuario();
                     //{
-                    clienteAux.ID = (int)data.Reader["Id"];
-                    clienteAux.DNI = data.Reader["DNI"].ToString();
-                    clienteAux.Nombre = data.Reader["NOMBRE"].ToString();
-                    clienteAux.Apellido = data.Reader["APELLIDO"].ToString();
-                    clienteAux.Email = data.Reader["EMAIL"].ToString();
-                    clienteAux.Telefono1 = data.Reader["TELEFONO_1"].ToString();
-                    clienteAux.Telefono2 = data.Reader["TELEFONO2"].ToString();
-                    clienteAux.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
-                    clienteAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
-                    clienteAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    clienteAux.Estado = (bool)data.Reader["ESTADO"];
-                    //};
-                    clienteLista.Add(clienteAux);
+                    usuarioAux.Legajo = data.Reader["LEGAJO"].ToString();
+                    usuarioAux.Nombre = data.Reader["NOMBRE"].ToString();
+                    usuarioAux.Apellido = data.Reader["APELLIDO"].ToString();
+                    usuarioAux.Email = data.Reader["EMAIL"].ToString();
+                    usuarioAux.Password = data.Reader["PASSWORD"].ToString();
+                    usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
+                    usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
+                    usuarioAux.Estado = (bool)data.Reader["ESTADO"];
+                    usuarioLista.Add(usuarioAux);
                 }
-                return clienteLista;
+                return usuarioLista;
             }
             catch (Exception ex)
             {
@@ -64,39 +57,36 @@ namespace Business
                 data.Close();
             }
         }
-        public static Cliente ClientePorID(int ID)
+
+        public static Usuario UsuarioPorLegajo(string legajo)
         {
-            Cliente cliente = new Cliente();
+            Usuario usuario = new Usuario();
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT ID
-                                , DNI
-                                ,  NOMBRE 
-                                , APELLIDO
-                                , EMAIL
-                                , TELEFONO_1
-                                , ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
-                                , FECHA_NACIMIENTO
-                                , FECHA_ALTA
-                                , FECHA_BAJA
-                                , ESTADO 
-                                FROM CLIENTES WHERE ID = " + ID.ToString());
-                data.ExecuteQuery();
+                data.SetQuery(@"SELECT LEGAJO
+                                     , NOMBRE
+                                     , APELLIDO
+                                     , EMAIL
+                                     , PASSWORD
+                                     , NOMBRE
+                                     , APELLIDO
+                                     , EMAIL
+                                     , FECHA_BAJA
+                                     , FECHA_ALTA
+                                     , ESTADO 
+                                     FROM USUARIOS");
 
                 while (data.Reader.Read())
                 {
-                    cliente.ID = (int)data.Reader["Id"];
-                    cliente.DNI = data.Reader["DNI"].ToString();
-                    cliente.Nombre = data.Reader["NOMBRE"].ToString();
-                    cliente.Apellido = data.Reader["APELLIDO"].ToString();
-                    cliente.Email = data.Reader["EMAIL"].ToString();
-                    cliente.Telefono1 = data.Reader["TELEFONO_1"].ToString();
-                    cliente.Telefono2 = data.Reader["TELEFONO2"].ToString();
-                    cliente.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
-                    cliente.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
-                    cliente.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    cliente.Estado = (bool)data.Reader["ESTADO"];
+                    usuario.Legajo = data.Reader["LEGAJO"].ToString();
+                    usuario.Nombre = data.Reader["NOMBRE"].ToString();
+                    usuario.Apellido = data.Reader["APELLIDO"].ToString();
+                    usuario.Email = data.Reader["EMAIL"].ToString();
+                    usuario.Password = data.Reader["PASSWORD"].ToString();
+                    usuario.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
+                    usuario.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
+                    usuario.Estado = (bool)data.Reader["ESTADO"];
                 }
             }
             catch (Exception ex)
@@ -108,16 +98,16 @@ namespace Business
             {
                 data.Close();
             }
-            return cliente;
+            return usuario;
         }
-        public static int Remove(Cliente cliente)
+        public static int Remove(Usuario usuario)
         {
             AccessData data = new AccessData();
             List<SqlParameter> parameters = new List<SqlParameter>();
             try
             {
-                string query = "DELETE FROM CLIENTES WHERE ID = @Id";
-                parameters.Add(new SqlParameter("@Id", cliente.ID));
+                string query = "DELETE FROM USUARIOS WHERE LEGAJO = @Legajo";
+                parameters.Add(new SqlParameter("@Legajo", usuario.Legajo));
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
             }

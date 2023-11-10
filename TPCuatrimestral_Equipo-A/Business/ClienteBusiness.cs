@@ -2,6 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Business
@@ -103,6 +104,34 @@ namespace Business
                 data.Close();
             }
             return cliente;
+        }
+
+        public static bool GuardarUsuario(string nombre, string apellido, string dni, string email, string telefono)
+        {
+
+            AccessData data = new AccessData();
+            try
+            {
+                // guardar cliente en la base de datos.
+                Cliente cliente = new Cliente();
+                data.SetQuery("INSERT INTO Clientes (Nombre, Apellido, DNI, Email, Telefono) VALUES (@Nombre, @Apellido, @Dni, @Email, @Telefono)");
+                data.AddParameter("@Nombre", nombre);
+                data.AddParameter("@Apellido", apellido);
+                data.AddParameter("@Dni", dni);
+                data.AddParameter("@Email", email);
+                data.AddParameter("@Telefono", telefono);
+
+                data.ExecuteQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
         }
         public static int Remove(Cliente cliente)
         {

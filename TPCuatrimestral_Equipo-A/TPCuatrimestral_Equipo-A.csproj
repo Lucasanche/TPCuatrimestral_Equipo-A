@@ -99,6 +99,7 @@
     <Content Include="Clientes.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="estilos\home.css" />
+    <Content Include="estilos\Tablas.css" />
     <Content Include="imagenes\abrir-documento.svg" />
     <Content Include="imagenes\ojo.svg" />
     <Content Include="Tickets.aspx" />

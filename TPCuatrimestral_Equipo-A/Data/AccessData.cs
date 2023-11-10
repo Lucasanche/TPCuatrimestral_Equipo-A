@@ -49,6 +49,10 @@ namespace Data
                 return false;
             }
         }
+        public void AddParameter(string parameterName, object value)
+        {
+            command.Parameters.AddWithValue(parameterName, value);
+        }
         public int ExecuteNonQuery()
         {
             try

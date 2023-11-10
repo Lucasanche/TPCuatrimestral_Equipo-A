@@ -64,11 +64,13 @@
     border-radius: 15px;
     justify-content: center;
     border-color: #ffffff00;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
+    border-color: white;
+    text-decoration: none;
 }
-
+.boton-agregar:hover {
+    color: white;
+    text-decoration: none;
+}
 .boton-filtros {
     display: flex;
     width: 15vh;

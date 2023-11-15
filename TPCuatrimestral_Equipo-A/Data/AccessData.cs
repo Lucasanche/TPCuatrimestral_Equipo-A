@@ -10,7 +10,7 @@ namespace Data
         private readonly SqlConnection connection;
         private readonly SqlCommand command;
         private SqlDataReader reader;
-        private string connectionString = @"Server=.;Database=CALL_CENTER;Trusted_Connection=True;";
+        private string connectionString = @"Server=tcp:brasil.database.windows.net,1433;Initial Catalog=CALL_CENTER;Persist Security Info=False;User ID=GrupoA;Password=utnpachecoA1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public SqlDataReader Reader
         {
             get { return reader; }

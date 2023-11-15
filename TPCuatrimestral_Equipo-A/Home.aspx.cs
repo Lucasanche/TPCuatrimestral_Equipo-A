@@ -16,14 +16,14 @@ namespace TPCuatrimestral_Equipo_A
             string email = TextEmailUsuario.Text;
             string password = TextPassword.Text;
             Usuario usuario = UsuarioBusiness.UsuarioPorEmail(email, password);
-            Error.Visible = true;
+            textError.Visible = true;
             if (usuario != null)
             {
-                Error.Text = "Usuario existente";
+                textError.Text = "Usuario existente";
             }
             else
             {
-                Error.Text = "El usuario o la contraseña son incorrectas";
+                textError.Text = "El usuario o la contraseña son incorrectas";
             }
         }
     }

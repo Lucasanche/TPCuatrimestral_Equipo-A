@@ -121,8 +121,8 @@
     font-family: "Open Sans", Arial, sans-serif;
 }
 
-    .input-busqueda:focus::placeholder {
-        color: transparent; /* Hace que el placeholder sea transparente cuando el input está enfocado */
-        font-style: normal; /* Restablece el estilo de fuente a normal cuando el input está enfocado */
-    }
+.input-busqueda:focus::placeholder {
+    color: transparent; /* Hace que el placeholder sea transparente cuando el input está enfocado */
+    font-style: normal; /* Restablece el estilo de fuente a normal cuando el input está enfocado */
+}
 

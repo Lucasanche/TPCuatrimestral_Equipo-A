@@ -17,14 +17,24 @@ namespace TPCuatrimestral_Equipo_A
             string password = TextPassword.Text;
             Usuario usuario = UsuarioBusiness.UsuarioPorEmail(email, password);
             textError.Visible = true;
-            if (usuario != null)
+            try
             {
-                textError.Text = "Usuario existente";
+                if (usuario != null)
+                {
+                    Session.Add("usuario", usuario);
+                    Response.Redirect("Tickets.aspx", false);
+                    textError.Text = "Usuario existente";
+                }
+                else
+                {
+                    textError.Text = "El usuario o la contraseña son incorrectas";
+                }
             }
-            else
+            catch(Exception ex)
             {
-                textError.Text = "El usuario o la contraseña son incorrectas";
+                Response.Redirect("Error.aspx");
             }
+            
         }
     }
 }

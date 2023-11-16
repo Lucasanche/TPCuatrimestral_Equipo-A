@@ -72,6 +72,7 @@
     <Compile Include="ClienteBusiness.cs" />
     <Compile Include="PrioridadBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolBusiness.cs" />
     <Compile Include="TicketBusiness.cs" />
     <Compile Include="TipoTicketBusiness.cs" />
     <Compile Include="UsuarioBusiness.cs" />

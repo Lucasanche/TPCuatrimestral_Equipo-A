@@ -4,11 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <link href="estilos/Tablas.css" rel="stylesheet" />
-
-
-
     <h1 class="uk-heading-divider">Tickets</h1>
-
     <div class="row-accion">
         <a class="boton-agregar" href="#modal-center-Add" uk-toggle>Agregar+</a>
         <div class="container-busqueda">
@@ -60,13 +56,10 @@
                         <asp:DropDownList ID="UsuarioDDL" runat="server"></asp:DropDownList>
                     </div>
                 </div>
-
-
                 <%--  <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" />--%>
             </div>
         </div>
     </div>
-
     <div id="modal-center" class="uk-flex-top" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 

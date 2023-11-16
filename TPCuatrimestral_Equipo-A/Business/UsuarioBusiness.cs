@@ -17,6 +17,7 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
+                Usuario usuarioAux = new Usuario();
                 data.SetQuery(@"SELECT LEGAJO
                                      , NOMBRE
                                      , APELLIDO
@@ -27,13 +28,13 @@ namespace Business
                                      , EMAIL
                                      , FECHA_BAJA
                                      , FECHA_ALTA
+                                     , ROL
                                      , ESTADO 
                                      FROM USUARIOS");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
-                    Usuario usuarioAux = new Usuario();
                     //{
                     usuarioAux.Legajo = data.Reader["LEGAJO"].ToString();
                     usuarioAux.Nombre = data.Reader["NOMBRE"].ToString();
@@ -41,6 +42,7 @@ namespace Business
                     usuarioAux.Email = data.Reader["EMAIL"].ToString();
                     usuarioAux.Password = data.Reader["PASSWORD"].ToString();
                     usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
+                    usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
                     usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
                     usuarioAux.Estado = (bool)data.Reader["ESTADO"];
                     usuarioLista.Add(usuarioAux);
@@ -59,7 +61,7 @@ namespace Business
         }
         public static Usuario UsuarioPorLegajo(string legajo)
         {
-            Usuario usuario = new Usuario();
+            Usuario usuarioAux = new Usuario();
             AccessData data = new AccessData();
             try
             {
@@ -78,15 +80,17 @@ namespace Business
 
                 while (data.Reader.Read())
                 {
-                    usuario.Legajo = data.Reader["LEGAJO"].ToString();
-                    usuario.Nombre = data.Reader["NOMBRE"].ToString();
-                    usuario.Apellido = data.Reader["APELLIDO"].ToString();
-                    usuario.Email = data.Reader["EMAIL"].ToString();
-                    usuario.Password = data.Reader["PASSWORD"].ToString();
-                    usuario.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
-                    usuario.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    usuario.Estado = (bool)data.Reader["ESTADO"];
+                    usuarioAux.Legajo = data.Reader["LEGAJO"].ToString();
+                    usuarioAux.Nombre = data.Reader["NOMBRE"].ToString();
+                    usuarioAux.Apellido = data.Reader["APELLIDO"].ToString();
+                    usuarioAux.Email = data.Reader["EMAIL"].ToString();
+                    usuarioAux.Password = data.Reader["PASSWORD"].ToString();
+                    usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
+                    usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
+                    usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
+                    usuarioAux.Estado = (bool)data.Reader["ESTADO"];
                 }
+                return usuarioAux;
             }
             catch (Exception ex)
             {
@@ -97,11 +101,11 @@ namespace Business
             {
                 data.Close();
             }
-            return usuario;
+            
         }
         public static Usuario UsuarioPorEmail(string email, string password)
         {
-            Usuario usuario = new Usuario();
+            Usuario usuarioAux = new Usuario();
             AccessData data = new AccessData();
             string query = $"SELECT * FROM USUARIOS WHERE EMAIL = '{email}' AND PASSWORD = '{password}'";
             try
@@ -111,14 +115,16 @@ namespace Business
                 if(data.Reader !=  null) {
                     while (data.Reader.Read())
                     {
-                        usuario.Legajo = data.Reader["LEGAJO"].ToString();
-                        usuario.Nombre = data.Reader["NOMBRE"].ToString();
-                        usuario.Apellido = data.Reader["APELLIDO"].ToString();
-                        usuario.Email = data.Reader["EMAIL"].ToString();
-                        usuario.Password = data.Reader["PASSWORD"].ToString();
-                        usuario.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
-                        usuario.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                        usuario.Estado = (bool)data.Reader["ESTADO"];
+                        Rol rolAux = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
+                        usuarioAux.Legajo = data.Reader["LEGAJO"].ToString();
+                        usuarioAux.Nombre = data.Reader["NOMBRE"].ToString();
+                        usuarioAux.Apellido = data.Reader["APELLIDO"].ToString();
+                        usuarioAux.Email = data.Reader["EMAIL"].ToString();
+                        usuarioAux.Password = data.Reader["PASSWORD"].ToString();
+                        usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
+                        usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
+                        usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
+                        usuarioAux.Estado = (bool)data.Reader["ESTADO"];
                     }
                 }
                 else
@@ -136,13 +142,13 @@ namespace Business
             {
                 data.Close();
             }
-            if(usuario.Legajo == null)
+            if(usuarioAux.Legajo == null)
             {
                 return null;
             }
             else
             {
-                return usuario;
+                return usuarioAux;
             }
         }
         public static int Remove(Usuario usuario)

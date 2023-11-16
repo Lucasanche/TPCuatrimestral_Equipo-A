@@ -1,6 +1,5 @@
 namespace Domain
 {
-
     public partial class Rol
     {
         public byte ID { get; set; }

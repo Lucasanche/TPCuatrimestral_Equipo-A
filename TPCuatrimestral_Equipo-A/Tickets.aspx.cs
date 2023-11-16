@@ -10,105 +10,116 @@ namespace TPCuatrimestral_Equipo_A
 {
     public partial class Tickets : System.Web.UI.Page
     {
+        List<Ticket> _ticketList;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
             {
                 Response.Redirect("Error404.aspx");
             }
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
-                TicketsGV.AutoGenerateColumns = true;
-                BindingSource bs = new BindingSource();
-                bs.DataSource = TicketBusiness.List();
-                TicketsGV.AutoGenerateColumns = false;
-                TicketsGV.DataSource = bs;
-                BoundField colID = new BoundField();
-                colID.DataField = "ID";
-                colID.HeaderText = "ID";
-                TicketsGV.Columns.Add(colID);
-                BoundField colTipoTicket = new BoundField();
-                colTipoTicket.DataField = "Tipo.Nombre";
-                colTipoTicket.HeaderText = "Tipo";
-                BoundField colPrioridad = new BoundField();
-                colPrioridad.DataField = "Prioridad.Nombre";
-                colPrioridad.HeaderText = "Prioridad";
-                TicketsGV.Columns.Add(colPrioridad);
-                BoundField colDescripcionInicial = new BoundField();
-                colDescripcionInicial.DataField = "DescripcionInicial";
-                colDescripcionInicial.HeaderText = "Descripción inicial";
-                TicketsGV.Columns.Add(colDescripcionInicial);
-                BoundField colDescripcionCierre = new BoundField();
-                colDescripcionCierre.DataField = "DescripcionCierre";
-                colDescripcionCierre.HeaderText = "Descripción al cierre";
-                TicketsGV.Columns.Add(colDescripcionCierre);
-                BoundField colLegajoUsuario = new BoundField();
-                colLegajoUsuario.DataField = "LegajoUsuario";
-                colLegajoUsuario.HeaderText = "Legajo usuario asignado";
-                TicketsGV.Columns.Add(colLegajoUsuario);
-                BoundField colNombreUsuario = new BoundField();
-                colNombreUsuario.DataField = "NombreUsuario";
-                colNombreUsuario.HeaderText = "Usuario asignado";
-                TicketsGV.Columns.Add(colNombreUsuario);
-                BoundField colClienteAfectado = new BoundField();
-                colClienteAfectado.DataField = "ClienteAfectado.ID";
-                colClienteAfectado.HeaderText = "ID del cliente afectado";
-                TicketsGV.Columns.Add(colClienteAfectado);
-                BoundField colFechaCreacion = new BoundField();
-                colFechaCreacion.DataField = "FechaCreacion";
-                colFechaCreacion.HeaderText = "Fecha de creación";
-                TicketsGV.Columns.Add(colFechaCreacion);
-                BoundField colFechaCierre = new BoundField();
-                colFechaCierre.DataField = "FechaCierre";
-                colFechaCierre.HeaderText = "Fecha de cierre";
-                TicketsGV.Columns.Add(colFechaCierre);
-                BoundField colEstado = new BoundField();
-                colEstado.DataField = "Estado.Nombre";
-                colEstado.HeaderText = "Estado";
-                TicketsGV.Columns.Add(colEstado);
-                TicketsGV.DataBind();
-
-                List<TipoTicket> tiposTicket = TipoTicketBusiness.List();
-                List<string> tiposTicketNombre = new List<string>();
-                foreach (TipoTicket tipo in tiposTicket)
-                {
-                    tiposTicketNombre.Add(tipo.Nombre);
-                }
-                TipoDDL.DataSource = tiposTicketNombre;
-                TipoDDL.DataBind();
-
-                List<Prioridad> prioridades = PrioridadBusiness.List();
-                List<string> prioridadesNombre = new List<string>();
-                foreach (Prioridad prioridad in prioridades)
-                {
-                    prioridadesNombre.Add(prioridad.Nombre);
-                }
-                PrioridadDDL.DataSource = prioridadesNombre;
-                PrioridadDDL.DataBind();
-
-                List<string> parametrosClientes = new List<string>();
-                parametrosClientes.Add("DNI");
-                parametrosClientes.Add("EMAIL");
-                ClienteAfectadoDDL.DataSource = parametrosClientes;
-                ClienteAfectadoDDL.DataBind();
+                CargarTabla();
             }
         }
 
         protected void BuscarCliente_Click(object sender, EventArgs e)
         {
 
-                if (TextClienteAfectado.Text != "" && TextClienteAfectado.Text != null)
-                {
+            if (TextClienteAfectado.Text != "" && TextClienteAfectado.Text != null)
+            {
 
-                }
-                else
-                {
-                    //Response.Write("buscate una vida");
-                }
+            }
+            else
+            {
+                //Response.Write("buscate una vida");
+            }
+        }
+        protected void CargarTabla()
+        {
+            _ticketList = TicketBusiness.List();
+            TicketsGV.AutoGenerateColumns = true;
+            BindingSource bs = new BindingSource();
+            bs.DataSource = TicketBusiness.List();
+            TicketsGV.AutoGenerateColumns = false;
+            TicketsGV.DataSource = bs;
+            BoundField colID = new BoundField();
+            colID.DataField = "ID";
+            colID.HeaderText = "ID";
+            TicketsGV.Columns.Add(colID);
+            BoundField colTipoTicket = new BoundField();
+            colTipoTicket.DataField = "Tipo.Nombre";
+            colTipoTicket.HeaderText = "Tipo";
+            BoundField colPrioridad = new BoundField();
+            colPrioridad.DataField = "Prioridad.Nombre";
+            colPrioridad.HeaderText = "Prioridad";
+            TicketsGV.Columns.Add(colPrioridad);
+            BoundField colDescripcionInicial = new BoundField();
+            colDescripcionInicial.DataField = "DescripcionInicial";
+            colDescripcionInicial.HeaderText = "Descripción inicial";
+            TicketsGV.Columns.Add(colDescripcionInicial);
+            BoundField colDescripcionCierre = new BoundField();
+            colDescripcionCierre.DataField = "DescripcionCierre";
+            colDescripcionCierre.HeaderText = "Descripción al cierre";
+            TicketsGV.Columns.Add(colDescripcionCierre);
+            BoundField colLegajoUsuario = new BoundField();
+            colLegajoUsuario.DataField = "LegajoUsuario";
+            colLegajoUsuario.HeaderText = "Legajo usuario asignado";
+            TicketsGV.Columns.Add(colLegajoUsuario);
+            BoundField colNombreUsuario = new BoundField();
+            colNombreUsuario.DataField = "NombreUsuario";
+            colNombreUsuario.HeaderText = "Usuario asignado";
+            TicketsGV.Columns.Add(colNombreUsuario);
+            BoundField colClienteAfectado = new BoundField();
+            colClienteAfectado.DataField = "ClienteAfectado.ID";
+            colClienteAfectado.HeaderText = "ID del cliente afectado";
+            TicketsGV.Columns.Add(colClienteAfectado);
+            BoundField colFechaCreacion = new BoundField();
+            colFechaCreacion.DataField = "FechaCreacion";
+            colFechaCreacion.HeaderText = "Fecha de creación";
+            TicketsGV.Columns.Add(colFechaCreacion);
+            BoundField colFechaCierre = new BoundField();
+            colFechaCierre.DataField = "FechaCierre";
+            colFechaCierre.HeaderText = "Fecha de cierre";
+            TicketsGV.Columns.Add(colFechaCierre);
+            BoundField colEstado = new BoundField();
+            colEstado.DataField = "Estado.Nombre";
+            colEstado.HeaderText = "Estado";
+            TicketsGV.Columns.Add(colEstado);
+            TicketsGV.DataBind();
 
+            List<TipoTicket> tiposTicket = TipoTicketBusiness.List();
+            List<string> tiposTicketNombre = new List<string>();
+            foreach (TipoTicket tipo in tiposTicket)
+            {
+                tiposTicketNombre.Add(tipo.Nombre);
+            }
+            TipoDDL.DataSource = tiposTicketNombre;
+            TipoDDL.DataBind();
+
+            List<Prioridad> prioridades = PrioridadBusiness.List();
+            List<string> prioridadesNombre = new List<string>();
+            foreach (Prioridad prioridad in prioridades)
+            {
+                prioridadesNombre.Add(prioridad.Nombre);
+            }
+            PrioridadDDL.DataSource = prioridadesNombre;
+            PrioridadDDL.DataBind();
+
+            List<string> parametrosClientes = new List<string>();
+            parametrosClientes.Add("DNI");
+            parametrosClientes.Add("EMAIL");
+            ClienteAfectadoDDL.DataSource = parametrosClientes;
+            ClienteAfectadoDDL.DataBind();
+        }
+        protected void RecargarTabla()
+        {
+            TicketsGV.DataSource = null;
+            CargarTabla();
         }
     }
 }
+
 
 
 //if (!IsPostBack)

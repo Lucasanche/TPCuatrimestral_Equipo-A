@@ -19,9 +19,6 @@ namespace TPCuatrimestral_Equipo_A
 
                 cliente = ClientesBusiness.ClientePorID(clienteID);
 
-                // Asignar el valor de clienteID al Text del Label
-                txtIDCliente.Text = cliente.Nombre;
-
                 //Cargar los label de descripcion
                 lblDNI.Text = cliente.DNI;
                 lblNombre.Text = cliente.Nombre;    

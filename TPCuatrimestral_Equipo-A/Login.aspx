@@ -11,7 +11,7 @@
                     <h3 style="font-size: 45px; font-weight: 600; color: #7c83d785;">Iniciar sesión</h3>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <div>
                         <div class="input-group form-group imagen-span">
                             <div class="container-icono">
                                 <span class="icono">
@@ -39,7 +39,7 @@
                         <div>
                             <asp:Label ID="textError" runat="server" Text="El usuario no existe" Visible="false"></asp:Label>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-center ">

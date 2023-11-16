@@ -35,7 +35,6 @@
                             <ul class="uk-navbar-nav">
                                 <li><a href="Tickets.aspx">Tickets</a></li>
                                 <li><a href="Clientes.aspx">Clientes</a></li>
-                                <li><a href="Contacto.aspx">Contacto</a></li>
                                 <%if (((Domain.Usuario)Session["usuario"]).Rol.ID == 3)
                                     { %>
                                 <li><a href="Usuarios.aspx">Usuarios</a></li>    

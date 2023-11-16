@@ -1,7 +1,7 @@
-﻿<%@ Page Title="Clientes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Clientes.aspx.cs" Inherits="TPCuatrimestral_Equipo_A.Clientes" %>
+﻿<%@ Page EnableEventValidation="true" Title="Clientes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Clientes.aspx.cs" Inherits="TPCuatrimestral_Equipo_A.Clientes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server"> 
 
      <link href="estilos/Tablas.css" rel="stylesheet" />
 
@@ -21,6 +21,7 @@
         <a class="boton-filtros" href="#modal-center" uk-toggle>Otros Filtros</a>
     </div>
 
+    <!--Inicio Modal-->
     <div id="modal-center-Add" class="uk-flex-top" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
             <h3 class="uk-heading-divider">Agregar Clientes</h3>
@@ -62,8 +63,8 @@
                         <asp:TextBox ID="txtTelefono" runat="server" CssClass="uk-input" />
                     </div>
                 </div>
-
                     <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" AutoPostBack="false" UseSubmitBehavior="False"/>
+                    <asp:Label Text="" runat="server" ID="txtConfirma"/>
             </div>
         </div>
     </div>
@@ -107,12 +108,12 @@
         <td></td>
         <td>
            <button class="ver-clientes">
-             <img class="imagen-primaria" src="imagenes/ojo.svg" style="width: 2.7vh; height: 1.5vh;" alt="">
+             <img class="imagen-primaria" src="imagenes/ojo.svg" style="width: 2.7vh; height: 2.5vh;" alt="">
              <img class="imagen-secundaria" src="imagenes/abrir-documento.svg" alt="">
              <span class="texto-button" style="
              position: relative;
              left: 30%;">Ver</span>
-         </button>
+            </button>
         </td>
     </tr>
     <tr>
@@ -125,10 +126,7 @@
         <td>01/05/2021</td>
         <td></td>
         <td>
-           <button class="uk-button uk-button-secondary" style="background-color: seagreen;border-radius: 14px;width: 60px;height: 25px;
-            display: flex;justify-content: center;align-items: center;">
-                Vista
-            </button>
+            asd
         </td>
     </tr>
 </tbody>
@@ -139,11 +137,24 @@
 </tfoot>
 </table>
 
-    <!--
-    <div class="uk-container">
-        <asp:GridView ID="ClientesGV" runat="server" CssClass="uk-table uk-table-divider"></asp:GridView>
-    </div>
-    -->
+    <asp:GridView ID="ClientesGV" runat="server" AutoGenerateColumns="False" OnRowCommand="ClientesGV_RowCommand">
+    <Columns>
+        <asp:BoundField DataField="ID" HeaderText="#" />
+        <asp:BoundField DataField="DNI" HeaderText="DNI" />
+        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+        <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+        <asp:BoundField DataField="Email" HeaderText="Email" />
+        <asp:BoundField DataField="Telefono1" HeaderText="Telefono" />
+        <asp:BoundField DataField="FechaAlta" HeaderText="Fecha de Alta" />
+        <asp:BoundField DataField="FechaBaja" HeaderText="Fecha de Baja" />
+        <asp:TemplateField HeaderText="Opciones">
+            <ItemTemplate>
+                <asp:Button runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' Text="Ver Detalles" CssClass="uk-button uk-button-secondary" PostBackUrl='<%# $"Contacto.aspx?ID={Eval("ID")}" %>' />
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
+
 
 
 </asp:Content>

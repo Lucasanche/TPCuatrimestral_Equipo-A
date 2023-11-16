@@ -1,6 +1,7 @@
 ﻿using Business;
 using System;
-
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -9,10 +10,17 @@ namespace TPCuatrimestral_Equipo_A
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*
             ClientesGV.DataSource = ClientesBusiness.List();
             ClientesGV.DataBind();
-            */
+            // Registrar para validación de eventos
+            foreach (GridViewRow row in ClientesGV.Rows)
+            {
+                Button btnVerDetalles = (Button)row.FindControl("VerDetalles");
+                if (btnVerDetalles != null)
+                {
+                    ClientScript.RegisterForEventValidation(btnVerDetalles.UniqueID, "VerDetalles");
+                }
+            }
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -35,14 +43,29 @@ namespace TPCuatrimestral_Equipo_A
             //Pasar los datos a la funcion de bussines
             if (ClientesBusiness.GuardarUsuario(nombre, apellido, dni, email, telefono))
             {
-                // El usuario se guardó correctamente, puedes realizar alguna acción adicional si es necesario.
-                Response.Write("Usuario guardado exitosamente.");
+                // guardo correctamente
+                string mensaje = "Usuario guardado exitosamente.";
+                txtConfirma.Text= mensaje;
             }
             else
             {
-                // Ocurrió un error al guardar el usuario, muestra un mensaje de error.
-                Response.Write("Error al guardar el usuario. Por favor, inténtalo nuevamente.");
+                //error al guardar el usuario
+                string mensaje = "Error al guardar el usuario. Por favor, inténtalo nuevamente.";
+                txtConfirma.Text = mensaje;
             }
         }
+        protected void ClientesGV_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "VerDetalles")
+            {
+                // Aquí obtienes el ID del cliente desde el CommandArgument
+                int clienteID = Convert.ToInt32(e.CommandArgument);
+
+                // Redirige a la página de detalles pasando el ID como parámetro
+                Response.Redirect($"Contacto.aspx?ID={clienteID}");
+            }
+        }
+
+
     }
 }

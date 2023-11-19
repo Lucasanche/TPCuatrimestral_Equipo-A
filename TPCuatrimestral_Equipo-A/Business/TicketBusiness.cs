@@ -198,8 +198,16 @@ namespace Business
             try
             {
                 // Actualizar Ticket en la base de datos.
-                data.SetQuery("UPDATE Tickets SET Tipo = @Tipo, Prioridad = @Prioridad, DescripcionInicial = @DescripcionInicial, DescripcionCierre = @DescripcionCierre, LegajoUsuario = @LegajoUsuario, NombreUsuario = @NombreUsuario, ClienteAfectado = @ClienteAfectado, FechaCreacion = @FechaCreacion, FechaCierre = @FechaCierre, Estado = @Estado WHERE ID = @Id");
-
+                data.SetQuery("UPDATE Tickets SET Tipo = @Tipo, " +
+                    "Prioridad = @Prioridad, " +
+                    "DescripcionInicial = @DescripcionInicial, " +
+                    "DescripcionCierre = @DescripcionCierre, " +
+                    "LegajoUsuario = @LegajoUsuario, " +
+                    "NombreUsuario = @NombreUsuario, " +
+                    "ClienteAfectado = @ClienteAfectado, " +
+                    "FechaCreacion = @FechaCreacion, " +
+                    "FechaCierre = @FechaCierre, " +
+                    "Estado = @Estado WHERE ID = @Id");
                 data.AddParameter("@Id", ticket.ID);
                 data.AddParameter("@Tipo", ticket.Tipo);
                 data.AddParameter("@Prioridad", ticket.Prioridad);
@@ -207,7 +215,7 @@ namespace Business
                 data.AddParameter("@DescripcionCierre", ticket.DescripcionCierre);
                 data.AddParameter("@LegajoUsuario", ticket.LegajoUsuario);
                 data.AddParameter("@NombreUsuario", ticket.NombreUsuario);
-                data.AddParameter("@ClienteAfectado", ticket.ClienteAfectado.ID);  // Asumiendo que ClienteAfectado es un objeto de tipo Cliente
+                data.AddParameter("@ClienteAfectado", ticket.ClienteAfectado.ID); 
                 data.AddParameter("@FechaCreacion", ticket.FechaCreacion);
                 data.AddParameter("@FechaCierre", ticket.FechaCierre);
                 data.AddParameter("@Estado", ticket.Estado);
@@ -230,7 +238,7 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                // Actualizar el estado del Ticket en la base de datos para indicar que ha sido eliminado lógicamente.
+                // Baja logica
                 data.SetQuery("UPDATE Tickets SET ESTADO = 0 WHERE ID = @Id");
                 data.AddParameter("@Id", ticketID);
 

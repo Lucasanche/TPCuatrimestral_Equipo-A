@@ -192,6 +192,147 @@ namespace Business
                 data.Close();
             }
         }
+        public static bool ModificarTicket(Ticket ticket)
+        {
+            AccessData data = new AccessData();
+            try
+            {
+                // Actualizar Ticket en la base de datos.
+                data.SetQuery("UPDATE Tickets SET Tipo = @Tipo, " +
+                    "Prioridad = @Prioridad, " +
+                    "DescripcionInicial = @DescripcionInicial, " +
+                    "DescripcionCierre = @DescripcionCierre, " +
+                    "LegajoUsuario = @LegajoUsuario, " +
+                    "NombreUsuario = @NombreUsuario, " +
+                    "ClienteAfectado = @ClienteAfectado, " +
+                    "FechaCreacion = @FechaCreacion, " +
+                    "FechaCierre = @FechaCierre, " +
+                    "Estado = @Estado WHERE ID = @Id");
+                data.AddParameter("@Id", ticket.ID);
+                data.AddParameter("@Tipo", ticket.Tipo);
+                data.AddParameter("@Prioridad", ticket.Prioridad);
+                data.AddParameter("@DescripcionInicial", ticket.DescripcionInicial);
+                data.AddParameter("@DescripcionCierre", ticket.DescripcionCierre);
+                data.AddParameter("@LegajoUsuario", ticket.LegajoUsuario);
+                data.AddParameter("@NombreUsuario", ticket.NombreUsuario);
+                data.AddParameter("@ClienteAfectado", ticket.ClienteAfectado.ID); 
+                data.AddParameter("@FechaCreacion", ticket.FechaCreacion);
+                data.AddParameter("@FechaCierre", ticket.FechaCierre);
+                data.AddParameter("@Estado", ticket.Estado);
+
+                data.ExecuteQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+
+        public static bool BajaLogicaTicket(int ticketID)
+        {
+            AccessData data = new AccessData();
+            try
+            {
+                // Baja logica
+                data.SetQuery("UPDATE Tickets SET ESTADO = 0 WHERE ID = @Id");
+                data.AddParameter("@Id", ticketID);
+
+                data.ExecuteQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+        public static Ticket BuscarTicketPorID(int ticketID)
+        {
+            Ticket ticket = null; // Inicializa la variable en null
+
+            AccessData data = new AccessData();
+
+            try
+            {
+                data.SetQuery(@"SELECT 
+                            ticket.ID
+                            , tipo.ID AS ID_TIPO
+                            , tipo.NOMBRE AS TIPO
+                            , priori.ID AS ID_PRIORIDAD
+                            , priori.NOMBRE AS PRIORIDAD
+                            , ticket.DESCRIPCION_INICIAL
+                            , ISNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE
+                            , usuario.LEGAJO AS LEGAJO_USUARIO
+                            , CONCAT(usuario.NOMBRE,' ', usuario.APELLIDO) AS USUARIO
+                            , CLIENTE_AFECTADO
+                            , ticket.FECHA_INICIO
+                            , FECHA_FIN
+                            , estado.ID AS ID_ESTADO
+                            , estado.NOMBRE AS ESTADO
+                            FROM TICKETS ticket
+                            LEFT JOIN TIPOS_INCIDENCIA AS tipo ON ticket.ID_TIPO = tipo.ID
+                            LEFT JOIN PRIORIDADES AS priori ON ticket.ID_PRIORIDAD = priori.ID
+                            LEFT JOIN ESTADOS_TICKET AS estado ON ticket.ID_ESTADO = estado.ID
+                            LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.LEGAJO
+                            WHERE ticket.ID = @TicketID"); // Utiliza un parámetro para evitar SQL injection
+                data.AddParameter("@TicketID", ticketID); // Agrega el parámetro al comando
+                data.ExecuteQuery();
+
+                while (data.Reader.Read())
+                {
+                    ticket = new Ticket(); // Inicializa el objeto solo si hay datos
+                    ticket.ID = (int)data.Reader["Id"];
+                    ticket.Tipo = new TipoTicket
+                    {
+                        ID = (byte)data.Reader["ID_TIPO"],
+                        Nombre = data.Reader["TIPO"].ToString()
+                    };
+                    ticket.Prioridad = new Prioridad
+                    {
+                        ID = (byte)data.Reader["ID_PRIORIDAD"],
+                        Nombre = data.Reader["PRIORIDAD"].ToString()
+                    };
+                    ticket.DescripcionInicial = data.Reader["DESCRIPCION_INICIAL"].ToString();
+                    ticket.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
+                    ticket.LegajoUsuario = data.Reader["LEGAJO_USUARIO"].ToString();
+                    ticket.NombreUsuario = data.Reader["USUARIO"].ToString();
+                    ticket.ClienteAfectado = ClientesBusiness.ClientePorID((int)data.Reader["CLIENTE_AFECTADO"]);
+                    ticket.FechaCreacion = (DateTime)data.Reader["FECHA_INICIO"];
+                    if (!data.Reader.IsDBNull(data.Reader.GetOrdinal("FECHA_FIN")))
+                    {
+                        ticket.FechaCierre = (DateTime?)data.Reader["FECHA_FIN"];
+                    }
+                    else
+                    {
+                        ticket.FechaCierre = null;
+                    }
+                    ticket.Estado = new EstadoReclamo()
+                    {
+                        ID = (byte)data.Reader["ID_ESTADO"],
+                        Nombre = data.Reader["ESTADO"].ToString()
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al buscar el ticket por ID: {ex.Message}");
+                throw;
+            }
+            finally
+            {
+                data.Close();
+            }
+
+            return ticket;
+        }
         public static int GetIdTicketMasViejo()
         {
             AccessData data = new AccessData();

@@ -1,17 +1,40 @@
 ﻿
 /*BOTON verde*/
+.container-detalles {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    color: white;
+    border-radius: 45px;
+}
 .ver-clientes {
     border: none;
-    border-radius: 45px;
     background-color: seagreen;
+    border-radius: 45px;
     width: 6.4vh;
     height: 2.9vh;
     cursor: pointer;
     transition: color 0.01s cubic-bezier(0.25, 1.01, 0.25, 1);
     position: relative;
 }
+.container-detalles a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.container-detalles span {
+    margin-right: -25px;
+}
 
-.ver-clientes:hover {
+.container-detalles a:hover {
     border: 0px solid rgb(255, 255, 255);
     color: white;
 }
@@ -32,11 +55,11 @@
     bottom: 18%;
 }
 
-.ver-clientes:hover .imagen-primaria {
+.container-detalles:hover .imagen-primaria {
     opacity: 0;
 }
 
-.ver-clientes:hover .imagen-secundaria {
+.container-detalles:hover .imagen-secundaria {
     opacity: 1;
 }
 

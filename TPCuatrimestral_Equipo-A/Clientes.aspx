@@ -81,79 +81,29 @@
     </div>
 </div>
 
-
-<table class="uk-table uk-table-striped uk-table-hover">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>DNI</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Email</th>
-        <th>Telefono</th>
-        <th>Fecha de Alta</th>
-        <th>Fecha de Baja</th>
-        <th>Opciones</th>
-    </tr>
-    </thead>
-<tbody>
-    <tr>
-        <td>1</td>
-        <td>40404502</td>
-        <td>Marcos</td>
-        <td>Ramirez</td>
-        <td>marcosRamirez2222@gmail.com</td>
-        <td>114751415</td>
-        <td>05/12/2021</td>
-        <td></td>
-        <td>
-           <button class="ver-clientes">
-             <img class="imagen-primaria" src="imagenes/ojo.svg" style="width: 2.7vh; height: 2.5vh;" alt="">
-             <img class="imagen-secundaria" src="imagenes/abrir-documento.svg" alt="">
-             <span class="texto-button" style="
-             position: relative;
-             left: 30%;">Ver</span>
-            </button>
-        </td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>3154502</td>
-        <td>Gabriel</td>
-        <td>Lopez Figueroa</td>
-        <td>asdjkashdkjasd@gmail.com</td>
-        <td>114465115</td>
-        <td>01/05/2021</td>
-        <td></td>
-        <td>
-            asd
-        </td>
-    </tr>
-</tbody>
-<tfoot>
-    <tr>
-        <td></td>
-    </tr>
-</tfoot>
-</table>
-
-    <asp:GridView ID="ClientesGV" runat="server" AutoGenerateColumns="False" OnRowCommand="ClientesGV_RowCommand">
-    <Columns>
-        <asp:BoundField DataField="ID" HeaderText="#" />
-        <asp:BoundField DataField="DNI" HeaderText="DNI" />
-        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-        <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-        <asp:BoundField DataField="Email" HeaderText="Email" />
-        <asp:BoundField DataField="Telefono1" HeaderText="Telefono" />
-        <asp:BoundField DataField="FechaAlta" HeaderText="Fecha de Alta" />
-        <asp:BoundField DataField="FechaBaja" HeaderText="Fecha de Baja" />
-        <asp:TemplateField HeaderText="Opciones">
+    <asp:GridView ID="ClientesGV" CssClass="uk-table uk-table-striped uk-table-hover" runat="server" AutoGenerateColumns="False" OnRowCommand="ClientesGV_RowCommand">
+        <Columns>
+            <asp:BoundField DataField="ID" HeaderText="#" />
+            <asp:BoundField DataField="DNI" HeaderText="DNI" />
+            <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+            <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+            <asp:BoundField DataField="Email" HeaderText="Email" />
+            <asp:BoundField DataField="Telefono1" HeaderText="Telefono" />
+            <asp:BoundField DataField="FechaAlta" HeaderText="Fecha de Alta" />
+            <asp:BoundField DataField="FechaBaja" HeaderText="Fecha de Baja" />
+            <asp:TemplateField HeaderText="Opciones">
             <ItemTemplate>
-                <asp:Button runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' Text="Ver Detalles" CssClass="uk-button uk-button-secondary" PostBackUrl='<%# $"Contacto.aspx?ID={Eval("ID")}" %>' />
+                 <div class="container-detalles">
+                    <asp:LinkButton runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' CssClass="ver-clientes">
+                        <img class="imagen-primaria" src="imagenes/ojo.svg" style="width: 2.7vh; height: 1.8vh;" alt="" />
+                        <img class="imagen-secundaria" src="imagenes/abrir-documento.svg" alt="" />
+                        <span class="texto-button" style="margin-right: -25px;">Ver</span>
+                    </asp:LinkButton>
+                </div>
             </ItemTemplate>
         </asp:TemplateField>
-    </Columns>
-</asp:GridView>
+        </Columns>
+    </asp:GridView>
 
 
 

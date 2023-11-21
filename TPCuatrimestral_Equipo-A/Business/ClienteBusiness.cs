@@ -158,25 +158,72 @@ namespace Business
                 data.Close();
             }
         }
+        public static bool ModificarCliente(Cliente cliente)
+        {
+            AccessData data = new AccessData();
+            try
+            {
+                // Actualiza
+                data.SetQuery("UPDATE Clientes SET Nombre = @Nombre, Apellido = @Apellido, DNI = @Dni, Email = @Email, Telefono = @Telefono WHERE ID = @Id");
+                data.AddParameter("@Id", cliente.ID);
+                data.AddParameter("@Nombre", cliente.Nombre);
+                data.AddParameter("@Apellido", cliente.Apellido);
+                data.AddParameter("@Dni", cliente.DNI);
+                data.AddParameter("@Email", cliente.Email);
+                data.AddParameter("@Telefono", cliente.Telefono1); 
+
+                data.ExecuteQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+
+        public static bool BajaLogicaCliente(int clienteID)
+        {
+            AccessData data = new AccessData();
+            try
+            {
+                data.SetQuery("UPDATE Clientes SET ESTADO = 0 WHERE ID = @Id");
+                data.AddParameter("@Id", clienteID);
+
+                data.ExecuteQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
         public static int Remove(Cliente cliente)
-{
-    AccessData data = new AccessData();
-    List<SqlParameter> parameters = new List<SqlParameter>();
-    try
-    {
-        string query = "DELETE FROM CLIENTES WHERE ID = @Id";
-        parameters.Add(new SqlParameter("@Id", cliente.ID));
-        data.SetQuery(query, parameters);
-        return data.ExecuteNonQuery();
-    }
-    catch (Exception ex)
-    {
-        throw ex;
-    }
-    finally
-    {
-        data.Close();
-    }
-}
+        {
+            AccessData data = new AccessData();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            try
+            {
+                string query = "DELETE FROM CLIENTES WHERE ID = @Id";
+                parameters.Add(new SqlParameter("@Id", cliente.ID));
+                data.SetQuery(query, parameters);
+                return data.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@
     <link href="estilos/Tablas.css" rel="stylesheet" />
     <h1 class="uk-heading-divider">Tickets</h1>
     <div class="row-accion">
-        <a class="boton-agregar" href="#modal-center-Add" uk-toggle>Agregar+</a>
+        <a class="boton-agregar" uk-toggle>Agregar+</a>
         <div class="container-busqueda">
             <input type="text" class="input-busqueda" placeholder="Buscar por ID...">
             <i class="lupita">
@@ -17,49 +17,7 @@
         </div>
         <a class="boton-filtros" href="#modal-center" uk-toggle>Otros Filtros</a>
     </div>
-    <div id="modal-center-Add" class="uk-flex-top" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-            <h3 class="uk-heading-divider">Añadir ticket</h3>
 
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-
-            <div class="uk-form-stacked">
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Tipo:</label>
-                    <div class="uk-form-controls">
-                        <asp:DropDownList ID="TipoDDL" runat="server"></asp:DropDownList>
-                    </div>
-                </div>
-                <div class="uk-form-stacked">
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-text">Prioridad:</label>
-                        <asp:DropDownList ID="PrioridadDDL" runat="server"></asp:DropDownList>
-                    </div>
-                </div>
-                <div class="uk-form-stacked">
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-text">Descripción inicial:</label>
-                        <asp:TextBox ID="TextDescripcionInicial" runat="server" CssClass="uk-input" />
-                    </div>
-                </div>
-                <div class="uk-form-stacked">
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-text">Cliente afectado:</label>
-                        <asp:DropDownList ID="ClienteAfectadoDDL" runat="server"></asp:DropDownList>
-                        <asp:TextBox ID="TextClienteAfectado" runat="server" CssClass="uk-input" />
-                        <asp:Button ID="BuscarCliente" runat="server" Text="Buscar cliente" OnClick="BuscarCliente_Click" AutoPostBack="false" UseSubmitBehavior="False"/>
-                    </div>
-                </div>
-                <div class="uk-form-stacked">
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-text">Usuario asignado:</label>
-                        <asp:DropDownList ID="UsuarioDDL" runat="server"></asp:DropDownList>
-                    </div>
-                </div>
-                <%--  <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" />--%>
-            </div>
-        </div>
-    </div>
     <div id="modal-center" class="uk-flex-top" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 
@@ -130,9 +88,30 @@
 
     --%>
 
-    <asp:GridView ID="TicketsGV" runat="server" CssClass="uk-table uk-table-striped uk-table-hover"></asp:GridView>
-
-
+    <asp:GridView ID="TicketsGV" CssClass="uk-table uk-table-striped uk-table-hover" runat="server" OnRowCommand="TicketsGV_RowCommand" AutoGenerateColumns="false">
+    <Columns>
+        <asp:BoundField DataField="ID" HeaderText="#" />
+        <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
+        <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
+        <asp:BoundField DataField="DescripcionInicial" HeaderText="Descripcion Inicial" />
+        <asp:BoundField DataField="DescripcionCierre" HeaderText="Descripcion Cierre" />
+        <asp:BoundField DataField="LegajoUsuario" HeaderText="Legajo Usuario" />
+        <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="Cliente Afectado" />
+        <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha De Creacion" />
+        <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
+        <asp:TemplateField HeaderText="Opciones">
+            <ItemTemplate>
+                <div class="container-detalles">
+                    <asp:LinkButton runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' CssClass="ver-clientes">
+                        <img class="imagen-primaria" src="imagenes/ojo.svg" style="width: 2.7vh; height: 1.8vh;" alt="" />
+                        <img class="imagen-secundaria" src="imagenes/abrir-documento.svg" alt="" />
+                        <span class="texto-button" style="margin-right: -25px;">Ver</span>
+                    </asp:LinkButton>
+                </div>
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
 
 
 

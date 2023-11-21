@@ -10,7 +10,6 @@ namespace TPCuatrimestral_Equipo_A
 {
     public partial class Tickets : System.Web.UI.Page
     {
-        List<Ticket> _ticketList;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
@@ -19,22 +18,31 @@ namespace TPCuatrimestral_Equipo_A
             }
             if (!IsPostBack)
             {
-                CargarTabla();
+                TicketsGV.DataSource = TicketBusiness.List();
+                TicketsGV.DataBind();
+                // Registrar para validación de eventos
+                foreach (GridViewRow row in TicketsGV.Rows)
+                {
+                    System.Web.UI.WebControls.Button btnVerDetalleTicket = (System.Web.UI.WebControls.Button)row.FindControl("VerDetalleTicket");
+                    if (btnVerDetalleTicket != null)
+                    {
+                        ClientScript.RegisterForEventValidation(btnVerDetalleTicket.UniqueID, "VerDetalleTicket");
+                    }
+                }
             }
         }
-
-        protected void BuscarCliente_Click(object sender, EventArgs e)
+        protected void TicketsGV_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
-
-            if (TextClienteAfectado.Text != "" && TextClienteAfectado.Text != null)
+            if (e.CommandName == "VerDetalles")
             {
+                // Aquí obtienes el ID del cliente desde el CommandArgument
+                int ticketID = Convert.ToInt32(e.CommandArgument);
 
-            }
-            else
-            {
-                //Response.Write("buscate una vida");
+                // Redirige a la página de detalles pasando el ID como parámetro
+                Response.Redirect($"DetalleTicket.aspx?ID={ticketID}");
             }
         }
+        /*
         protected void CargarTabla()
         {
             _ticketList = TicketBusiness.List();
@@ -119,6 +127,7 @@ namespace TPCuatrimestral_Equipo_A
             TicketsGV.DataSource = null;
             CargarTabla();
         }
+        */
     }
 }
 

@@ -148,10 +148,16 @@
             <asp:BoundField DataField="FechaAlta" HeaderText="Fecha de Alta" />
             <asp:BoundField DataField="FechaBaja" HeaderText="Fecha de Baja" />
             <asp:TemplateField HeaderText="Opciones">
-                <ItemTemplate>
-                    <asp:Button runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' Text="Ver Detalles" CssClass="uk-button uk-button-secondary" PostBackUrl='<%# $"Contacto.aspx?ID={Eval("ID")}" %>' />
-                </ItemTemplate>
-            </asp:TemplateField>
+            <ItemTemplate>
+                 <div class="container-detalles">
+                    <asp:LinkButton runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' CssClass="ver-clientes">
+                        <img class="imagen-primaria" src="imagenes/ojo.svg" style="width: 2.7vh; height: 1.8vh;" alt="" />
+                        <img class="imagen-secundaria" src="imagenes/abrir-documento.svg" alt="" />
+                        <span class="texto-button" style="margin-right: -25px;">Ver</span>
+                    </asp:LinkButton>
+                </div>
+            </ItemTemplate>
+        </asp:TemplateField>
         </Columns>
     </asp:GridView>
 

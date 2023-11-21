@@ -96,6 +96,7 @@
   <ItemGroup>
     <Content Include="Clientes.aspx" />
     <Content Include="Contacto.aspx" />
+    <Content Include="DetalleTicket.aspx" />
     <Content Include="Error404.aspx" />
     <Content Include="estilos\home.css" />
     <Content Include="estilos\Tablas.css" />
@@ -119,6 +120,13 @@
     </Compile>
     <Compile Include="Contacto.aspx.designer.cs">
       <DependentUpon>Contacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleTicket.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>DetalleTicket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleTicket.aspx.designer.cs">
+      <DependentUpon>DetalleTicket.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error404.aspx.cs">
       <DependentUpon>Error404.aspx</DependentUpon>

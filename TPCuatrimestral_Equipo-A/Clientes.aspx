@@ -137,23 +137,23 @@
 </tfoot>
 </table>
 
-    <asp:GridView ID="ClientesGV" runat="server" AutoGenerateColumns="False" OnRowCommand="ClientesGV_RowCommand">
-    <Columns>
-        <asp:BoundField DataField="ID" HeaderText="#" />
-        <asp:BoundField DataField="DNI" HeaderText="DNI" />
-        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-        <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-        <asp:BoundField DataField="Email" HeaderText="Email" />
-        <asp:BoundField DataField="Telefono1" HeaderText="Telefono" />
-        <asp:BoundField DataField="FechaAlta" HeaderText="Fecha de Alta" />
-        <asp:BoundField DataField="FechaBaja" HeaderText="Fecha de Baja" />
-        <asp:TemplateField HeaderText="Opciones">
-            <ItemTemplate>
-                <asp:Button runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' Text="Ver Detalles" CssClass="uk-button uk-button-secondary" PostBackUrl='<%# $"Contacto.aspx?ID={Eval("ID")}" %>' />
-            </ItemTemplate>
-        </asp:TemplateField>
-    </Columns>
-</asp:GridView>
+    <asp:GridView ID="ClientesGV" CssClass="uk-table uk-table-striped uk-table-hover" runat="server" AutoGenerateColumns="False" OnRowCommand="ClientesGV_RowCommand">
+        <Columns>
+            <asp:BoundField DataField="ID" HeaderText="#" />
+            <asp:BoundField DataField="DNI" HeaderText="DNI" />
+            <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+            <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+            <asp:BoundField DataField="Email" HeaderText="Email" />
+            <asp:BoundField DataField="Telefono1" HeaderText="Telefono" />
+            <asp:BoundField DataField="FechaAlta" HeaderText="Fecha de Alta" />
+            <asp:BoundField DataField="FechaBaja" HeaderText="Fecha de Baja" />
+            <asp:TemplateField HeaderText="Opciones">
+                <ItemTemplate>
+                    <asp:Button runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' Text="Ver Detalles" CssClass="uk-button uk-button-secondary" PostBackUrl='<%# $"Contacto.aspx?ID={Eval("ID")}" %>' />
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+    </asp:GridView>
 
 
 

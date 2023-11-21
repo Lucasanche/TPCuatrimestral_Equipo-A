@@ -106,9 +106,11 @@ namespace TPCuatrimestral_Equipo_A
             PrioridadDDL.DataSource = prioridadesNombre;
             PrioridadDDL.DataBind();
 
-            List<string> parametrosClientes = new List<string>();
-            parametrosClientes.Add("DNI");
-            parametrosClientes.Add("EMAIL");
+            List<string> parametrosClientes = new List<string>
+            {
+                "DNI",
+                "EMAIL"
+            };
             ClienteAfectadoDDL.DataSource = parametrosClientes;
             ClienteAfectadoDDL.DataBind();
         }

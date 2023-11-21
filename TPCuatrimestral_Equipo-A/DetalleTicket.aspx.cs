@@ -1,6 +1,7 @@
 ﻿using Business;
 using Domain;
 using System;
+using System.Collections.Generic;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -19,24 +20,42 @@ namespace TPCuatrimestral_Equipo_A
 
                 ticket = TicketBusiness.BuscarTicketPorID(ticketID);
 
+                //Labels
                 lblID.Text = ticket.ID.ToString();
-                //Cargar los label de descripcion
-                /*
-                lblDNI.Text = cliente.DNI;
-                lblNombre.Text = cliente.Nombre;    
-                lblApellido.Text = cliente.Apellido;
-                lblEmail.Text = cliente.Email;
-                lblTelefono.Text = cliente.Telefono1;
+                lblPrioridad.Text = ticket.Prioridad.Nombre;
+                lblTipo.Text = ticket.Tipo.Nombre;
+                lblEstado.Text = ticket.Estado.Nombre;
+                lblFechaCreacion.Text = ticket.FechaCreacion.ToString();
+                lblLegajoUsuario.Text = ticket.LegajoUsuario.ToString();
+                lblClienteAfectado.Text = ticket.ClienteAfectado.DNI;
+                lblDescripcionCierre.Text = ticket.DescripcionCierre;
+                lblDescripcionInicial.Text = ticket.DescripcionInicial;
 
-                // Cargar en caso de Edicion los textbox
-                txtNombre.Text = cliente.Nombre;
-                txtApellido.Text = cliente.Apellido;
-                txtDNI.Text = cliente.DNI;
-                txtEmail.Text = cliente.Email;
-                txtTelefono.Text = cliente.Telefono1;
-                */
+                //Textos
+                TextDescripcionInicial.Text = ticket.DescripcionInicial;
+                TextClienteAfectado.Text = ticket.ClienteAfectado.DNI;
+
+                //Cargo los tipos de ticket y prioridades para el modal EDITAR
+                List<TipoTicket> tiposTicket = TipoTicketBusiness.List();
+                List<string> tiposTicketNombre = new List<string>();
+                foreach (TipoTicket tipo in tiposTicket)
+                {
+                    tiposTicketNombre.Add(tipo.Nombre);
+                }
+                TipoDDL.DataSource = tiposTicketNombre;
+                TipoDDL.DataBind();
+
+                List<Prioridad> prioridades = PrioridadBusiness.List();
+                List<string> prioridadesNombre = new List<string>();
+                foreach (Prioridad prioridad in prioridades)
+                {
+                    prioridadesNombre.Add(prioridad.Nombre);
+                }
+                PrioridadDDL.DataSource = prioridadesNombre;
+                PrioridadDDL.DataBind();
 
             }
+            
         }
     }
 }

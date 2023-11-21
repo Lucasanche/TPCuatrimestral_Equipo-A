@@ -23,7 +23,7 @@
     </div>
 
     <div class="uk-container">
-        <button class="uk-button uk-button-default uk-button-large" type="button" uk-toggle="target: #modal-example">Editar Cliente</button>
+        <button class="uk-button uk-button-default uk-button-large" type="button" uk-toggle="target: #modal-editar">Editar Cliente</button>
         <button class="uk-button uk-button-primary uk-button-large" href="#modal-center-Add" >Agregar Incidente</button>
         <button class="uk-button uk-button-secondary uk-button-large">Eliminar Cliente</button>
     </div>
@@ -74,7 +74,7 @@
  <!--FIN Modal Agregar Tickets-->
 
     <!-- Modal Edicion Cliente-->
-    <div id="modal-example" uk-modal>
+    <div id="modal-editar" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
             <h3 class="uk-heading-divider">Modificar Cliente</h3>
 

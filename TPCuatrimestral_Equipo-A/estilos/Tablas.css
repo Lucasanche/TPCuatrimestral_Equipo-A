@@ -9,7 +9,6 @@
     flex-wrap: wrap;
     color: white;
     border-radius: 45px;
-    cursor: pointer;
 }
 .ver-clientes {
     border: none;
@@ -35,7 +34,7 @@
     margin-right: -25px;
 }
 
-.container-detalles:hover {
+.container-detalles a:hover {
     border: 0px solid rgb(255, 255, 255);
     color: white;
 }

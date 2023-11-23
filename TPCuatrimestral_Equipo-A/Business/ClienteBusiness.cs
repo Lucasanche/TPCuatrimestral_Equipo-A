@@ -106,7 +106,7 @@ namespace Business
             return cliente;
         }
 
-        public static bool GuardarUsuario(string nombre, string apellido, string dni, string email, string telefono)
+        public static bool GuardarCliente(string nombre, string apellido, string dni, string email, string telefono)
         {
 
             AccessData data = new AccessData();
@@ -132,6 +132,7 @@ namespace Business
                 data.Close();
             }
         }
+
         public static string BuscarPor(string parametro, string valor)
         {
             string DNIcliente = "";
@@ -190,8 +191,11 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery("UPDATE Clientes SET ESTADO = 0 WHERE ID = @Id");
+                DateTime fechaBaja = DateTime.Now;
+
+                data.SetQuery("UPDATE Clientes SET ESTADO = 0, FechaBaja = @FechaBaja WHERE ID = @Id");
                 data.AddParameter("@Id", clienteID);
+                data.AddParameter("@FechaBaja", fechaBaja);
 
                 data.ExecuteQuery();
                 return true;

@@ -47,16 +47,16 @@ namespace TPCuatrimestral_Equipo_A
 
 
             //Pasar los datos a la funcion de bussines
-            if (ClientesBusiness.GuardarUsuario(nombre, apellido, dni, email, telefono))
+            if (ClientesBusiness.GuardarCliente(nombre, apellido, dni, email, telefono))
             {
                 // guardo correctamente
-                string mensaje = "Usuario guardado exitosamente.";
+                string mensaje = "Cliente guardado exitosamente.";
                 txtConfirma.Text= mensaje;
             }
             else
             {
                 //error al guardar el usuario
-                string mensaje = "Error al guardar el usuario. Por favor, inténtalo nuevamente.";
+                string mensaje = "Error al guardar el cliente. Por favor, inténtalo nuevamente.";
                 txtConfirma.Text = mensaje;
             }
         }

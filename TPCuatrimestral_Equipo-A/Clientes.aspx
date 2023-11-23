@@ -63,7 +63,7 @@
                         <asp:TextBox ID="txtTelefono" runat="server" CssClass="uk-input" />
                     </div>
                 </div>
-                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" AutoPostBack="false" UseSubmitBehavior="False"/>
+                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cliente" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" AutoPostBack="false" UseSubmitBehavior="False"/>
                     <asp:Label Text="" runat="server" ID="txtConfirma"/>
             </div>
         </div>

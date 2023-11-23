@@ -32,11 +32,11 @@ namespace TPCuatrimestral_Equipo_A
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             //Guardar datos en variables
-            string nombre = txtNombre.Text;
-            string apellido = txtApellido.Text;
-            string dni = txtDNI.Text;
-            string email = txtEmail.Text;
-            string telefono = txtTelefono.Text;
+            string nombre = txtNombre1.Text;
+            string apellido = txtApellido1.Text;
+            string dni = txtDNI1.Text;
+            string email = txtEmail1.Text;
+            string telefono = txtTelefono1.Text;
 
 
             //Validar los datos (puedes agregar más validaciones según sea necesario)
@@ -47,17 +47,17 @@ namespace TPCuatrimestral_Equipo_A
 
 
             //Pasar los datos a la funcion de bussines
-            if (ClientesBusiness.GuardarUsuario(nombre, apellido, dni, email, telefono))
+            if (ClientesBusiness.GuardarCliente(nombre, apellido, dni, email, telefono))
             {
                 // guardo correctamente
-                string mensaje = "Usuario guardado exitosamente.";
-                txtConfirma.Text= mensaje;
+                string mensaje = "Cliente guardado exitosamente.";
+                txtAgregaCliente.Text= mensaje;
             }
             else
             {
                 //error al guardar el usuario
-                string mensaje = "Error al guardar el usuario. Por favor, inténtalo nuevamente.";
-                txtConfirma.Text = mensaje;
+                string mensaje = "Error al guardar el cliente. Por favor, inténtalo nuevamente.";
+                txtAgregaCliente.Text = mensaje;
             }
         }
         protected void ClientesGV_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)

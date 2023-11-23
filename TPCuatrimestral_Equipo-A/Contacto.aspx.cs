@@ -1,6 +1,7 @@
 ﻿using Business;
 using Domain;
 using System;
+using System.Collections.Generic;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -34,6 +35,86 @@ namespace TPCuatrimestral_Equipo_A
                 txtTelefono.Text = cliente.Telefono1;
 
             }
+
+            //Cargo los tipos de ticket y prioridades para el modal
+            List<TipoTicket> tiposTicket = TipoTicketBusiness.List();
+            List<string> tiposTicketNombre = new List<string>();
+            foreach (TipoTicket tipo in tiposTicket)
+            {
+                tiposTicketNombre.Add(tipo.Nombre);
+            }
+            TipoDDL.DataSource = tiposTicketNombre;
+            TipoDDL.DataBind();
+
+            List<Prioridad> prioridades = PrioridadBusiness.List();
+            List<string> prioridadesNombre = new List<string>();
+            foreach (Prioridad prioridad in prioridades)
+            {
+                prioridadesNombre.Add(prioridad.Nombre);
+            }
+            PrioridadDDL.DataSource = prioridadesNombre;
+            PrioridadDDL.DataBind();
+
+        }
+
+        protected void ConfirmaEdicion_Click(object sender, EventArgs e)
+        {
+            //cargar variables 
+            int clienteID = Convert.ToInt32(Request.QueryString["ID"]);
+            string nombre = txtNombre.Text;
+            string apellido = txtApellido.Text;
+            string dni = txtDNI.Text;
+            string email = txtEmail.Text;
+            string telefono = txtTelefono.Text;
+
+            // instancia de Cliente y asigna
+            Cliente cliente = new Cliente
+            {
+                ID = clienteID,
+                Nombre = nombre,
+                Apellido = apellido,
+                DNI = dni,
+                Email = email,
+                Telefono1 = telefono
+            };
+
+            // Llamar a la función para modificar el cliente
+            if (ClientesBusiness.ModificarCliente(cliente))
+            {
+                // Cliente editado correctamente
+                string mensaje = "Cliente editado exitosamente.";
+                txtEditado.Text = mensaje;
+            }
+            else
+            {
+                // Error al editar el cliente
+                string mensaje = "Error al editar el cliente. Por favor, inténtalo nuevamente.";
+                txtEditado.Text = mensaje;
+            }
+        }
+
+        protected void EliminarCliente_Click(object sender, EventArgs e)
+        {
+            int clienteID = Convert.ToInt32(Request.QueryString["ID"]);
+
+            if (ClientesBusiness.BajaLogicaCliente(clienteID))
+            {
+                // Cliente eliminado correctamente
+                string mensaje = "Cliente eliminado exitosamente.";
+                txtEliminado.Text = mensaje;
+            }
+            else
+            {
+                // Error al eliminar
+                string mensaje = "Error al eliminar el cliente. Por favor, inténtalo nuevamente.";
+                txtEliminado.Text = mensaje;
+            }
+
+        }
+
+        protected void AgregarTicket_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

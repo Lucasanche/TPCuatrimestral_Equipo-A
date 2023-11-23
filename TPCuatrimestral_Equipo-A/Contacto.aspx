@@ -35,7 +35,7 @@
             <p>Esta seguro que desea darle la BAJA al cliente?</p>
             <p class="uk-text-right">
                 <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <asp:Button Text="Confirmar" runat="server" ID="EliminarCliente" OnClick="EliminarCliente_Click" CssClass="uk-button uk-button-danger" />
+                <asp:Button Text="Confirmar" runat="server" ID="EliminarCliente" OnClick="EliminarCliente_Click" CssClass="uk-button uk-button-danger" AutoPostBack="false" UseSubmitBehavior="False" />
             </p>
             <asp:Label Text="text" runat="server" ID="txtEliminado"/>
         </div>
@@ -117,7 +117,7 @@
                 </div>
             </div>
                 <p class="uk-text-right">
-                    <asp:Button Text="Guardar Cambios" runat="server" ID="ConfirmaEdicion" OnClick="ConfirmaEdicion_Click" CssClass="uk-button uk-button-primary" />
+                    <asp:Button Text="Guardar Cambios" runat="server" ID="ConfirmaEdicion" OnClick="ConfirmaEdicion_Click" CssClass="uk-button uk-button-primary" AutoPostBack="false" UseSubmitBehavior="False" />
                     <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
                 </p>
                 <asp:Label Text="" runat="server" ID="txtEditado"/>

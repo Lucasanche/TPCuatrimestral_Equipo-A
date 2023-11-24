@@ -26,6 +26,22 @@ namespace Domain
         [DisplayName("Fecha de cierre")]
         public DateTime? FechaCierre { get; set; }
         [DisplayName("Estado")]
+        public byte IdEstadoReclamo { get; set; }
         public EstadoReclamo Estado { get; set; }
+        public Ticket()
+        {
+            ID= 0;
+            Tipo= new TipoTicket();
+            Prioridad   = new Prioridad();
+            DescripcionInicial = "";
+            DescripcionCierre = "";
+            LegajoUsuario = "";
+            NombreUsuario = "";
+            ClienteAfectado = new Cliente();
+            FechaCreacion = new DateTime();
+            FechaCierre = new DateTime();
+            Estado = new EstadoReclamo();
+        }
     }
+
 }

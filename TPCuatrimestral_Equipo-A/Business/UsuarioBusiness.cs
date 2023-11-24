@@ -17,7 +17,6 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                Usuario usuarioAux = new Usuario();
                 data.SetQuery(@"SELECT LEGAJO
                                      , NOMBRE
                                      , APELLIDO
@@ -35,6 +34,7 @@ namespace Business
 
                 while (data.Reader.Read())
                 {
+                    Usuario usuarioAux = new Usuario();
                     //{
                     usuarioAux.Legajo = data.Reader["LEGAJO"].ToString();
                     usuarioAux.Nombre = data.Reader["NOMBRE"].ToString();
@@ -44,6 +44,7 @@ namespace Business
                     usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
                     usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
                     usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
+
                     usuarioAux.Estado = (bool)data.Reader["ESTADO"];
                     usuarioLista.Add(usuarioAux);
                 }

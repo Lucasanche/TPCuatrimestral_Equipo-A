@@ -105,6 +105,52 @@ namespace Business
             }
             return cliente;
         }
+        public static Cliente ClientePorDNI(int DNI)
+        {
+            Cliente cliente = new Cliente();
+            AccessData data = new AccessData();
+            try
+            {
+                data.SetQuery(@"SELECT ID
+                                , DNI
+                                ,  NOMBRE 
+                                , APELLIDO
+                                , EMAIL
+                                , TELEFONO_1
+                                , ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
+                                , FECHA_NACIMIENTO
+                                , FECHA_ALTA
+                                , FECHA_BAJA
+                                , ESTADO 
+                                FROM CLIENTES WHERE DNI = '" + DNI.ToString()+"'");
+                data.ExecuteQuery();
+
+                while (data.Reader.Read())
+                {
+                    cliente.ID = (int)data.Reader["Id"];
+                    cliente.DNI = data.Reader["DNI"].ToString();
+                    cliente.Nombre = data.Reader["NOMBRE"].ToString();
+                    cliente.Apellido = data.Reader["APELLIDO"].ToString();
+                    cliente.Email = data.Reader["EMAIL"].ToString();
+                    cliente.Telefono1 = data.Reader["TELEFONO_1"].ToString();
+                    cliente.Telefono2 = data.Reader["TELEFONO2"].ToString();
+                    cliente.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
+                    cliente.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
+                    cliente.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
+                    cliente.Estado = (bool)data.Reader["ESTADO"];
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+            return cliente;
+        }
 
         public static bool GuardarCliente(string nombre, string apellido, string dni, string email, string telefono)
         {

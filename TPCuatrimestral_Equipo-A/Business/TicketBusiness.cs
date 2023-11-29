@@ -146,7 +146,7 @@ namespace Business
                 }
                 if (ticket.LegajoUsuario != null && ticket.LegajoUsuario != "")
                 {
-                    columns += "LEGAJO_USUARIO,";
+                    columns += "USUARIO_ASIGNADO,";
                     values += $"@Legajo_usuario,";
                     parameters.Add(new SqlParameter("@Legajo_usuario", ticket.LegajoUsuario));
                 }
@@ -167,8 +167,8 @@ namespace Business
                 //}
                 if (ticket.Estado != null)
                 {
-                    columns += "ID_ESTADO,";
-                    values += $"@Id_estado,";
+                    columns += "ID_ESTADO";
+                    values += $"@Id_estado";
                     parameters.Add(new SqlParameter("@Id_estado", ticket.Estado.ID));
                 }
                 else { return -1; }

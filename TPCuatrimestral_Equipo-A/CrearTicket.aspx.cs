@@ -12,16 +12,19 @@ namespace TPCuatrimestral_Equipo_A
 {
     public partial class CrearTicket : System.Web.UI.Page
     {
-        private Ticket ticket = new Ticket();
+        private Ticket ticket;
         private List<Usuario> usuarios;
         private List<Prioridad> prioridades;
         private List<TipoTicket> tipos;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("Error404.aspx");
+            }
             if (!IsPostBack)
             {
-                ticket = new Ticket();
-                usuarios = UsuarioBusiness.List();
+                usuarios = new List<Usuario>();
                 prioridades = PrioridadBusiness.List();
                 tipos = TipoTicketBusiness.List();
 
@@ -30,7 +33,17 @@ namespace TPCuatrimestral_Equipo_A
                 ddlPrioridad.DataValueField = "ID";
                 ddlPrioridad.DataBind();
 
-                ddlUsuario.DataSource = usuarios;
+
+                if (((Usuario)Session["usuario"]).Rol.ID == 1)
+                {
+                    usuarios.Add((Usuario)Session["usuario"]);
+                    ddlUsuario.DataSource = usuarios;
+                }
+                else
+                {
+                    usuarios = UsuarioBusiness.List();
+                    ddlUsuario.DataSource = usuarios;
+                }
                 ddlUsuario.DataTextField = "NombreCompleto";
                 ddlUsuario.DataValueField = "Legajo";
                 ddlUsuario.DataBind();
@@ -54,7 +67,9 @@ namespace TPCuatrimestral_Equipo_A
             catch { ID = 0; }
             if (ID != 0)
             {
+                ticket = new Ticket();
                 ticket.ClienteAfectado = ClientesBusiness.ClientePorDNI(ID);
+                Session.Add("ticket", ticket);
                 if (ticket.ClienteAfectado.ID != 0)
                 {
                     string textCliente = $"ID: {ticket.ClienteAfectado.ID.ToString()}   DNI: {ticket.ClienteAfectado.DNI}   Nombre: {ticket.ClienteAfectado.Nombre} {ticket.ClienteAfectado.Apellido}";
@@ -78,7 +93,9 @@ namespace TPCuatrimestral_Equipo_A
             catch { DNI = 0; }
             if (DNI != 0)
             {
+                ticket = new Ticket();
                 ticket.ClienteAfectado = ClientesBusiness.ClientePorDNI(DNI);
+                Session.Add("ticket", ticket);
                 if (ticket.ClienteAfectado.ID != 0)
                 {
                     string textCliente = $"ID: {ticket.ClienteAfectado.ID.ToString()}   DNI: {ticket.ClienteAfectado.DNI}   Nombre: {ticket.ClienteAfectado.Nombre} {ticket.ClienteAfectado.Apellido}";
@@ -121,11 +138,32 @@ namespace TPCuatrimestral_Equipo_A
                 descripcionValida = true;
             }
             if (descripcionValida && clienteValido) {
+                labelValidarCliente.Visible = true;
+                labelValidarCliente.Text = ddlPrioridad.SelectedValue;
+                ticket = (Ticket)Session["ticket"];
                 ticket.DescripcionInicial = textDescripcion.Text;
                 ticket.FechaCreacion = DateTime.Now;
                 ticket.IdEstadoReclamo = 1;
                 ticket.Estado = new EstadoReclamo();
-                //ticket.Prioridad = prioridades.FirstOrDefault(p => )
+                ticket.Prioridad = PrioridadBusiness.PrioridadPorID(Byte.Parse(ddlPrioridad.SelectedValue));
+                ticket.Tipo = TipoTicketBusiness.TipoTicketPorID(Byte.Parse(ddlTipoTicket.SelectedValue));
+                ticket.LegajoUsuario = ddlUsuario.SelectedValue;
+                try
+                {
+                    if (TicketBusiness.Agregar(ticket) == 1)
+                    { 
+                    int ok = 0;
+                    }
+                    else
+                    {
+                        int notOk = 0;
+                    }
+
+                }
+                catch(Exception ex)
+                {
+                    
+                }
             }
         }
     }

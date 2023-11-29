@@ -38,5 +38,32 @@ namespace Business
                 data.Close();
             }
         }
+        public static TipoTicket TipoTicketPorID(byte ID)
+        {
+            TipoTicket tipoTicket = new TipoTicket();
+            AccessData data = new AccessData();
+            try
+            {
+                data.SetQuery(@"SELECT ID
+                                , NOMBRE
+                                FROM TIPOS_INCIDENCIA WHERE ID = " + ID.ToString());
+                data.ExecuteQuery();
+
+                while (data.Reader.Read())
+                {
+                    tipoTicket.ID = (byte)data.Reader["ID"];
+                    tipoTicket.Nombre = data.Reader["NOMBRE"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+            return tipoTicket;
+        }
     }
 }

@@ -152,22 +152,22 @@ namespace Business
             return cliente;
         }
 
-        public static bool GuardarCliente(string nombre, string apellido, string dni, string email, string telefono)
+        public static int GuardarCliente(string nombre, string apellido, string dni, string email, string telefono, DateTime fechaNacimiento)
         {
 
             AccessData data = new AccessData();
             try
             {
                 // guardar cliente en la base de datos.
-                data.SetQuery("INSERT INTO Clientes (Nombre, Apellido, DNI, Email, Telefono) VALUES (@Nombre, @Apellido, @Dni, @Email, @Telefono)");
+                data.SetQuery("INSERT INTO Clientes (Nombre, Apellido, DNI, Email, TELEFONO_1, FECHA_NACIMIENTO) VALUES (@Nombre, @Apellido, @Dni, @Email, @Telefono , @FechaNacimiento)");
                 data.AddParameter("@Nombre", nombre);
                 data.AddParameter("@Apellido", apellido);
                 data.AddParameter("@Dni", dni);
                 data.AddParameter("@Email", email);
                 data.AddParameter("@Telefono", telefono);
+                data.AddParameter("@FechaNacimiento", fechaNacimiento);
 
-                data.ExecuteQuery();
-                return true;
+                return data.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

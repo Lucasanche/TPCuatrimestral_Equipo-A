@@ -56,34 +56,7 @@ namespace TPCuatrimestral_Equipo_A
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             //Guardar datos en variables
-            string nombre = txtNombre1.Text;
-            string apellido = txtApellido1.Text;
-            string dni = ExtraerNumeros(txtDNI1.Text);
-            string email = txtEmail1.Text;
-            string telefono = txtTelefono1.Text;
-
-
-            //Validar los datos (puedes agregar más validaciones según sea necesario)
-
-
-            //Generar instancia
-            ClientesBusiness negocioClientes = new ClientesBusiness();
-
-
-            //Pasar los datos a la funcion de bussines
-            if (ClientesBusiness.GuardarCliente(nombre, apellido, dni, email, telefono))
-            {
-                // guardo correctamente
-                string mensaje = "Cliente guardado exitosamente.";
-                txtAgregaCliente.Text = mensaje;
-            }
-            else
-            {
-                //error al guardar el usuario
-                string mensaje = "Error al guardar el cliente. Por favor, inténtalo nuevamente.";
-                txtAgregaCliente.Text = mensaje;
-            }
-            UpdatePanel1.Update();
+           
         }
 
 

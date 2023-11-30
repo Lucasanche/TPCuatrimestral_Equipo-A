@@ -205,22 +205,20 @@ namespace Business
                 data.Close();
             }
         }
-        public static bool ModificarCliente(Cliente cliente)
+        public static int ModificarCliente(string nombre, string apellido, string email, string telefono, int id)
         {
             AccessData data = new AccessData();
             try
             {
                 // Actualiza
-                data.SetQuery("UPDATE Clientes SET Nombre = @Nombre, Apellido = @Apellido, DNI = @Dni, Email = @Email, Telefono = @Telefono WHERE ID = @Id");
-                data.AddParameter("@Id", cliente.ID);
-                data.AddParameter("@Nombre", cliente.Nombre);
-                data.AddParameter("@Apellido", cliente.Apellido);
-                data.AddParameter("@Dni", cliente.DNI);
-                data.AddParameter("@Email", cliente.Email);
-                data.AddParameter("@Telefono", cliente.Telefono1); 
+                data.SetQuery("UPDATE CLIENTES SET NOMBRE = @Nombre, APELLIDO = @Apellido, EMAIL = @Email, TELEFONO_1 = @Telefono WHERE ID = @Id");
+                data.AddParameter("@Id", id);
+                data.AddParameter("@Nombre", nombre);
+                data.AddParameter("@Apellido", apellido);
+                data.AddParameter("@Email", email);
+                data.AddParameter("@Telefono", telefono);
 
-                data.ExecuteQuery();
-                return true;
+                return data.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -232,19 +230,18 @@ namespace Business
             }
         }
 
-        public static bool BajaLogicaCliente(int clienteID)
+        public static int BajaLogicaCliente(int id)
         {
             AccessData data = new AccessData();
             try
             {
                 DateTime fechaBaja = DateTime.Now;
 
-                data.SetQuery("UPDATE Clientes SET ESTADO = 0, FechaBaja = @FechaBaja WHERE ID = @Id");
-                data.AddParameter("@Id", clienteID);
+                data.SetQuery("UPDATE Clientes SET ESTADO = 0, FECHA_BAJA = @FechaBaja WHERE ID = @Id");
+                data.AddParameter("@Id", id);
                 data.AddParameter("@FechaBaja", fechaBaja);
 
-                data.ExecuteQuery();
-                return true;
+                return data.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

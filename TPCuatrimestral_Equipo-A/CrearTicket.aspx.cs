@@ -18,6 +18,11 @@ namespace TPCuatrimestral_Equipo_A
         private List<TipoTicket> tipos;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["dni"] != null)
+            {
+                string dni = Request.QueryString["dni"];
+                tbBuscarPorDNI.Text = dni;
+            }
             if (Session["usuario"] == null)
             {
                 Response.Redirect("Error404.aspx");

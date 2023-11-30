@@ -2,6 +2,8 @@
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Web.UI.WebControls;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -33,27 +35,7 @@ namespace TPCuatrimestral_Equipo_A
                 txtDNI.Text = cliente.DNI;
                 txtEmail.Text = cliente.Email;
                 txtTelefono.Text = cliente.Telefono1;
-
             }
-
-            //Cargo los tipos de ticket y prioridades para el modal
-            List<TipoTicket> tiposTicket = TipoTicketBusiness.List();
-            List<string> tiposTicketNombre = new List<string>();
-            foreach (TipoTicket tipo in tiposTicket)
-            {
-                tiposTicketNombre.Add(tipo.Nombre);
-            }
-            TipoDDL.DataSource = tiposTicketNombre;
-            TipoDDL.DataBind();
-
-            List<Prioridad> prioridades = PrioridadBusiness.List();
-            List<string> prioridadesNombre = new List<string>();
-            foreach (Prioridad prioridad in prioridades)
-            {
-                prioridadesNombre.Add(prioridad.Nombre);
-            }
-            PrioridadDDL.DataSource = prioridadesNombre;
-            PrioridadDDL.DataBind();
 
         }
 
@@ -112,9 +94,16 @@ namespace TPCuatrimestral_Equipo_A
 
         }
 
-        protected void AgregarTicket_Click(object sender, EventArgs e)
+        protected void CrearTicket_Command(object sender, CommandEventArgs e)
         {
-            
+            // Obtener el valor del DNI del Label
+            string dni = lblDNI.Text;
+
+            // Imprimir para depuración
+            Debug.WriteLine($"Valor de dni: {dni}");
+
+            // Redirigir a la página CrearTicket.aspx con el parámetro DNI
+            Response.Redirect($"CrearTicket.aspx?dni={dni}");
         }
     }
 }

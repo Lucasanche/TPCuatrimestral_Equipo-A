@@ -24,7 +24,7 @@
 
     <div class="uk-container">
         <button class="uk-button uk-button-default uk-button-large" type="button" uk-toggle="target: #modal-editar">Editar Cliente</button>
-        <button class="uk-button uk-button-primary uk-button-large" type="button" uk-toggle="target: #modal-agregar">Agregar Incidente</button>
+        <asp:LinkButton runat="server" CommandName="CrearTicket" OnCommand="CrearTicket_Command" class="uk-button uk-button-primary uk-button-large">Agregar Incidente</asp:LinkButton>
         <button class="uk-button uk-button-secondary uk-button-large" type="button" uk-toggle="target: #modal-eliminar">Eliminar Cliente</button>
     </div>
 
@@ -42,37 +42,7 @@
     </div>
   <!--FIN advert para eliminar-->
 
-     <!--Inicio Modal Agregar Tickets-->
-     <div id="modal-agregar" class="uk-flex-top" uk-modal>
-         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-             <h3 class="uk-heading-divider">Añadir ticket</h3>
-
-             <button class="uk-modal-close-default" type="button" uk-close></button>
-
-             <div class="uk-form-stacked">
-                 <div class="uk-margin">
-                     <label class="uk-form-label" for="form-stacked-text">Tipo:</label>
-                     <div class="uk-form-controls">
-                         <asp:DropDownList ID="TipoDDL" runat="server"></asp:DropDownList>
-                     </div>
-                 </div>
-                 <div class="uk-form-stacked">
-                     <div class="uk-margin">
-                         <label class="uk-form-label" for="form-stacked-text">Prioridad:</label>
-                         <asp:DropDownList ID="PrioridadDDL" runat="server"></asp:DropDownList>
-                     </div>
-                 </div>
-                 <div class="uk-form-stacked">
-                     <div class="uk-margin">
-                         <label class="uk-form-label" for="form-stacked-text">Descripción inicial:</label>
-                         <asp:TextBox ID="TextDescripcionInicial" runat="server" CssClass="uk-input" />
-                     </div>
-                 </div>
-                 <!--<asp:Button Text="text" runat="server" ID="AgregarTicket" OnClick="AgregarTicket_Click" CssClass="uk-button uk-button-primary uk-button-small" AutoPostBack="false" UseSubmitBehavior="False" />-->
-             </div>
-         </div>
-     </div>
- <!--FIN Modal Agregar Tickets-->
+    
 
     <!-- Modal Edicion Cliente-->
     <div id="modal-editar" uk-modal>

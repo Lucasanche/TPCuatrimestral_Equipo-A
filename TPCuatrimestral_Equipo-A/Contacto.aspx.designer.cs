@@ -78,42 +78,6 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtEliminado;
 
         /// <summary>
-        /// Control TipoDDL.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList TipoDDL;
-
-        /// <summary>
-        /// Control PrioridadDDL.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PrioridadDDL;
-
-        /// <summary>
-        /// Control TextDescripcionInicial.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextDescripcionInicial;
-
-        /// <summary>
-        /// Control AgregarTicket.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AgregarTicket;
-
-        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>

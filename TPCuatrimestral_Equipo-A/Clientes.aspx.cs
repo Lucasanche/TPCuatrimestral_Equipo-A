@@ -2,6 +2,11 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Text.RegularExpressions;
+using Domain;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -29,12 +34,19 @@ namespace TPCuatrimestral_Equipo_A
             }
         }
 
+        static string ExtraerNumeros(string input)
+        {
+            Regex regex = new Regex(@"\D");
+            string result = regex.Replace(input, "");
+            return result;
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             //Guardar datos en variables
             string nombre = txtNombre1.Text;
             string apellido = txtApellido1.Text;
-            string dni = txtDNI1.Text;
+            string dni = ExtraerNumeros(txtDNI1.Text);
             string email = txtEmail1.Text;
             string telefono = txtTelefono1.Text;
 

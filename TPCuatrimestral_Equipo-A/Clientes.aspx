@@ -1,9 +1,10 @@
-﻿<%@ Page EnableEventValidation="true" Title="Clientes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Clientes.aspx.cs" Inherits="TPCuatrimestral_Equipo_A.Clientes" %>
+﻿<%@ Page EnableEventValidation="true" EnableViewState="true" Title="Clientes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Clientes.aspx.cs" Inherits="TPCuatrimestral_Equipo_A.Clientes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server"> 
 
      <link href="estilos/Tablas.css" rel="stylesheet" />
+    <asp:ScriptManager runat="server"></asp:ScriptManager>
 
 
     <h1 class="uk-heading-divider">Clientes</h1>
@@ -22,52 +23,60 @@
     </div>
 
     <!--Inicio Modal-->
-    <div id="modal-agregarCliente" class="uk-flex-top" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-            <h3 class="uk-heading-divider">Agregar Clientes</h3>
+    <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div id="modal-agregarCliente" class="uk-flex-top" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <h3 class="uk-heading-divider">Agregar Clientes</h3>
 
-            <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
 
-            <div class="uk-form-stacked">
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Nombre:</label>
-                    <div class="uk-form-controls">
-                        <asp:TextBox ID="txtNombre1" runat="server" CssClass="uk-input" />
+                    <div class="uk-form-stacked">
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-stacked-text">Nombre:</label>
+                            <div class="uk-form-controls">
+                                <asp:TextBox ID="txtNombre1" runat="server" CssClass="uk-input" />
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-stacked-text">Apellido:</label>
+                            <div class="uk-form-controls">
+                                <asp:TextBox ID="txtApellido1" runat="server" CssClass="uk-input" />
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-stacked-text">DNI:</label>
+                            <div class="uk-form-controls">
+                                <asp:TextBox ID="txtDNI1" runat="server" CssClass="uk-input" />
+                            </div>
+                        </div>
+
+                         <div class="uk-margin">
+                             <label class="uk-form-label" for="form-stacked-text">Email:</label>
+                             <div class="uk-form-controls">
+                                 <asp:TextBox ID="txtEmail1" runat="server" CssClass="uk-input" />
+                             </div>
+                         </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
+                            <div class="uk-form-controls">
+                                <asp:TextBox ID="txtTelefono1" runat="server" CssClass="uk-input" />
+                            </div>
+                        </div>
+                            <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cliente" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false"/>
+                            <asp:Label Text="" runat="server" ID="txtAgregaCliente"/>
                     </div>
                 </div>
-
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Apellido:</label>
-                    <div class="uk-form-controls">
-                        <asp:TextBox ID="txtApellido1" runat="server" CssClass="uk-input" />
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">DNI:</label>
-                    <div class="uk-form-controls">
-                        <asp:TextBox ID="txtDNI1" runat="server" CssClass="uk-input" />
-                    </div>
-                </div>
-
-                 <div class="uk-margin">
-                     <label class="uk-form-label" for="form-stacked-text">Email:</label>
-                     <div class="uk-form-controls">
-                         <asp:TextBox ID="txtEmail1" runat="server" CssClass="uk-input" />
-                     </div>
-                 </div>
-
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
-                    <div class="uk-form-controls">
-                        <asp:TextBox ID="txtTelefono1" runat="server" CssClass="uk-input" />
-                    </div>
-                </div>
-                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cliente" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" AutoPostBack="false" type="submit" UseSubmitBehavior="false"/>
-                    <asp:Label Text="" runat="server" ID="txtAgregaCliente"/>
-            </div>
-        </div>
-    </div>
+            </div> 
+        </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnGuardar" />
+        </Triggers>
+       </asp:UpdatePanel>
+    
     <!--Fin Modal con formulario-->
 
 

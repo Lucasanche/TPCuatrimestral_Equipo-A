@@ -40,6 +40,18 @@ namespace TPCuatrimestral_Equipo_A
             string result = regex.Replace(input, "");
             return result;
         }
+        
+        protected void ClientesGV_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "VerDetalles")
+            {
+                // Aquí obtienes el ID del cliente desde el CommandArgument
+                int clienteID = Convert.ToInt32(e.CommandArgument);
+
+                // Redirige a la página de detalles pasando el ID como parámetro
+                Response.Redirect($"Contacto.aspx?ID={clienteID}");
+            }
+        }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -63,7 +75,7 @@ namespace TPCuatrimestral_Equipo_A
             {
                 // guardo correctamente
                 string mensaje = "Cliente guardado exitosamente.";
-                txtAgregaCliente.Text= mensaje;
+                txtAgregaCliente.Text = mensaje;
             }
             else
             {
@@ -71,17 +83,7 @@ namespace TPCuatrimestral_Equipo_A
                 string mensaje = "Error al guardar el cliente. Por favor, inténtalo nuevamente.";
                 txtAgregaCliente.Text = mensaje;
             }
-        }
-        protected void ClientesGV_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "VerDetalles")
-            {
-                // Aquí obtienes el ID del cliente desde el CommandArgument
-                int clienteID = Convert.ToInt32(e.CommandArgument);
-
-                // Redirige a la página de detalles pasando el ID como parámetro
-                Response.Redirect($"Contacto.aspx?ID={clienteID}");
-            }
+            UpdatePanel1.Update();
         }
 
 

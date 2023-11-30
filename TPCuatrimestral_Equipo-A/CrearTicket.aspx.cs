@@ -34,7 +34,7 @@ namespace TPCuatrimestral_Equipo_A
                 ddlPrioridad.DataBind();
 
 
-                if (((Usuario)Session["usuario"]).Rol.ID == 1)
+                if (((Usuario)Session["usuario"]).Rol.ID == 3)
                 {
                     usuarios.Add((Usuario)Session["usuario"]);
                     ddlUsuario.DataSource = usuarios;
@@ -103,6 +103,7 @@ namespace TPCuatrimestral_Equipo_A
                 }
                 else
                 {
+                    textResultadoCliente.ForeColor = System.Drawing.Color.Red;
                     textResultadoCliente.Text = "Cliente inexistente";
                 }
             }
@@ -119,6 +120,8 @@ namespace TPCuatrimestral_Equipo_A
         {
             bool clienteValido = false;
             bool descripcionValida = false;
+            labelValidarCliente.ForeColor = System.Drawing.Color.Red;
+            labelValidarDescripcion.ForeColor = System.Drawing.Color.Red;
             if (textResultadoCliente.Text == "")
             {
                 labelValidarCliente.Visible = true;
@@ -151,12 +154,18 @@ namespace TPCuatrimestral_Equipo_A
                 try
                 {
                     if (TicketBusiness.Agregar(ticket) == 1)
-                    { 
-                    int ok = 0;
+                    {
+                        btnGuardar.Visible = false;
+                        btnVolver.Visible = true;
+                        txtAgregaCliente.Visible = true;
+                        txtAgregaCliente.ForeColor = System.Drawing.Color.Green;
+                        txtAgregaCliente.Text = "Ticket añadido correctamente";
                     }
                     else
                     {
-                        int notOk = 0;
+                        txtAgregaCliente.Visible = true;
+                        txtAgregaCliente.ForeColor = System.Drawing.Color.Red;
+                        txtAgregaCliente.Text = "Hubo un error al cargar el ticket, por favor contacte con un administrador";
                     }
 
                 }
@@ -165,6 +174,11 @@ namespace TPCuatrimestral_Equipo_A
                     
                 }
             }
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Tickets.aspx");
         }
     }
 }

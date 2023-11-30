@@ -123,6 +123,15 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label labelValidarDescripcion;
 
         /// <summary>
+        /// txtAgregaCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtAgregaCliente;
+
+        /// <summary>
         /// btnGuardar control.
         /// </summary>
         /// <remarks>
@@ -132,12 +141,12 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Button btnGuardar;
 
         /// <summary>
-        /// txtAgregaCliente control.
+        /// btnVolver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtAgregaCliente;
+        protected global::System.Web.UI.WebControls.Button btnVolver;
     }
 }

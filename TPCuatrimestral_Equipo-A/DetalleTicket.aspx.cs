@@ -7,6 +7,7 @@ namespace TPCuatrimestral_Equipo_A
 {
     public partial class DetalleTicket : System.Web.UI.Page
     {
+        private List<Usuario> usuarios;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
@@ -14,48 +15,69 @@ namespace TPCuatrimestral_Equipo_A
                 Response.Redirect("Error404.aspx");
             }
             Ticket ticket = new Ticket();
-            if (Request.QueryString["ID"] != null)
+            if (Request.QueryString["ID"] != null && !IsPostBack)
             {
                 int ticketID = Convert.ToInt32(Request.QueryString["ID"]);
 
                 ticket = TicketBusiness.BuscarTicketPorID(ticketID);
+                Session.Add("ticket", ticket);
 
                 //Labels
+                List<EstadoReclamo> estadosReclamo = EstadoReclamoBusiness.List();
+                ddlEstado.DataSource = estadosReclamo;
+                ddlEstado.DataTextField = "Nombre";
+                ddlEstado.DataValueField = "ID";
+                ddlEstado.SelectedValue = ticket.Estado.ID.ToString();
+                ddlEstado.DataBind();
                 lblID.Text = ticket.ID.ToString();
-                lblPrioridad.Text = ticket.Prioridad.Nombre;
-                lblTipo.Text = ticket.Tipo.Nombre;
-                lblEstado.Text = ticket.Estado.Nombre;
+
                 lblFechaCreacion.Text = ticket.FechaCreacion.ToString();
-                lblLegajoUsuario.Text = ticket.LegajoUsuario.ToString();
+                if (((Usuario)Session["usuario"]).Rol.ID == 1)
+                {
+                    usuarios.Add((Usuario)Session["usuario"]);
+                    ddlUsuario.DataSource = usuarios;
+                    ddlTipoTicket.DataSource = ticket.Tipo;
+                    ddlPrioridad.DataSource = ticket.Prioridad;
+
+                }
+                else
+                {
+                    List<Prioridad> prioridades = PrioridadBusiness.List();
+                    List<TipoTicket> tipos = TipoTicketBusiness.List();
+                    usuarios = UsuarioBusiness.List();
+                    ddlTipoTicket.DataSource = tipos;
+                    ddlPrioridad.DataSource = prioridades;
+                    ddlUsuario.DataSource = usuarios;
+
+                }
+                ddlTipoTicket.DataTextField = "Nombre";
+                ddlTipoTicket.DataValueField = "ID";
+                ddlTipoTicket.SelectedValue = ticket.Tipo.ID.ToString();
+                ddlTipoTicket.DataBind();
+                ddlPrioridad.DataTextField = "Nombre";
+                ddlPrioridad.DataValueField = "ID";
+                ddlPrioridad.SelectedValue = ticket.Prioridad.ID.ToString();
+                ddlPrioridad.DataBind();
+                ddlUsuario.DataTextField = "NombreCompleto";
+                ddlUsuario.DataValueField = "Legajo";
+                ddlUsuario.SelectedValue = ticket.LegajoUsuario.ToString();
+                ddlUsuario.DataBind();
+
                 lblClienteAfectado.Text = ticket.ClienteAfectado.DNI;
-                lblDescripcionCierre.Text = ticket.DescripcionCierre;
                 lblDescripcionInicial.Text = ticket.DescripcionInicial;
 
                 //Textos
                 TextDescripcionInicial.Text = ticket.DescripcionInicial;
                 TextClienteAfectado.Text = ticket.ClienteAfectado.DNI;
-
-                //Cargo los tipos de ticket y prioridades para el modal EDITAR
-                List<TipoTicket> tiposTicket = TipoTicketBusiness.List();
-                List<string> tiposTicketNombre = new List<string>();
-                foreach (TipoTicket tipo in tiposTicket)
-                {
-                    tiposTicketNombre.Add(tipo.Nombre);
-                }
-                TipoDDL.DataSource = tiposTicketNombre;
-                TipoDDL.DataBind();
-
-                List<Prioridad> prioridades = PrioridadBusiness.List();
-                List<string> prioridadesNombre = new List<string>();
-                foreach (Prioridad prioridad in prioridades)
-                {
-                    prioridadesNombre.Add(prioridad.Nombre);
-                }
-                PrioridadDDL.DataSource = prioridadesNombre;
-                PrioridadDDL.DataBind();
-
             }
-            
+
+        }
+
+        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlEstado.SelectedItem.Text.Contains("Cerrado")) {
+                int a = 0;
+            }
         }
     }
 }

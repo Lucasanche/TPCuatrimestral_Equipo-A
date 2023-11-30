@@ -96,39 +96,39 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
 
         /// <summary>
-        /// TipoDDL control.
+        /// labelDescripcionCierre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList TipoDDL;
+        protected global::System.Web.UI.WebControls.Label labelDescripcionCierre;
 
         /// <summary>
-        /// PrioridadDDL control.
+        /// textCierre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PrioridadDDL;
+        protected global::System.Web.UI.WebControls.TextBox textCierre;
 
         /// <summary>
-        /// TextDescripcionInicial control.
+        /// labelVerificacionCierre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextDescripcionInicial;
+        protected global::System.Web.UI.WebControls.Label labelVerificacionCierre;
 
         /// <summary>
-        /// TextClienteAfectado control.
+        /// btnGuardarCambios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextClienteAfectado;
+        protected global::System.Web.UI.WebControls.Button btnGuardarCambios;
     }
 }

@@ -18,6 +18,7 @@ namespace TPCuatrimestral_Equipo_A
             }
             if (!IsPostBack)
             {
+                TicketsGV.DataSource = null;
                 TicketsGV.DataSource = TicketBusiness.List();
                 TicketsGV.DataBind();
                 // Registrar para validación de eventos

@@ -192,36 +192,26 @@ namespace Business
                 data.Close();
             }
         }
-        public static bool ModificarTicket(Ticket ticket)
+        public static int ModificarTicket(Ticket ticket)
         {
             AccessData data = new AccessData();
             try
             {
                 // Actualizar Ticket en la base de datos.
-                data.SetQuery("UPDATE Tickets SET Tipo = @Tipo, " +
-                    "Prioridad = @Prioridad, " +
-                    "DescripcionInicial = @DescripcionInicial, " +
-                    "DescripcionCierre = @DescripcionCierre, " +
-                    "LegajoUsuario = @LegajoUsuario, " +
-                    "NombreUsuario = @NombreUsuario, " +
-                    "ClienteAfectado = @ClienteAfectado, " +
-                    "FechaCreacion = @FechaCreacion, " +
-                    "FechaCierre = @FechaCierre, " +
-                    "Estado = @Estado WHERE ID = @Id");
+                data.SetQuery("UPDATE Tickets SET ID_TIPO = @Tipo, ID_PRIORIDAD = @Prioridad, DESCRIPCION_CIERRE = @DescripcionCierre, USUARIO_ASIGNADO = @LegajoUsuario, FECHA_FIN = @FechaCierre, ID_ESTADO = @Estado WHERE ID = @Id");
                 data.AddParameter("@Id", ticket.ID);
-                data.AddParameter("@Tipo", ticket.Tipo);
-                data.AddParameter("@Prioridad", ticket.Prioridad);
+                data.AddParameter("@Tipo", ticket.Tipo.ID);
+                data.AddParameter("@Prioridad", ticket.Prioridad.ID);
                 data.AddParameter("@DescripcionInicial", ticket.DescripcionInicial);
                 data.AddParameter("@DescripcionCierre", ticket.DescripcionCierre);
                 data.AddParameter("@LegajoUsuario", ticket.LegajoUsuario);
-                data.AddParameter("@NombreUsuario", ticket.NombreUsuario);
                 data.AddParameter("@ClienteAfectado", ticket.ClienteAfectado.ID); 
                 data.AddParameter("@FechaCreacion", ticket.FechaCreacion);
                 data.AddParameter("@FechaCierre", ticket.FechaCierre);
-                data.AddParameter("@Estado", ticket.Estado);
+                data.AddParameter("@Estado", ticket.Estado.ID);
 
-                data.ExecuteQuery();
-                return true;
+                
+                return data.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

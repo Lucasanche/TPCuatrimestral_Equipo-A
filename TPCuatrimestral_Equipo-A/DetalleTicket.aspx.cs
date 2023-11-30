@@ -2,6 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -17,6 +18,8 @@ namespace TPCuatrimestral_Equipo_A
             Ticket ticket = new Ticket();
             if (Request.QueryString["ID"] != null && !IsPostBack)
             {
+                bool cerrado = false;
+                Session.Add("cerrado", cerrado);
                 int ticketID = Convert.ToInt32(Request.QueryString["ID"]);
 
                 ticket = TicketBusiness.BuscarTicketPorID(ticketID);
@@ -67,8 +70,23 @@ namespace TPCuatrimestral_Equipo_A
                 lblDescripcionInicial.Text = ticket.DescripcionInicial;
 
                 //Textos
-                TextDescripcionInicial.Text = ticket.DescripcionInicial;
-                TextClienteAfectado.Text = ticket.ClienteAfectado.DNI;
+            }
+            else
+            {
+                if (ddlEstado.SelectedItem.Text.Contains("Cerrado"))
+                {
+                    bool cerrado = true;
+                    Session.Add("cerrado", cerrado);
+                    textCierre.Visible = true;
+                    labelDescripcionCierre.Visible = true;
+                }
+                else
+                {
+                    bool cerrado = false;
+                    Session.Add("cerrado", cerrado);
+                    textCierre.Visible = false;
+                    labelDescripcionCierre.Visible= false;
+                }
             }
 
         }
@@ -76,8 +94,77 @@ namespace TPCuatrimestral_Equipo_A
         protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlEstado.SelectedItem.Text.Contains("Cerrado")) {
-                int a = 0;
+                bool cerrado = true;
+                Session.Add("cerrado", cerrado); 
             }
+            else
+            {
+                bool cerrado = false;
+                Session.Add("cerrado", cerrado);
+            }
+        }
+
+        protected void btnGuardarCambios_Click(object sender, EventArgs e)
+        {
+            Ticket ticket = (Ticket)Session["ticket"];
+            bool modificado = false;
+            if(ddlTipoTicket.SelectedItem.Text != ticket.Tipo.Nombre)
+            {
+                TipoTicket tipo = TipoTicketBusiness.TipoTicketPorID(Byte.Parse(ddlTipoTicket.SelectedValue));
+                ticket.Tipo = tipo;
+                modificado = true;
+            }
+            if(ddlUsuario.SelectedValue.ToString() != ticket.LegajoUsuario)
+            {
+                ticket.LegajoUsuario = ddlUsuario.SelectedValue.ToString();
+                modificado = true;
+            }
+            if(ddlPrioridad.SelectedItem.Text != ticket.Prioridad.Nombre) {
+                Prioridad prioridad = PrioridadBusiness.PrioridadPorID(Byte.Parse(ddlPrioridad.SelectedValue));
+                ticket.Prioridad = prioridad;
+                modificado = true;
+            }
+            if ((bool)Session["cerrado"])
+            {
+                if(textCierre.Text == "")
+                {
+                    labelVerificacionCierre.Visible = true;
+                    modificado = false;
+                }
+                else
+                {
+                    labelVerificacionCierre.Visible = false;
+                    modificado = true;
+                    ticket.FechaCierre = DateTime.Now;
+                }
+            }
+            if(ticket.Estado.Nombre != ddlEstado.SelectedItem.Text)
+            {
+                EstadoReclamo estado = EstadoReclamoBusiness.EstadoReclamoPorID(ticket.Estado.ID);
+                ticket.Estado = estado;
+            }
+            try
+            {
+                if(modificado)
+                {
+                    if (TicketBusiness.ModificarTicket(ticket) == 1) {
+                        labelVerificacionCierre.Text = "Cambios guardados correctamente";
+                        labelVerificacionCierre.Visible = true;
+                    }
+                    else
+                    {
+                        labelVerificacionCierre.Text = "Error al guardar los cambios";
+                        labelVerificacionCierre.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+            
+            
         }
     }
 }

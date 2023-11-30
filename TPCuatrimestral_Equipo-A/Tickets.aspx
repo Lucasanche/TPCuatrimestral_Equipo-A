@@ -39,7 +39,7 @@
             <asp:BoundField DataField="LegajoUsuario" HeaderText="Legajo Usuario" />
             <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="Cliente Afectado" />
             <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha De Creacion" />
-            <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
+            <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado"/>
             <asp:TemplateField HeaderText="Opciones">
                 <ItemTemplate>
                     <div class="container-detalles">

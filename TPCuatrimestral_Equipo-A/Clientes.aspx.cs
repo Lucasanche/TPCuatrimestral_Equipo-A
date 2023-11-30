@@ -53,11 +53,6 @@ namespace TPCuatrimestral_Equipo_A
             }
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            //Guardar datos en variables
-           
-        }
 
 
     }

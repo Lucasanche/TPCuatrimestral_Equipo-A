@@ -39,7 +39,7 @@ namespace TPCuatrimestral_Equipo_A
                 ddlPrioridad.DataBind();
 
 
-                if (((Usuario)Session["usuario"]).Rol.ID == 3)
+                if (((Usuario)Session["usuario"]).Rol.ID == 1)
                 {
                     usuarios.Add((Usuario)Session["usuario"]);
                     ddlUsuario.DataSource = usuarios;

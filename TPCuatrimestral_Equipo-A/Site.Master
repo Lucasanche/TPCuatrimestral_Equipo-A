@@ -47,8 +47,8 @@
                                     <asp:HyperLink ID="linkUsuario" runat="server">Usuario</asp:HyperLink>
                                     <div class="uk-navbar-dropdown">
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                                            <li class="uk-active"><a href="#">Cambiar contraseña</a></li>
-                                            <li class="uk-active"><a href="#">Cerrar sesión</a></li>
+                                            <li class="uk-active">
+                                                <asp:Button ID="btnCerrarSesion" Text="Cerrar Sesión" runat="server" OnClick="btnCerrarSesion_Click" /></li>
                                         </ul>
                                     </div>
                                 </li>

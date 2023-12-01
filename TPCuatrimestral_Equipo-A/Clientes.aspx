@@ -19,7 +19,6 @@
                 </svg>
             </i>
         </div>
-        <a class="boton-filtros" href="#modal-center" uk-toggle>Otros Filtros</a>
     </div>
 
 

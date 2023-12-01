@@ -19,7 +19,25 @@ namespace TPCuatrimestral_Equipo_A
             if (!IsPostBack)
             {
                 TicketsGV.DataSource = null;
-                TicketsGV.DataSource = TicketBusiness.List();
+                List<Ticket> list = TicketBusiness.List();
+                Usuario usuario = (Usuario)Session["usuario"];
+               
+                if (usuario.Rol.ID == 1)
+                {
+                    List<Ticket> listAux = new List<Ticket>();
+                    foreach (Ticket ticket in list)
+                    {
+                        if(ticket.LegajoUsuario == usuario.Legajo && !ticket.Estado.Nombre.Contains("Cerrado"))
+                        {
+                            listAux.Add(ticket);
+                        }
+                    }
+                    TicketsGV.DataSource = listAux;
+                }
+                else
+                {
+                    TicketsGV.DataSource = list;
+                }
                 TicketsGV.DataBind();
                 // Registrar para validación de eventos
                 foreach (GridViewRow row in TicketsGV.Rows)

@@ -30,9 +30,9 @@ namespace Domain
         public EstadoReclamo Estado { get; set; }
         public Ticket()
         {
-            ID= 0;
-            Tipo= new TipoTicket();
-            Prioridad   = new Prioridad();
+            ID = 0;
+            Tipo = new TipoTicket();
+            Prioridad = new Prioridad();
             DescripcionInicial = "";
             DescripcionCierre = "";
             LegajoUsuario = "";
@@ -41,6 +41,21 @@ namespace Domain
             FechaCreacion = new DateTime();
             FechaCierre = new DateTime();
             Estado = new EstadoReclamo();
+        }
+        public Ticket(Ticket ticket)
+        {
+            this.ID = ticket.ID;
+            this.Tipo = ticket.Tipo;
+            this.Prioridad = ticket.Prioridad;
+            this.DescripcionInicial = ticket.DescripcionInicial;
+            this.DescripcionCierre = ticket.DescripcionCierre;
+            this.LegajoUsuario = ticket.LegajoUsuario;
+            this.NombreUsuario = ticket.NombreUsuario;
+            this.ClienteAfectado = ticket.ClienteAfectado;
+            this.FechaCreacion = ticket.FechaCreacion;
+            this.FechaCierre = ticket.FechaCierre;
+            this.IdEstadoReclamo = ticket.Estado.ID;
+            this.Estado = ticket.Estado;
         }
     }
 

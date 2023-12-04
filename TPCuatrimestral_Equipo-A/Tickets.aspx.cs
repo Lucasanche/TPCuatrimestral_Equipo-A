@@ -3,6 +3,7 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
@@ -19,11 +20,13 @@ namespace TPCuatrimestral_Equipo_A
             if (!IsPostBack)
             {
                 TicketsGV.DataSource = null;
+
                 List<Ticket> list = TicketBusiness.List();
                 Usuario usuario = (Usuario)Session["usuario"];
                
                 if (usuario.Rol.ID == 1)
                 {
+
                     List<Ticket> listAux = new List<Ticket>();
                     foreach (Ticket ticket in list)
                     {
@@ -32,7 +35,10 @@ namespace TPCuatrimestral_Equipo_A
                             listAux.Add(ticket);
                         }
                     }
+
                     TicketsGV.DataSource = listAux;
+                    int fechaCierreIndex = TicketsGV.Columns.IndexOf(TicketsGV.Columns.Cast<DataControlField>().FirstOrDefault(c => c.HeaderText == "Fecha de cierre"));
+                    TicketsGV.Columns[fechaCierreIndex].Visible = false;
                 }
                 else
                 {

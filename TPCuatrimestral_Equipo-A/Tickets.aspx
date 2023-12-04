@@ -1,14 +1,22 @@
 ﻿<%@ Page Title="Tickets" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Tickets.aspx.cs" Inherits="TPCuatrimestral_Equipo_A.Tickets" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="estilos/Tablas.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <link href="estilos/Tablas.css" rel="stylesheet" />
+    <% if (true)
+        { %>
+    <%
+        int a = 0;
+    %>
+    <% } %>
     <h1 class="uk-heading-divider">Tickets</h1>
 
     <div class="row-accion">
+
         <a class="boton-agregar" href="CrearTicket.aspx" uk-toggle>Agregar Ticket</a>
-<%--        <div class="container-busqueda">
+
+        <%--        <div class="container-busqueda">
             <input type="text" class="input-busqueda" placeholder="Buscar por DNI...">
             <i class="lupita">
                 <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor">
@@ -34,11 +42,12 @@
             <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
             <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
             <asp:BoundField DataField="DescripcionInicial" HeaderText="Descripcion Inicial" />
-            <asp:BoundField DataField="DescripcionCierre" HeaderText="Descripcion Cierre" />
-            <asp:BoundField DataField="LegajoUsuario" HeaderText="Legajo Usuario" />
-            <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="Cliente Afectado" />
+            <asp:BoundField DataField="NombreUsuario" HeaderText="Usuario Responsable" />
+            <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="DNI Cliente Afectado" />
             <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha De Creacion" />
-            <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado"/>
+            <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
+            <asp:BoundField DataField="DescripcionCierre" HeaderText="Descripcion Cierre" />
+            <asp:BoundField DataField="FechaCierre" HeaderText="Fecha de cierre" />
             <asp:TemplateField HeaderText="Opciones">
                 <ItemTemplate>
                     <div class="container-detalles">

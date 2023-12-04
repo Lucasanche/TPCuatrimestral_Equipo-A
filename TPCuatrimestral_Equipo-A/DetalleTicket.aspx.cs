@@ -16,25 +16,50 @@ namespace TPCuatrimestral_Equipo_A
                 Response.Redirect("Error404.aspx");
             }
             Ticket ticket = new Ticket();
-            if (Request.QueryString["ID"] != null && !IsPostBack)
+            if (Request.QueryString["ID"] != null)
             {
                 bool cerrado = false;
+                bool supervisor = ((Usuario)Session["usuario"]).Rol.ID == 2 || ((Usuario)Session["usuario"]).Rol.ID == 3;
                 Session.Add("cerrado", cerrado);
                 int ticketID = Convert.ToInt32(Request.QueryString["ID"]);
-
                 ticket = TicketBusiness.BuscarTicketPorID(ticketID);
                 Session.Add("ticket", ticket);
+                Session.Add("estadoTicket", ticket.Estado.ID);
 
                 //Labels
-                List<EstadoReclamo> estadosReclamo = EstadoReclamoBusiness.List();
-                ddlEstado.DataSource = estadosReclamo;
-                ddlEstado.DataTextField = "Nombre";
-                ddlEstado.DataValueField = "ID";
-                ddlEstado.SelectedValue = ticket.Estado.ID.ToString();
-                ddlEstado.DataBind();
+                switch (ticket.Estado.ID)
+                {
+                    case 1:
+                        btnCambioEstado1.Text = "Aprobar";
+                        if (!supervisor)
+                        {
+                            btnCambioEstado1.Enabled = false;
+                        }
+                        Session.Add("estadoTicket", 1);
+                        btnCambioEstado2.Visible = false;
+                        break;
+                    case 2:
+                        btnCambioEstado1.Text = "Procesar";
+                        Session.Add("estadoTicket", 1);
+                        break;
+                    case 3:
+                        btnCambioEstado1.Text = "Cerrar - Resuelto";
+                        btnCambioEstado2.Text = "Cerrar - No Resuelto";
+                        btnCambioEstado2.Visible = true;
+                        Session.Add("estadoTicket", 2);
+                        break;
+                    case 4:
+                        btnCambioEstado1.Visible = false;
+                        btnCambioEstado2.Visible = false;
+                        break;
+                    case 5:
+                        btnCambioEstado1.Visible = false;
+                        btnCambioEstado2.Visible = false;
+                        break;
+                }
                 lblID.Text = ticket.ID.ToString();
-
                 lblFechaCreacion.Text = ticket.FechaCreacion.ToString();
+                lblEstadoTicket.Text = ticket.Estado.Nombre;
                 if (((Usuario)Session["usuario"]).Rol.ID == 1)
                 {
                     usuarios.Add((Usuario)Session["usuario"]);
@@ -71,62 +96,33 @@ namespace TPCuatrimestral_Equipo_A
 
                 //Textos
             }
-            else
-            {
-                if (ddlEstado.SelectedItem.Text.Contains("Cerrado"))
-                {
-                    bool cerrado = true;
-                    Session.Add("cerrado", cerrado);
-                    textCierre.Visible = true;
-                    labelDescripcionCierre.Visible = true;
-                }
-                else
-                {
-                    bool cerrado = false;
-                    Session.Add("cerrado", cerrado);
-                    textCierre.Visible = false;
-                    labelDescripcionCierre.Visible= false;
-                }
-            }
-
-        }
-
-        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ddlEstado.SelectedItem.Text.Contains("Cerrado")) {
-                bool cerrado = true;
-                Session.Add("cerrado", cerrado); 
-            }
-            else
-            {
-                bool cerrado = false;
-                Session.Add("cerrado", cerrado);
-            }
         }
 
         protected void btnGuardarCambios_Click(object sender, EventArgs e)
         {
-            Ticket ticket = (Ticket)Session["ticket"];
+            Ticket ticket = new Ticket((Ticket)Session["ticket"]);
+            Ticket ticketNuevo = new Ticket((Ticket)Session["ticket"]);
             bool modificado = false;
-            if(ddlTipoTicket.SelectedItem.Text != ticket.Tipo.Nombre)
+            if (ddlTipoTicket.SelectedItem.Text != ticket.Tipo.Nombre)
             {
                 TipoTicket tipo = TipoTicketBusiness.TipoTicketPorID(Byte.Parse(ddlTipoTicket.SelectedValue));
-                ticket.Tipo = tipo;
+                ticketNuevo.Tipo = tipo;
                 modificado = true;
             }
-            if(ddlUsuario.SelectedValue.ToString() != ticket.LegajoUsuario)
+            if (ddlUsuario.SelectedValue.ToString() != ticket.LegajoUsuario)
             {
-                ticket.LegajoUsuario = ddlUsuario.SelectedValue.ToString();
+                ticketNuevo.LegajoUsuario = ddlUsuario.SelectedValue.ToString();
                 modificado = true;
             }
-            if(ddlPrioridad.SelectedItem.Text != ticket.Prioridad.Nombre) {
+            if (ddlPrioridad.SelectedItem.Text != ticket.Prioridad.Nombre)
+            {
                 Prioridad prioridad = PrioridadBusiness.PrioridadPorID(Byte.Parse(ddlPrioridad.SelectedValue));
-                ticket.Prioridad = prioridad;
+                ticketNuevo.Prioridad = prioridad;
                 modificado = true;
             }
             if ((bool)Session["cerrado"])
             {
-                if(textCierre.Text == "")
+                if (textCierre.Text == "")
                 {
                     labelVerificacionCierre.Visible = true;
                     modificado = false;
@@ -135,19 +131,22 @@ namespace TPCuatrimestral_Equipo_A
                 {
                     labelVerificacionCierre.Visible = false;
                     modificado = true;
-                    ticket.FechaCierre = DateTime.Now;
+                    ticketNuevo.FechaCierre = DateTime.Now;
                 }
             }
-            if(ticket.Estado.Nombre != ddlEstado.SelectedItem.Text)
+            if (ticket.Estado.ID != (Byte)Session["estadoTicket"] && Session["estadoTicket"] != null)
             {
-                EstadoReclamo estado = EstadoReclamoBusiness.EstadoReclamoPorID(ticket.Estado.ID);
-                ticket.Estado = estado;
+                EstadoReclamo estado = EstadoReclamoBusiness.EstadoReclamoPorID((Byte)Session["estadoTicket"]);
+                ticketNuevo.Estado = estado;
+                modificado = true;
             }
             try
             {
-                if(modificado)
+                if (modificado)
                 {
-                    if (TicketBusiness.ModificarTicket(ticket) == 1) {
+                    if (TicketBusiness.ModificarTicket(ticket, ticketNuevo) == 1)
+                    {
+                        Session["ticket"] = ticketNuevo;
                         labelVerificacionCierre.Text = "Cambios guardados correctamente";
                         labelVerificacionCierre.Visible = true;
                     }
@@ -162,9 +161,40 @@ namespace TPCuatrimestral_Equipo_A
             {
                 throw ex;
             }
-            
-            
-            
+
+
+
+        }
+
+        protected void btnCambioEstado1_Click(object sender, EventArgs e)
+        {
+            Byte estado = 0;
+            switch (((Ticket)Session["ticket"]).Estado.ID)
+            {
+                case 1:
+                    estado = 2;
+                    Session["estadoTicket"] = estado;
+                    break;
+                case 2:
+                    estado = 3;
+                    Session["estadoTicket"] = estado;
+                    break;
+                case 3:
+                    estado = 4;
+                    Session["estadoTicket"] = estado;
+                    break;
+            }
+
+            btnGuardarCambios_Click(sender, e);
+            Page_Load(sender, e);
+        }
+
+        protected void btnCambioEstado2_Click(object sender, EventArgs e)
+        {
+            Byte estado = 5;
+            Session["estadoTicket"] = estado;
+            btnGuardarCambios_Click(sender, e);
+            Page_Load(sender, e);
         }
     }
 }

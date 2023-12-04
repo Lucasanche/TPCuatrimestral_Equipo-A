@@ -87,13 +87,31 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label lblFechaCierre;
 
         /// <summary>
-        /// ddlEstado control.
+        /// lblEstadoTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
+        protected global::System.Web.UI.WebControls.Label lblEstadoTicket;
+
+        /// <summary>
+        /// btnCambioEstado1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCambioEstado1;
+
+        /// <summary>
+        /// btnCambioEstado2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCambioEstado2;
 
         /// <summary>
         /// labelDescripcionCierre control.

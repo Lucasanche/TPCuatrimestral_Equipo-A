@@ -44,16 +44,18 @@
                 <dd>
                     <asp:Label runat="server" ID="lblFechaCierre" /></dd>
                 <dt>Estado</dt>
-                <div class="uk-margin">
-                    <div class="dropdown">
-                        <asp:DropDownList ID="ddlEstado" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required AutoPostBack="true" OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged">
-                        </asp:DropDownList>
-                    </div>
+                <dd>
+                    <asp:Label runat="server" ID="lblEstadoTicket" /></dd>
+                <div class="uk-container">
+                    <asp:Button ID="btnCambioEstado1" Text="" runat="server" CssClass="uk-button uk-button-default uk-button-large" type="button" OnClick="btnCambioEstado1_Click" />
+                </div>
+                <div class="uk-container">
+                    <asp:Button ID="btnCambioEstado2" Text="" runat="server" CssClass="uk-button uk-button-default uk-button-large" type="button" OnClick="btnCambioEstado2_Click" />
                 </div>
                 <div class="uk-margin col-11">
                     <asp:Label ID="labelDescripcionCierre" Text="Descripción cierre:" runat="server" Visible="false" />
-                    <div class="uk-form-controls"> 
-                        <asp:TextBox ID="textCierre" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4" Visible="false"/>
+                    <div class="uk-form-controls">
+                        <asp:TextBox ID="textCierre" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4" Visible="false" />
                         <asp:Label ID="labelVerificacionCierre" runat="server" Text="Debes completar con una descripción del cierre para continuar" Visible="false" ViewStateMode="Enabled" />
                     </div>
                 </div>
@@ -62,7 +64,7 @@
     </div>
 
     <div class="uk-container">
-        <asp:Button ID="btnGuardarCambios" Text="Guardar cambios" runat="server" CssClass="uk-button uk-button-default uk-button-large" type="button" OnClick="btnGuardarCambios_Click"/>
+        <asp:Button ID="btnGuardarCambios" Text="Guardar cambios" runat="server" CssClass="uk-button uk-button-default uk-button-large" type="button" OnClick="btnGuardarCambios_Click" />
     </div>
 
 </asp:Content>

@@ -192,25 +192,46 @@ namespace Business
                 data.Close();
             }
         }
-        public static int ModificarTicket(Ticket ticket)
+        public static int ModificarTicket(Ticket ticket, Ticket ticketNuevo)
         {
             AccessData data = new AccessData();
+            List<SqlParameter> parameters = new List<SqlParameter>();
             try
             {
-                // Actualizar Ticket en la base de datos.
-                data.SetQuery("UPDATE Tickets SET ID_TIPO = @Tipo, ID_PRIORIDAD = @Prioridad, DESCRIPCION_CIERRE = @DescripcionCierre, USUARIO_ASIGNADO = @LegajoUsuario, FECHA_FIN = @FechaCierre, ID_ESTADO = @Estado WHERE ID = @Id");
-                data.AddParameter("@Id", ticket.ID);
-                data.AddParameter("@Tipo", ticket.Tipo.ID);
-                data.AddParameter("@Prioridad", ticket.Prioridad.ID);
-                data.AddParameter("@DescripcionInicial", ticket.DescripcionInicial);
-                data.AddParameter("@DescripcionCierre", ticket.DescripcionCierre);
-                data.AddParameter("@LegajoUsuario", ticket.LegajoUsuario);
-                data.AddParameter("@ClienteAfectado", ticket.ClienteAfectado.ID); 
-                data.AddParameter("@FechaCreacion", ticket.FechaCreacion);
-                data.AddParameter("@FechaCierre", ticket.FechaCierre);
-                data.AddParameter("@Estado", ticket.Estado.ID);
+                string values = "";
+                parameters.Add(new SqlParameter("Id", ticketNuevo.ID));
+                if (ticket.Tipo.ID != ticketNuevo.Tipo.ID)
+                {
+                    values += "ID_TIPO = @Id_tipo,";
+                    parameters.Add(new SqlParameter("@Id_tipo", ticketNuevo.Tipo.ID));
+                }
+                if (ticket.Prioridad.ID != ticketNuevo.Prioridad.ID)
+                {
+                    values += "ID_PRIORIDAD = @Id_prioridad,";
+                    parameters.Add(new SqlParameter("@Id_prioridad", ticketNuevo.Prioridad.ID));
+                }
+                if (!string.IsNullOrEmpty(ticketNuevo.DescripcionCierre) && !ticketNuevo.DescripcionCierre.Contains("Sin asignar"))
+                {
+                    values += "DESCRIPCION_CIERRE = @Descripcion_cierre,";
+                    parameters.Add(new SqlParameter("@Descripcion_cierre", ticketNuevo.DescripcionCierre));
+                }
+                if (ticket.LegajoUsuario != ticketNuevo.LegajoUsuario)
+                {
+                    values += "USUARIO_ASIGNADO = @Legajo_usuario,";
+                    parameters.Add(new SqlParameter("@Legajo_usuario", ticketNuevo.LegajoUsuario));
+                }
+                if (ticket.Estado.ID != ticketNuevo.Estado.ID)
+                {
+                    values += " ID_ESTADO = @Id_estado,";
+                    parameters.Add(new SqlParameter("@Id_estado", ticketNuevo.Estado.ID));
+                }
+                if (values.EndsWith(","))
+                {
+                    values = values.Substring(0, values.Length - 1);
+                }
+                string query = $@"UPDATE TICKETS SET {values} WHERE ID = @Id";
 
-                
+                data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
             }
             catch (Exception ex)

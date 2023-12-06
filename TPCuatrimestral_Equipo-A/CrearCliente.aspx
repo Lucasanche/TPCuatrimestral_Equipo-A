@@ -2,7 +2,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <style type="text/css">
+        .warning {
+            color:red;
+        }
+    </style>
+
     <div class="col-2"></div>
     <div class="container">
         <form novalidate>
@@ -15,7 +22,7 @@
                     <label class="uk-form-label" for="form-stacked-text">Nombre:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtNombre" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="text" ID="txtValidarNombre" runat="server" />
+                        <asp:Label Text="" ID="txtValidarNombre" runat="server" CssClass="warning"/>
                     </div>
                 </div>
 
@@ -23,7 +30,7 @@
                     <label class="uk-form-label" for="form-stacked-text">Apellido:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtApellido" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="text" ID="txtValidarApellido" runat="server" />
+                        <asp:Label Text="" ID="txtValidarApellido" runat="server" CssClass="warning" />
                     </div>
                 </div>
 
@@ -31,7 +38,7 @@
                     <label class="uk-form-label" for="form-stacked-text">DNI:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtDNI" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="text" ID="txtValidarDNI" runat="server" />
+                        <asp:Label Text="" ID="txtValidarDNI" runat="server" CssClass="warning" />
                     </div>
                 </div>
 
@@ -39,7 +46,7 @@
                     <label class="uk-form-label" for="form-stacked-text">Email:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="text" ID="txtValidarEmail" runat="server" />
+                        <asp:Label Text="" ID="txtValidarEmail" runat="server" CssClass="warning" />
                     </div>
                 </div>
 
@@ -47,14 +54,14 @@
                     <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtTelefono" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="text" ID="txtValidarTelefono" runat="server" />
+                        <asp:Label Text="" ID="txtValidarTelefono" runat="server" CssClass="warning" />
                     </div>
                 </div>
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
                     <div class="uk-form-controls">
                         <asp:Calendar ID="CalendarioFechaNacimiento" runat="server"></asp:Calendar>
-                        <asp:Label Text="text" ID="txtValidarFechaNacimiento" runat="server" />
+                        <asp:Label Text="" ID="txtValidarFechaNacimiento" runat="server" CssClass="warning" />
                     </div>
                 </div>
                 

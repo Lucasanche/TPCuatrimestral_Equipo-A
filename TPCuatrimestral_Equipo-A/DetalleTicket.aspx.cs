@@ -162,10 +162,7 @@ namespace TPCuatrimestral_Equipo_A
                 throw ex;
             }
 
-
-
         }
-
         protected void btnCambioEstado1_Click(object sender, EventArgs e)
         {
             Byte estado = 0;
@@ -184,7 +181,6 @@ namespace TPCuatrimestral_Equipo_A
                     Session["estadoTicket"] = estado;
                     break;
             }
-
             btnGuardarCambios_Click(sender, e);
             Page_Load(sender, e);
         }

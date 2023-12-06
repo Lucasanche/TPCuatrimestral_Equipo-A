@@ -15,6 +15,7 @@
                     <label class="uk-form-label" for="form-stacked-text">Nombre:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtNombre" runat="server" CssClass="uk-input" />
+                        <asp:Label Text="text" ID="txtValidarNombre" runat="server" />
                     </div>
                 </div>
 
@@ -22,6 +23,7 @@
                     <label class="uk-form-label" for="form-stacked-text">Apellido:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtApellido" runat="server" CssClass="uk-input" />
+                        <asp:Label Text="text" ID="txtValidarApellido" runat="server" />
                     </div>
                 </div>
 
@@ -29,6 +31,7 @@
                     <label class="uk-form-label" for="form-stacked-text">DNI:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtDNI" runat="server" CssClass="uk-input" />
+                        <asp:Label Text="text" ID="txtValidarDNI" runat="server" />
                     </div>
                 </div>
 
@@ -36,6 +39,7 @@
                     <label class="uk-form-label" for="form-stacked-text">Email:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="uk-input" />
+                        <asp:Label Text="text" ID="txtValidarEmail" runat="server" />
                     </div>
                 </div>
 
@@ -43,12 +47,14 @@
                     <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtTelefono" runat="server" CssClass="uk-input" />
+                        <asp:Label Text="text" ID="txtValidarTelefono" runat="server" />
                     </div>
                 </div>
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
                     <div class="uk-form-controls">
                         <asp:Calendar ID="CalendarioFechaNacimiento" runat="server"></asp:Calendar>
+                        <asp:Label Text="text" ID="txtValidarFechaNacimiento" runat="server" />
                     </div>
                 </div>
                 

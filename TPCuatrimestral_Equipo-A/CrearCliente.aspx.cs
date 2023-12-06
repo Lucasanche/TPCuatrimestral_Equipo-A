@@ -18,6 +18,31 @@ namespace TPCuatrimestral_Equipo_A
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            //Validar los datos (puedes agregar más validaciones según sea necesario)
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                txtValidarNombre.Text = "Campo obligatorio";
+            }
+            if (string.IsNullOrEmpty(txtApellido.Text))
+            {
+                txtValidarApellido.Text = "Campo obligatorio";
+            }
+            if (string.IsNullOrEmpty(ExtraerNumeros(txtDNI.Text)))
+            {
+                txtValidarDNI.Text = "Campo obligatorio";
+            }
+            if (string.IsNullOrEmpty(txtEmail.Text))
+            {
+                txtValidarEmail.Text = "Campo obligatorio";
+            }
+            if (string.IsNullOrEmpty(txtTelefono.Text))
+            {
+                txtValidarTelefono.Text = "Campo obligatorio";
+            }
+            if (CalendarioFechaNacimiento.SelectedDate >= DateTime.Now)
+            {
+                txtValidarFechaNacimiento.Text = "La fecha ingresada debe ser menor a la del dia actual";
+            }
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
             string dni = ExtraerNumeros(txtDNI.Text);
@@ -25,8 +50,6 @@ namespace TPCuatrimestral_Equipo_A
             string telefono = txtTelefono.Text;
             string mensaje = "";
             DateTime fechaNacimiento = CalendarioFechaNacimiento.SelectedDate;
-
-            //Validar los datos (puedes agregar más validaciones según sea necesario)
 
 
             //Generar instancia

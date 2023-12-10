@@ -40,6 +40,23 @@
 <div class="uk-section uk-section-muted" id="seccion-alta">
     <div class="col-2"></div>
     <div class="container">
+
+
+<!--
+
+    [LEGAJO]     VARCHAR (10) NOT NULL, no se modifica, preguntar como se compone si es PK pero sin numero
+    [NOMBRE]     VARCHAR (40) NOT NULL, modificable
+    [APELLIDO]   VARCHAR (40) NOT NULL, modificable
+    [EMAIL]      VARCHAR (70) NOT NULL, modificable
+    [PASSWORD]   VARCHAR (40) NOT NULL, modificable??
+    [FECHA_ALTA] DATE         DEFAULT (getdate()) NOT NULL, no se modifica
+    [FECHA_BAJA] DATE         NULL, no se modifica
+    [ROL]        TINYINT      NOT NULL,  modificable
+    [ESTADO]     BIT          DEFAULT ((1)) NOT NULL, no se modifica??
+
+-->
+
+
         <form novalidate>
             <h3 class="uk-heading-divider">Agregar Usuario</h3>
 
@@ -93,7 +110,7 @@
                     </div>
                 </div>
             
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cliente" OnClick="btn_GuardarClick" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cliente" OnClick="GuardarUsuario_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
                 <asp:Label Text="" runat="server" ID="txtAgregaCliente" CssClass="warning"/>
             </div>
         </form>
@@ -117,7 +134,7 @@
                     </div>
                 </div>
 
-                <asp:Button ID="Button1" runat="server" Text="Guardar Cliente" OnClick="btn_GuardarClick" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
+                <asp:Button ID="Button1" runat="server" Text="Guardar Cliente" OnClick="GuardarTipoTicket_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
                 <asp:Label Text="" runat="server" ID="Label1" CssClass="warning"/>
 
             </div>
@@ -134,7 +151,7 @@
         <div class="uk-margin"> 
             <div class="col-12">
                 <asp:TextBox runat="server" ID="txtLegajoUsuarioEditar" placeholder="Buscar Usuario por Legajo..." CssClass="uk-input" />
-                <asp:LinkButton ID="BuscarUsuario" runat="server" OnClick="btnBuscarUsuario_Click">
+                <asp:LinkButton ID="BuscarUsuario" runat="server" OnClick="BuscarUsuarioEditar_Click">
                         <i class="lupita">
                             <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
@@ -197,7 +214,7 @@
                     </div>
                 </div>
     
-                <asp:Button ID="Button2" runat="server" Text="Guardar Cliente" OnClick="btn_GuardarClick" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
+                <asp:Button ID="Button2" runat="server" Text="Guardar Cliente" OnClick="EditarUsuario_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
                 <asp:Label Text="" runat="server" ID="txtEditaCliente" CssClass="warning"/>
             </div>
         </form>
@@ -221,7 +238,7 @@
                     </div>
                 </div>
 
-                <asp:Button Text="Editar Tipo de Ticket" runat="server" CssClass="uk-button uk-button-primary uk-width-1-1" />
+                <asp:Button Text="Editar Tipo de Ticket" runat="server" OnClick="EditarTipoTicket_Click" CssClass="uk-button uk-button-primary uk-width-1-1" />
             </form>
         </div>
     </div>
@@ -234,7 +251,7 @@
     <div class="container">
         <div class="col-10"> 
                 <asp:TextBox runat="server" ID="txtLegajoEliminarUsuario" placeholder="Buscar Usuario por Legajo..." CssClass="uk-input" />
-                <asp:LinkButton ID="BuscarUsuario2" runat="server" OnClick="btnBuscarUsuario_Click">
+                <asp:LinkButton ID="BuscarUsuario2" runat="server" OnClick="BuscarUsuarioEliminar_Click">
                         <i class="lupita">
                             <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
@@ -244,7 +261,7 @@
             <div class="container" style="display: flex;justify-content: center;">
                 <div class="uk-margin">
                     <div class="col-8"> 
-                        <asp:Button Text="Eliminar Usuario Seleccionado" runat="server" CssClass="uk-button uk-button-danger uk-button-large" />
+                        <asp:Button Text="Eliminar Usuario Seleccionado" runat="server" OnClick="EliminarUsuario_Click" CssClass="uk-button uk-button-danger uk-button-large" />
                     </div>
                 </div>
             </div>
@@ -264,7 +281,7 @@
     <div class="col-2" ></div>
     <div class="container" style="display: flex;justify-content: center;">
     <div class="uk-margin" > 
-    <asp:Button Text="Eliminar Tipo de Ticket Seleccionado" runat="server" CssClass="uk-button uk-button-danger uk-button-large" />
+    <asp:Button Text="Eliminar Tipo de Ticket Seleccionado" runat="server" OnClick="EliminarTipoTicket_Click" CssClass="uk-button uk-button-danger uk-button-large" />
     </div>
     </div>
 

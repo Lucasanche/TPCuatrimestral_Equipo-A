@@ -152,6 +152,60 @@ namespace Business
                 return usuarioAux;
             }
         }
+
+        public static int ModificarUsuario(string legajo, string nombre, string apellido, string email, Rol rol)
+        {
+            AccessData data = new AccessData();
+            try
+            {
+                // Actualiza
+                data.SetQuery("UPDATE USUARIOS SET NOMBRE = @Nombre, APELLIDO = @Apellido, EMAIL = @Email, ROL = @Rol WHERE LEGAJO = @Legajo");
+                data.AddParameter("@Legajo", legajo);
+                data.AddParameter("@Nombre", nombre);
+                data.AddParameter("@Apellido", apellido);
+                data.AddParameter("@Email", email);
+                data.AddParameter("@Rol", rol); //revisar
+
+                return data.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+
+        public static int AgregarUsuario(string legajo, string nombre, string apellido, string email, Rol rol)
+        {
+            AccessData data = new AccessData();
+            string password = "password";
+            DateTime fechaAlta = DateTime.Now;
+            try
+            {
+                // Actualiza
+                data.SetQuery("INSERT INTO USUARIOS (NOMBRE, APELLIDO, EMAIL, PASSWORD, FECHA_ALTA, ROL) VALUES (@Nombre, @Apellido, @Email, @Password , @FechaAlta, @Rol)");
+                data.AddParameter("@Nombre", nombre);
+                data.AddParameter("@Apellido", apellido);
+                data.AddParameter("@Email", email);
+                data.AddParameter("@Password", password);
+                data.AddParameter("@FechaAlta", fechaAlta);
+                data.AddParameter("@Rol", rol); //revisar si sumar ID nomas
+
+                return data.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+
         public static int Remove(Usuario usuario)
         {
             AccessData data = new AccessData();

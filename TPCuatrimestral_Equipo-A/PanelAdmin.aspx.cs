@@ -29,24 +29,40 @@ namespace TPCuatrimestral_Equipo_A
 
 
         }
-        protected void btn_GuardarClick(object sender, EventArgs e)
-        {
-            
-            string message = "Buenos dias estrellitas";
-            txtAgregaCliente.Text = message;
-            txtValidarNombre.Text = "funciona";
-            
-           
-        }
-        protected void btnBuscarUsuario_Click(object sender, EventArgs e)
-        {
-
-            string message = "Buenos dias estrellitas";
-            txtAgregaCliente.Text = message;
-            txtValidarNombre.Text = "funciona";
-
+        protected void GuardarUsuario_Click(object sender, EventArgs e)
+        { 
 
         }
+        protected void GuardarTipoTicket_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void EditarUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void EditarTipoTicket_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void EliminarUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void EliminarTipoTicket_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BuscarUsuarioEditar_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void BuscarUsuarioEliminar_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
     
 }

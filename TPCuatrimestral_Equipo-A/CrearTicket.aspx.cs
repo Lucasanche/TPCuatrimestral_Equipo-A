@@ -149,7 +149,7 @@ namespace TPCuatrimestral_Equipo_A
                 labelValidarCliente.Visible = true;
                 labelValidarCliente.Text = ddlPrioridad.SelectedValue;
                 ticket = (Ticket)Session["ticket"];
-                ticket.DescripcionInicial = textDescripcion.Text;
+                ticket.DescripcionInicial = $"- {textDescripcion.Text}";
                 ticket.FechaCreacion = DateTime.Now;
                 ticket.IdEstadoReclamo = 1;
                 ticket.Estado = new EstadoReclamo();

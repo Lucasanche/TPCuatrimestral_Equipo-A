@@ -120,25 +120,17 @@ namespace TPCuatrimestral_Equipo_A
                 ticketNuevo.Prioridad = prioridad;
                 modificado = true;
             }
-            if ((bool)Session["cerrado"])
-            {
-                if (textCierre.Text == "")
-                {
-                    labelVerificacionCierre.Visible = true;
-                    modificado = false;
-                }
-                else
-                {
-                    labelVerificacionCierre.Visible = false;
-                    modificado = true;
-                    ticketNuevo.FechaCierre = DateTime.Now;
-                }
-            }
             if (ticket.Estado.ID != (Byte)Session["estadoTicket"] && Session["estadoTicket"] != null)
             {
                 EstadoReclamo estado = EstadoReclamoBusiness.EstadoReclamoPorID((Byte)Session["estadoTicket"]);
                 ticketNuevo.Estado = estado;
                 modificado = true;
+            }
+            if (!String.IsNullOrEmpty(textComentario.Text))
+            {
+                modificado = true;
+                string fechaHoraActual = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
+                ticketNuevo.DescripcionInicial += $"\n- {fechaHoraActual}: {textComentario.Text}";
             }
             try
             {
@@ -191,6 +183,20 @@ namespace TPCuatrimestral_Equipo_A
             Session["estadoTicket"] = estado;
             btnGuardarCambios_Click(sender, e);
             Page_Load(sender, e);
+        }
+
+        protected void textComentario_TextChanged(object sender, EventArgs e)
+        {
+            if(textComentario.Text != "")
+            {
+                btnCambioEstado1.Enabled = true;
+                btnCambioEstado2.Enabled = true;
+            }
+            else
+            {
+                btnCambioEstado1.Enabled = false;
+                btnCambioEstado2.Enabled = false;
+            }
         }
     }
 }

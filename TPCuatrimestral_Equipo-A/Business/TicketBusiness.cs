@@ -210,10 +210,17 @@ namespace Business
                     values += "ID_PRIORIDAD = @Id_prioridad,";
                     parameters.Add(new SqlParameter("@Id_prioridad", ticketNuevo.Prioridad.ID));
                 }
+
+                //TODO: Enviar email acá
                 if (!string.IsNullOrEmpty(ticketNuevo.DescripcionCierre) && !ticketNuevo.DescripcionCierre.Contains("Sin asignar"))
                 {
                     values += "DESCRIPCION_CIERRE = @Descripcion_cierre,";
                     parameters.Add(new SqlParameter("@Descripcion_cierre", ticketNuevo.DescripcionCierre));
+                }
+                if (!string.IsNullOrEmpty(ticketNuevo.DescripcionInicial) && !ticketNuevo.DescripcionInicial.Contains("Sin asignar"))
+                {
+                    values += "DESCRIPCION_INICIAL = @Descripcion_inicial,";
+                    parameters.Add(new SqlParameter("@Descripcion_inicial", ticketNuevo.DescripcionInicial));
                 }
                 if (ticket.LegajoUsuario != ticketNuevo.LegajoUsuario)
                 {

@@ -149,7 +149,8 @@ namespace TPCuatrimestral_Equipo_A
                 labelValidarCliente.Visible = true;
                 labelValidarCliente.Text = ddlPrioridad.SelectedValue;
                 ticket = (Ticket)Session["ticket"];
-                ticket.DescripcionInicial = $"- {textDescripcion.Text}";
+                string fechaHoraActual = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
+                ticket.DescripcionInicial += $"- {fechaHoraActual}: {textDescripcion.Text}";
                 ticket.FechaCreacion = DateTime.Now;
                 ticket.IdEstadoReclamo = 1;
                 ticket.Estado = new EstadoReclamo();

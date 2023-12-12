@@ -50,7 +50,14 @@
                 <dd class="uk-margin col-11">
                     <div class="uk-form-controls">
                         <asp:TextBox ID="textComentario" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4" />
-                        <asp:Label ID="labelVerificacionCierre" runat="server" Text="Debes completar con una descripción del cierre para continuar" Visible="false" ViewStateMode="Enabled" />
+                        <asp:Label ID="labelVerificacionCierre" runat="server" Text="Debes añadir un comentario antes de continuar" Visible="false" ViewStateMode="Enabled" />
+                    </div>
+                </dd>
+                <asp:Label ID="labelMensajeParaCliente" Text="Mensaje para el cliente" runat="server" Visible="false"/>
+                <dd class="uk-margin col-11">
+                    <div class="uk-form-controls">
+                        <asp:TextBox ID="textEnvioMail" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4" Visible="false"/>
+                        <asp:Label ID="labelVerificacionEmail" runat="server" Text="Debes completar con un mensaje para el cliente" Visible="false" ViewStateMode="Enabled" />
                     </div>
                 </dd>
                 <dd>

@@ -41,12 +41,10 @@
             <asp:BoundField DataField="ID" HeaderText="#" />
             <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
             <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
-            <asp:BoundField DataField="DescripcionInicial" HeaderText="Descripcion Inicial" />
             <asp:BoundField DataField="NombreUsuario" HeaderText="Usuario Responsable" />
             <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="DNI Cliente Afectado" />
             <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha De Creacion" />
             <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
-            <asp:BoundField DataField="DescripcionCierre" HeaderText="Descripcion Cierre" />
             <asp:BoundField DataField="FechaCierre" HeaderText="Fecha de cierre" />
             <asp:TemplateField HeaderText="Opciones">
                 <ItemTemplate>

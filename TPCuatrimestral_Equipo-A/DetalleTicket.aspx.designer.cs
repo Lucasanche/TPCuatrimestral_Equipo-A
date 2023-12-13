@@ -87,6 +87,60 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label lblFechaCierre;
 
         /// <summary>
+        /// labelComentarios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelComentarios;
+
+        /// <summary>
+        /// textComentario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textComentario;
+
+        /// <summary>
+        /// labelVerificacionCierre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelVerificacionCierre;
+
+        /// <summary>
+        /// labelMensajeParaCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelMensajeParaCliente;
+
+        /// <summary>
+        /// textEnvioMail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textEnvioMail;
+
+        /// <summary>
+        /// labelVerificacionEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelVerificacionEmail;
+
+        /// <summary>
         /// lblEstadoTicket control.
         /// </summary>
         /// <remarks>
@@ -112,33 +166,6 @@ namespace TPCuatrimestral_Equipo_A
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCambioEstado2;
-
-        /// <summary>
-        /// labelDescripcionCierre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelDescripcionCierre;
-
-        /// <summary>
-        /// textCierre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textCierre;
-
-        /// <summary>
-        /// labelVerificacionCierre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelVerificacionCierre;
 
         /// <summary>
         /// btnGuardarCambios control.

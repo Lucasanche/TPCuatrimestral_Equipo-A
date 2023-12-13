@@ -3,6 +3,8 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Net;
+using System.Net.Mail;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -40,12 +42,15 @@ namespace TPCuatrimestral_Equipo_A
                         break;
                     case 2:
                         btnCambioEstado1.Text = "Procesar";
+                        btnCambioEstado2.Visible = false;
                         Session.Add("estadoTicket", 1);
                         break;
                     case 3:
                         btnCambioEstado1.Text = "Cerrar - Resuelto";
                         btnCambioEstado2.Text = "Cerrar - No Resuelto";
                         btnCambioEstado2.Visible = true;
+                        textEnvioMail.Visible = true;
+                        labelMensajeParaCliente.Visible = true;
                         Session.Add("estadoTicket", 2);
                         break;
                     case 4:
@@ -58,6 +63,7 @@ namespace TPCuatrimestral_Equipo_A
                         break;
                 }
                 lblID.Text = ticket.ID.ToString();
+                labelComentarios.Text = ticket.DescripcionInicial;
                 lblFechaCreacion.Text = ticket.FechaCreacion.ToString();
                 lblEstadoTicket.Text = ticket.Estado.Nombre;
                 if (((Usuario)Session["usuario"]).Rol.ID == 1)
@@ -120,25 +126,17 @@ namespace TPCuatrimestral_Equipo_A
                 ticketNuevo.Prioridad = prioridad;
                 modificado = true;
             }
-            if ((bool)Session["cerrado"])
-            {
-                if (textCierre.Text == "")
-                {
-                    labelVerificacionCierre.Visible = true;
-                    modificado = false;
-                }
-                else
-                {
-                    labelVerificacionCierre.Visible = false;
-                    modificado = true;
-                    ticketNuevo.FechaCierre = DateTime.Now;
-                }
-            }
             if (ticket.Estado.ID != (Byte)Session["estadoTicket"] && Session["estadoTicket"] != null)
             {
                 EstadoReclamo estado = EstadoReclamoBusiness.EstadoReclamoPorID((Byte)Session["estadoTicket"]);
                 ticketNuevo.Estado = estado;
                 modificado = true;
+            }
+            if (!String.IsNullOrEmpty(textComentario.Text))
+            {
+                modificado = true;
+                string fechaHoraActual = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
+                ticketNuevo.DescripcionInicial += $"<br>- {fechaHoraActual}: {textComentario.Text}";
             }
             try
             {
@@ -177,6 +175,20 @@ namespace TPCuatrimestral_Equipo_A
                     Session["estadoTicket"] = estado;
                     break;
                 case 3:
+                    if (String.IsNullOrEmpty(textEnvioMail.Text))
+                    {
+                        labelVerificacionEmail.Visible = true;
+                        break;
+                    }
+                    if (EnviarEmail(textEnvioMail.Text,((Ticket)Session["ticket"]).ClienteAfectado.Email)) {
+                        labelVerificacionEmail.Text = "Email enviado correctamente";
+                        labelVerificacionEmail.Visible = true;
+                    }
+                    else {
+                        labelVerificacionEmail.Text = "Email enviado correctamente";
+                        labelVerificacionEmail.Visible= true;
+                    }
+                    
                     estado = 4;
                     Session["estadoTicket"] = estado;
                     break;
@@ -187,10 +199,77 @@ namespace TPCuatrimestral_Equipo_A
 
         protected void btnCambioEstado2_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(textEnvioMail.Text))
+            {
+                labelVerificacionEmail.Visible = true;
+                return;
+            }
+            if (EnviarEmail(textEnvioMail.Text, ((Ticket)Session["ticket"]).ClienteAfectado.Email))
+            {
+                labelVerificacionEmail.Text = "Email enviado correctamente";
+                labelVerificacionEmail.Visible = true;
+            }
+            else
+            {
+                labelVerificacionEmail.Text = "Email enviado correctamente";
+                labelVerificacionEmail.Visible = true;
+            }
             Byte estado = 5;
             Session["estadoTicket"] = estado;
             btnGuardarCambios_Click(sender, e);
             Page_Load(sender, e);
+        }
+
+        protected void textComentario_TextChanged(object sender, EventArgs e)
+        {
+            if (textComentario.Text != "")
+            {
+                btnCambioEstado1.Enabled = true;
+                btnCambioEstado2.Enabled = true;
+            }
+            else
+            {
+                btnCambioEstado1.Enabled = false;
+                btnCambioEstado2.Enabled = false;
+            }
+        }
+        protected bool EnviarEmail(string emailBody, string destinatario)
+        {
+            if (string.IsNullOrEmpty(emailBody))
+            {
+                return false;
+            }
+            var fromAddress = new MailAddress("tpprog3grupoa@gmail.com", "GrupoA");
+            string toAddress = destinatario;
+            string fromPassword = "qyjwaqzikjnaqxqf";
+            string subject = "Test";
+            string body = emailBody;
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            try
+            
+            {
+                using (var message = new MailMessage(toAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
+                }
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

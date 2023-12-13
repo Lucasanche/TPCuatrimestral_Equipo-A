@@ -63,6 +63,15 @@
             <button class="uk-modal-close-default" type="button" uk-close></button>
 
             <div class="uk-form-stacked">
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Legajo:</label>
+                    <div class="uk-form-controls">
+                        <asp:TextBox ID="txtLegajo" runat="server" CssClass="uk-input" />
+                        <asp:Label Text="" ID="txtValidarLegajo" runat="server" CssClass="warning"/>
+                    </div>
+                </div>
+
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Nombre:</label>
                     <div class="uk-form-controls">
@@ -80,14 +89,6 @@
                 </div>
 
                 <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">DNI:</label>
-                    <div class="uk-form-controls">
-                        <asp:TextBox ID="txtDNI" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="" ID="txtValidarDNI" runat="server" CssClass="warning" />
-                    </div>
-                </div>
-
-                <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Email:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="uk-input" />
@@ -96,21 +97,14 @@
                 </div>
 
                 <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
+                    <label class="uk-form-label" for="form-stacked-text">Rol:</label>
                     <div class="uk-form-controls">
-                        <asp:TextBox ID="txtTelefono" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="" ID="txtValidarTelefono" runat="server" CssClass="warning" />
+                        <asp:DropDownList runat="server" ID="ddlRol" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required></asp:DropDownList>>
                     </div>
                 </div>
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Fecha de nacimiento:</label>
-                    <div class="uk-form-controls">
-                        <asp:Calendar ID="CalendarioFechaNacimiento" runat="server"></asp:Calendar>
-                        <asp:Label Text="" ID="txtValidarFechaNacimiento" runat="server" CssClass="warning" />
-                    </div>
-                </div>
+               
             
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cliente" OnClick="GuardarUsuario_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" OnClick="GuardarUsuario_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
                 <asp:Label Text="" runat="server" ID="txtAgregaCliente" CssClass="warning"/>
             </div>
         </form>
@@ -134,9 +128,9 @@
                     </div>
                 </div>
 
-                <asp:Button ID="Button1" runat="server" Text="Guardar Cliente" OnClick="GuardarTipoTicket_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
+                <asp:Button ID="Button1" runat="server" Text="Guardar Tipo Ticket" OnClick="GuardarTipoTicket_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
                 <asp:Label Text="" runat="server" ID="Label1" CssClass="warning"/>
-
+                <asp:Label Text="" ID="txtValidarGuardado" runat="server" CssClass="warning"/>
             </div>
         </form>
     </div>
@@ -158,6 +152,7 @@
                             </svg>
                         </i>
                 </asp:LinkButton>
+                <asp:Label Text="" ID="txtValidarUserEditar" CssClass="warning" runat="server" />
             </div>
         </div>
     </div>
@@ -170,7 +165,7 @@
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Nombre:</label>
                     <div class="uk-form-controls">
-                        <asp:TextBox ID="TextBox1" runat="server" CssClass="uk-input" />
+                        <asp:TextBox ID="txtNombreEditarUsuario" runat="server" CssClass="uk-input" />
                         <asp:Label Text="" ID="txtValidarNombreEdit" runat="server" CssClass="warning"/>
                     </div>
                 </div>
@@ -178,44 +173,20 @@
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Apellido:</label>
                     <div class="uk-form-controls">
-                        <asp:TextBox ID="TextBox2" runat="server" CssClass="uk-input" />
+                        <asp:TextBox ID="txtApellidoEditarUsuario" runat="server" CssClass="uk-input" />
                         <asp:Label Text="" ID="txtValidarApellidoEdit" runat="server" CssClass="warning" />
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">DNI:</label>
-                    <div class="uk-form-controls">
-                        <asp:TextBox ID="TextBox3" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="" ID="txtValidarDNIEdit" runat="server" CssClass="warning" />
                     </div>
                 </div>
 
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Email:</label>
                     <div class="uk-form-controls">
-                        <asp:TextBox ID="TextBox4" runat="server" CssClass="uk-input" />
+                        <asp:TextBox ID="txtEmailEditarUsuario" runat="server" CssClass="uk-input" />
                         <asp:Label Text="" ID="txtValidarEmailEdit" runat="server" CssClass="warning" />
                     </div>
                 </div>
 
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
-                    <div class="uk-form-controls">
-                        <asp:TextBox ID="TextBox5" runat="server" CssClass="uk-input" />
-                        <asp:Label Text="" ID="txtValidarTelefonoEdit" runat="server" CssClass="warning" />
-                    </div>
-                </div>
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Fecha de nacimiento:</label>
-                    <div class="uk-form-controls">
-                        <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
-                        <asp:Label Text="" ID="txtValidarFechaNacimientoEdit" runat="server" CssClass="warning" />
-                    </div>
-                </div>
-    
-                <asp:Button ID="Button2" runat="server" Text="Guardar Cliente" OnClick="EditarUsuario_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
-                <asp:Label Text="" runat="server" ID="txtEditaCliente" CssClass="warning"/>
+                <asp:Button ID="Button2" runat="server" Text="Editar Usuario" OnClick="EditarUsuario_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
             </div>
         </form>
     </div>
@@ -258,6 +229,7 @@
                             </svg>
                         </i>
                 </asp:LinkButton>
+            <asp:Label Text="" ID="txtValidarUsuarioEliminar" CssClass="warning" runat="server" />
             <div class="container" style="display: flex;justify-content: center;">
                 <div class="uk-margin">
                     <div class="col-8"> 
@@ -284,6 +256,7 @@
     <asp:Button Text="Eliminar Tipo de Ticket Seleccionado" runat="server" OnClick="EliminarTipoTicket_Click" CssClass="uk-button uk-button-danger uk-button-large" />
     </div>
     </div>
+    <asp:Label Text="" ID="txtValidarEliminado" runat="server" CssClass="warning"/>
 
 </div>
 

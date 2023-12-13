@@ -8,9 +8,39 @@ using System.Threading.Tasks;
 
 namespace Business
 {
-    internal class RolBusiness
+    public class RolBusiness
     {
+        
+        /*
+        public static List<Rol> List()
+        {
+            List<Rol> ListaRol = new List<Rol>();
+            AccessData data = new AccessData();
+            try
+            {
+                data.SetQuery("SELECT DESCRIPCION FROM ROLES");
+                data.ExecuteQuery();
 
+                while (data.Reader.Read())
+                {
+                    Rol Rol = new Rol();
+                    Rol.ID = (byte)data.Reader["ID"];
+                    Rol.Descripcion = data.Reader["DESCRIPCION"].ToString();
+                    ListaRol.Add(Rol);
+                }
+                return ListaRol;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+        */
         public static Rol RolPorID(byte ID)
         {
             Rol rol = new Rol();

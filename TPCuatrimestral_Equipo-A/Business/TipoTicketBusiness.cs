@@ -2,6 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,50 @@ namespace Business
                 data.Close();
             }
             return tipoTicket;
+        }
+        public static int AgregarTipoTicket(string desc)
+        {
+            AccessData data = new AccessData();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            try
+            {
+                // Actualiza
+                data.SetQuery("INSERT INTO TIPOS_INCIDENCIA (Descripcion) VALUES (@Descripcion)");
+                data.AddParameter("@Descripcion", desc);
+
+                return data.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+        public static int EliminarTipoTicket(string desc)
+        {
+            AccessData data = new AccessData();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            try
+            {
+                // Actualiza
+                data.SetQuery("DELETE FROM TIPOS_INCIDENCIA WHERE DESCRIPCION = @Descripcion");
+                data.AddParameter("@Descripcion", desc);
+
+                return data.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
         }
     }
 }

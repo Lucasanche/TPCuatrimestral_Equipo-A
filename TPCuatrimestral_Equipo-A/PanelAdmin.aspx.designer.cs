@@ -15,6 +15,24 @@ namespace TPCuatrimestral_Equipo_A
     {
 
         /// <summary>
+        /// Control txtLegajo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLegajo;
+
+        /// <summary>
+        /// Control txtValidarLegajo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtValidarLegajo;
+
+        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>
@@ -51,24 +69,6 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarApellido;
 
         /// <summary>
-        /// Control txtDNI.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDNI;
-
-        /// <summary>
-        /// Control txtValidarDNI.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarDNI;
-
-        /// <summary>
         /// Control txtEmail.
         /// </summary>
         /// <remarks>
@@ -87,40 +87,13 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarEmail;
 
         /// <summary>
-        /// Control txtTelefono.
+        /// Control ddlRol.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
-
-        /// <summary>
-        /// Control txtValidarTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarTelefono;
-
-        /// <summary>
-        /// Control CalendarioFechaNacimiento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarioFechaNacimiento;
-
-        /// <summary>
-        /// Control txtValidarFechaNacimiento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarFechaNacimiento;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRol;
 
         /// <summary>
         /// Control btnGuardar.
@@ -177,6 +150,15 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
+        /// Control txtValidarGuardado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtValidarGuardado;
+
+        /// <summary>
         /// Control txtLegajoUsuarioEditar.
         /// </summary>
         /// <remarks>
@@ -195,13 +177,22 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.LinkButton BuscarUsuario;
 
         /// <summary>
-        /// Control TextBox1.
+        /// Control txtValidarUserEditar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.Label txtValidarUserEditar;
+
+        /// <summary>
+        /// Control txtNombreEditarUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombreEditarUsuario;
 
         /// <summary>
         /// Control txtValidarNombreEdit.
@@ -213,13 +204,13 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarNombreEdit;
 
         /// <summary>
-        /// Control TextBox2.
+        /// Control txtApellidoEditarUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtApellidoEditarUsuario;
 
         /// <summary>
         /// Control txtValidarApellidoEdit.
@@ -231,31 +222,13 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarApellidoEdit;
 
         /// <summary>
-        /// Control TextBox3.
+        /// Control txtEmailEditarUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
-
-        /// <summary>
-        /// Control txtValidarDNIEdit.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarDNIEdit;
-
-        /// <summary>
-        /// Control TextBox4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox txtEmailEditarUsuario;
 
         /// <summary>
         /// Control txtValidarEmailEdit.
@@ -267,42 +240,6 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarEmailEdit;
 
         /// <summary>
-        /// Control TextBox5.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
-
-        /// <summary>
-        /// Control txtValidarTelefonoEdit.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarTelefonoEdit;
-
-        /// <summary>
-        /// Control Calendar1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
-
-        /// <summary>
-        /// Control txtValidarFechaNacimientoEdit.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarFechaNacimientoEdit;
-
-        /// <summary>
         /// Control Button2.
         /// </summary>
         /// <remarks>
@@ -310,15 +247,6 @@ namespace TPCuatrimestral_Equipo_A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button2;
-
-        /// <summary>
-        /// Control txtEditaCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEditaCliente;
 
         /// <summary>
         /// Control ddlEditarTipoTicket.
@@ -357,6 +285,15 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.LinkButton BuscarUsuario2;
 
         /// <summary>
+        /// Control txtValidarUsuarioEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtValidarUsuarioEliminar;
+
+        /// <summary>
         /// Control ddlEliminarTipoTicket.
         /// </summary>
         /// <remarks>
@@ -364,5 +301,14 @@ namespace TPCuatrimestral_Equipo_A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEliminarTipoTicket;
+
+        /// <summary>
+        /// Control txtValidarEliminado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtValidarEliminado;
     }
 }

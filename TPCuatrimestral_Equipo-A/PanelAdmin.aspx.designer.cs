@@ -15,7 +15,25 @@ namespace TPCuatrimestral_Equipo_A
     {
 
         /// <summary>
-        /// txtNombre control.
+        /// Control txtLegajo.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLegajo;
+
+        /// <summary>
+        /// Control txtValidarLegajo.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtValidarLegajo;
+
+        /// <summary>
+        /// Control txtNombre.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -24,7 +42,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
-        /// txtValidarNombre control.
+        /// Control txtValidarNombre.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -33,7 +51,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarNombre;
 
         /// <summary>
-        /// txtApellido control.
+        /// Control txtApellido.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -42,31 +60,13 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
 
         /// <summary>
-        /// txtValidarApellido control.
+        /// Control txtValidarApellido.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label txtValidarApellido;
-
-        /// <summary>
-        /// txtDNI control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDNI;
-
-        /// <summary>
-        /// txtValidarDNI control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarDNI;
 
         /// <summary>
         /// txtEmail control.
@@ -87,43 +87,16 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarEmail;
 
         /// <summary>
-        /// txtTelefono control.
+        /// Control ddlRol.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRol;
 
         /// <summary>
-        /// txtValidarTelefono control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarTelefono;
-
-        /// <summary>
-        /// CalendarioFechaNacimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarioFechaNacimiento;
-
-        /// <summary>
-        /// txtValidarFechaNacimiento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarFechaNacimiento;
-
-        /// <summary>
-        /// btnGuardar control.
+        /// Control btnGuardar.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -177,7 +150,16 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// txtLegajoUsuarioEditar control.
+        /// Control txtValidarGuardado.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtValidarGuardado;
+
+        /// <summary>
+        /// Control txtLegajoUsuarioEditar.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -186,7 +168,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtLegajoUsuarioEditar;
 
         /// <summary>
-        /// BuscarUsuario control.
+        /// Control BuscarUsuario.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -195,16 +177,25 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.LinkButton BuscarUsuario;
 
         /// <summary>
-        /// TextBox1 control.
+        /// Control txtValidarUserEditar.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.Label txtValidarUserEditar;
 
         /// <summary>
-        /// txtValidarNombreEdit control.
+        /// Control txtNombreEditarUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombreEditarUsuario;
+
+        /// <summary>
+        /// Control txtValidarNombreEdit.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -213,16 +204,16 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarNombreEdit;
 
         /// <summary>
-        /// TextBox2 control.
+        /// Control txtApellidoEditarUsuario.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtApellidoEditarUsuario;
 
         /// <summary>
-        /// txtValidarApellidoEdit control.
+        /// Control txtValidarApellidoEdit.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -231,31 +222,13 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarApellidoEdit;
 
         /// <summary>
-        /// TextBox3 control.
+        /// Control txtEmailEditarUsuario.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
-
-        /// <summary>
-        /// txtValidarDNIEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarDNIEdit;
-
-        /// <summary>
-        /// TextBox4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox txtEmailEditarUsuario;
 
         /// <summary>
         /// txtValidarEmailEdit control.
@@ -267,43 +240,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarEmailEdit;
 
         /// <summary>
-        /// TextBox5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
-
-        /// <summary>
-        /// txtValidarTelefonoEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarTelefonoEdit;
-
-        /// <summary>
-        /// Calendar1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
-
-        /// <summary>
-        /// txtValidarFechaNacimientoEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtValidarFechaNacimientoEdit;
-
-        /// <summary>
-        /// Button2 control.
+        /// Control Button2.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -312,16 +249,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
-        /// txtEditaCliente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEditaCliente;
-
-        /// <summary>
-        /// ddlEditarTipoTicket control.
+        /// Control ddlEditarTipoTicket.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -330,7 +258,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.DropDownList ddlEditarTipoTicket;
 
         /// <summary>
-        /// txtNombreTipoTicketEditar control.
+        /// Control txtNombreTipoTicketEditar.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -339,7 +267,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtNombreTipoTicketEditar;
 
         /// <summary>
-        /// txtLegajoEliminarUsuario control.
+        /// Control txtLegajoEliminarUsuario.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -348,7 +276,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtLegajoEliminarUsuario;
 
         /// <summary>
-        /// BuscarUsuario2 control.
+        /// Control BuscarUsuario2.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -357,12 +285,30 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.LinkButton BuscarUsuario2;
 
         /// <summary>
-        /// ddlEliminarTipoTicket control.
+        /// Control txtValidarUsuarioEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtValidarUsuarioEliminar;
+
+        /// <summary>
+        /// Control ddlEliminarTipoTicket.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEliminarTipoTicket;
+
+        /// <summary>
+        /// Control txtValidarEliminado.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtValidarEliminado;
     }
 }

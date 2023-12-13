@@ -153,7 +153,7 @@ namespace Business
             }
         }
 
-        public static int ModificarUsuario(string legajo, string nombre, string apellido, string email, Rol rol)
+        public static int ModificarUsuario(string legajo, string nombre, string apellido, string email)
         {
             AccessData data = new AccessData();
             try
@@ -164,7 +164,6 @@ namespace Business
                 data.AddParameter("@Nombre", nombre);
                 data.AddParameter("@Apellido", apellido);
                 data.AddParameter("@Email", email);
-                data.AddParameter("@Rol", rol); //revisar
 
                 return data.ExecuteNonQuery();
             }
@@ -178,11 +177,12 @@ namespace Business
             }
         }
 
-        public static int AgregarUsuario(string legajo, string nombre, string apellido, string email, Rol rol)
+        public static int AgregarUsuario(string legajo, string nombre, string apellido, string email)
         {
             AccessData data = new AccessData();
             string password = "password";
             DateTime fechaAlta = DateTime.Now;
+            int rolBase = 1;
             try
             {
                 // Actualiza
@@ -192,7 +192,7 @@ namespace Business
                 data.AddParameter("@Email", email);
                 data.AddParameter("@Password", password);
                 data.AddParameter("@FechaAlta", fechaAlta);
-                data.AddParameter("@Rol", rol); //revisar si sumar ID nomas
+                data.AddParameter("@Rol", rolBase); 
 
                 return data.ExecuteNonQuery();
             }
@@ -214,6 +214,27 @@ namespace Business
             {
                 string query = "DELETE FROM USUARIOS WHERE LEGAJO = @Legajo";
                 parameters.Add(new SqlParameter("@Legajo", usuario.Legajo));
+                data.SetQuery(query, parameters);
+                return data.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+
+        public static int EliminarUsuario(string legajo)
+        {
+            AccessData data = new AccessData();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            try
+            {
+                string query = "DELETE FROM USUARIOS WHERE LEGAJO = @Legajo";
+                parameters.Add(new SqlParameter("@Legajo", legajo));
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
             }

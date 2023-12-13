@@ -94,12 +94,12 @@
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-stacked-text">Nombre:</label>
                         <div class="uk-form-controls">
-                            <asp:TextBox ID="txtNombreIncidencia" runat="server" CssClass="uk-input" />
+                            <asp:TextBox ID="txtIncidencia" runat="server" CssClass="uk-input" placeholder="Nombre de la nueva incidencia"/>
                             <asp:Label Text="" ID="txtValidarNombreIncidencia" runat="server" CssClass="warning" />
                         </div>
                     </div>
 
-                    <asp:Button ID="btnGuardarTipoTicket" runat="server" Text="Guardar Tipo Ticket" OnClick="GuardarTipoTicket_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
+                    <asp:Button ID="btnGuardarTipoTicket" runat="server" Text="Guardar Tipo Ticket" OnClick="GuardarTipoTicket_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false"/>
                   
                     <asp:Label Text="" ID="txtValidarGuardado" runat="server" CssClass="warning" />
                 </div>

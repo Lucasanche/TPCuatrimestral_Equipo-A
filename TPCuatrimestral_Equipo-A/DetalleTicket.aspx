@@ -18,19 +18,19 @@
                 <dd class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Usuario:</label>
                     <div class="uk-form-controls">
-                        <asp:DropDownList ID="ddlUsuario" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required></asp:DropDownList>
+                        <asp:DropDownList ID="ddlUsuario" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" OnSelectedIndexChanged="ddlUsuario_SelectedIndexChanged" AutoPostBack="true" form-check-input required></asp:DropDownList>
                     </div>
                 </dd>
                 <dd class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Tipo:</label>
                     <div class="uk-form-controls">
-                        <asp:DropDownList ID="ddlTipoTicket" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required></asp:DropDownList>
+                        <asp:DropDownList ID="ddlTipoTicket" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required OnSelectedIndexChanged="ddlUsuario_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                     </div>
                 </dd>
                 <dd class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Prioridad:</label>
                     <div class="dropdown">
-                        <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required>
+                        <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required OnSelectedIndexChanged="ddlUsuario_SelectedIndexChanged" AutoPostBack="true">
                         </asp:DropDownList>
                     </div>
                 </dd>

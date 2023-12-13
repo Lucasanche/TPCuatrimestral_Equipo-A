@@ -25,9 +25,6 @@ namespace TPCuatrimestral_Equipo_A
             ddlEliminarTipoTicket.DataSource = tipos;
             ddlEliminarTipoTicket.DataTextField = "Nombre";
             ddlEliminarTipoTicket.DataBind();
-
-
-
         }
         protected void GuardarUsuario_Click(object sender, EventArgs e)
         { 

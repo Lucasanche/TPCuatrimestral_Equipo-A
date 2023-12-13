@@ -18,7 +18,7 @@ namespace TPCuatrimestral_Equipo_A
                 Response.Redirect("Error404.aspx");
             }
             Ticket ticket = new Ticket();
-            if (Request.QueryString["ID"] != null)
+            if (Request.QueryString["ID"] != null && !IsPostBack)
             {
                 bool cerrado = false;
                 bool supervisor = ((Usuario)Session["usuario"]).Rol.ID == 2 || ((Usuario)Session["usuario"]).Rol.ID == 3;
@@ -27,7 +27,7 @@ namespace TPCuatrimestral_Equipo_A
                 ticket = TicketBusiness.BuscarTicketPorID(ticketID);
                 Session.Add("ticket", ticket);
                 Session.Add("estadoTicket", ticket.Estado.ID);
-
+                btnGuardarCambios.Enabled = false;
                 //Labels
                 switch (ticket.Estado.ID)
                 {
@@ -159,6 +159,10 @@ namespace TPCuatrimestral_Equipo_A
             {
                 throw ex;
             }
+            finally
+            {
+                btnGuardarCambios.Enabled = false;
+            }
 
         }
         protected void btnCambioEstado1_Click(object sender, EventArgs e)
@@ -270,6 +274,11 @@ namespace TPCuatrimestral_Equipo_A
             {
                 return false;
             }
+        }
+
+        protected void ddlUsuario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnGuardarCambios.Enabled = true;
         }
     }
 }

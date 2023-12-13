@@ -1,35 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PanelAdmin.aspx.cs" Inherits="TPCuatrimestral_Equipo_A.PanelAdmin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="estilos/panelAdmin.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <style type="text/css">
-    .warning {
-        color:red;
-    }
-    .menu-navegacion {
-        display: flex;
-        position: sticky;
-        top: 0;
-        background-color: #f1f1f1;
-        padding: 10px;
-        z-index: 100;
-        justify-content: center;
-    }
-
-    .menu-navegacion a {
-        padding: 8px 16px;
-        text-decoration: none;
-        color: black;
-        margin: 0 10px;
-    }
-
-    .menu-navegacion a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-</style>
-
-
 <div class="menu-navegacion">
     <a href="#seccion-alta">ALTA</a>
     <a href="#seccion-editar">EDITAR</a>

@@ -1,0 +1,25 @@
+.warning {
+    color: red;
+}
+
+.menu-navegacion {
+    display: flex;
+    position: sticky;
+    top: 0;
+    background-color: #f1f1f1;
+    padding: 10px;
+    z-index: 100;
+    justify-content: center;
+}
+
+    .menu-navegacion a {
+        padding: 8px 16px;
+        text-decoration: none;
+        color: black;
+        margin: 0 10px;
+    }
+
+        .menu-navegacion a:hover {
+            background-color: #ddd;
+            color: black;
+        }

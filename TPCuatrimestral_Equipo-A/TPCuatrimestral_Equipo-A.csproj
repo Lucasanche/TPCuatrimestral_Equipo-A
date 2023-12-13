@@ -100,6 +100,7 @@
     <Content Include="CrearTicket.aspx" />
     <Content Include="DetalleTicket.aspx" />
     <Content Include="Error404.aspx" />
+    <Content Include="estilos\panelAdmin.css" />
     <Content Include="estilos\home.css" />
     <Content Include="estilos\Tablas.css" />
     <Content Include="imagenes\abrir-documento.svg" />

@@ -90,8 +90,6 @@
             <form novalidate>
                 <h3 class="uk-heading-divider">Agregar Tipo Ticket</h3>
 
-                <button class="uk-modal-close-default" type="button" uk-close></button>
-
                 <div class="uk-form-stacked">
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-stacked-text">Nombre:</label>
@@ -101,8 +99,8 @@
                         </div>
                     </div>
 
-                    <asp:Button ID="Button1" runat="server" Text="Guardar Tipo Ticket" OnClick="GuardarTipoTicket_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
-                    <asp:Label Text="" runat="server" ID="Label1" CssClass="warning" />
+                    <asp:Button ID="btnGuardarTipoTicket" runat="server" Text="Guardar Tipo Ticket" OnClick="GuardarTipoTicket_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
+                  
                     <asp:Label Text="" ID="txtValidarGuardado" runat="server" CssClass="warning" />
                 </div>
             </form>

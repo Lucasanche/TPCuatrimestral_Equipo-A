@@ -83,12 +83,25 @@ namespace TPCuatrimestral_Equipo_A
         }
         protected void GuardarTipoTicket_Click(object sender, EventArgs e)
         {
+            
             string nuevoNombre;
-            nuevoNombre = txtNombreIncidencia.Text;
 
-            if (TipoTicketBusiness.AgregarTipoTicket(nuevoNombre) == 1)
+            if (string.IsNullOrEmpty(txtNombreIncidencia.Text))
             {
-                txtValidarGuardado.Text = "Tipo de Ticket Guardado exitosamente.";
+                txtValidarNombreIncidencia.Text = "Falta Nombre de Tipo Ticket";
+            }
+            if (txtNombreIncidencia.Text != "")
+            {
+                nuevoNombre = txtNombreIncidencia.Text;
+
+                if (TipoTicketBusiness.AgregarTipoTicket(nuevoNombre) == 1)
+                {
+                    txtValidarGuardado.Text = "Tipo de Ticket Guardado exitosamente.";
+                }
+                else
+                {
+                    txtValidarGuardado.Text = "Ocurrió un error, intentelo nuevamente";
+                }
             }
 
         }

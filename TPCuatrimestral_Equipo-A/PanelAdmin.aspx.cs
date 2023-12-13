@@ -24,7 +24,7 @@ namespace TPCuatrimestral_Equipo_A
             ddlEditarTipoTicket.DataTextField = "Nombre";
             ddlEditarTipoTicket.DataBind();
 
-
+            
             ddlEliminarTipoTicket.DataSource = tipos;
             ddlEliminarTipoTicket.DataTextField = "Nombre";
             ddlEliminarTipoTicket.DataBind();
@@ -105,6 +105,28 @@ namespace TPCuatrimestral_Equipo_A
             }
 
         }
+        protected void BuscarUsuarioEditar_Click(object sender, EventArgs e)
+        {
+
+            if (txtLegajoUsuarioEditar.Text == null)
+            {
+                txtValidarUserEditar.Text = "Complete con el Legajo del usuario";
+            }
+            else
+            {
+                Usuario usuario = new Usuario();
+                string legajo;
+                legajo = txtLegajoUsuarioEditar.Text;
+
+                usuario = UsuarioBusiness.UsuarioPorLegajo(legajo);
+
+                txtNombreEditarUsuario.Text = usuario.Nombre;
+                txtApellidoEditarUsuario.Text = usuario.Apellido;
+                txtEmailEditarUsuario.Text = usuario.Email;
+
+            }
+
+        }
         protected void EditarUsuario_Click(object sender, EventArgs e)
         {
             string legajo;
@@ -153,28 +175,6 @@ namespace TPCuatrimestral_Equipo_A
             }
         }
 
-        protected void BuscarUsuarioEditar_Click(object sender, EventArgs e)
-        {
-
-            if (txtLegajoUsuarioEditar.Text == null)
-            {
-                txtValidarUserEditar.Text = "Complete con el Legajo del usuario";
-            }
-            else
-            {
-                Usuario usuario = new Usuario();
-                string legajo;
-                legajo = txtLegajoUsuarioEditar.Text;
-
-                usuario = UsuarioBusiness.UsuarioPorLegajo(legajo);
-
-                txtNombreEditarUsuario.Text = usuario.Nombre;
-                txtApellidoEditarUsuario.Text = usuario.Apellido;
-                txtEmailEditarUsuario.Text = usuario.Email;
-
-            }
-
-        }
         protected void BuscarUsuarioEliminar_Click(object sender, EventArgs e)
         {
             if (txtLegajoEliminarUsuario.Text == null)

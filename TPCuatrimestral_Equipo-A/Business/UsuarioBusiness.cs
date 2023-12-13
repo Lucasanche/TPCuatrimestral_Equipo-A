@@ -66,18 +66,9 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT LEGAJO
-                                     , NOMBRE
-                                     , APELLIDO
-                                     , EMAIL
-                                     , PASSWORD
-                                     , NOMBRE
-                                     , APELLIDO
-                                     , EMAIL
-                                     , FECHA_BAJA
-                                     , FECHA_ALTA
-                                     , ESTADO 
-                                     FROM USUARIOS");
+                string query = "SELECT * FROM USUARIOS WHERE LEGAJO = @Legajo";
+                data.SetQuery(query);
+                data.AddParameter("@Legajo", legajo);
 
                 while (data.Reader.Read())
                 {
@@ -91,18 +82,18 @@ namespace Business
                     usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
                     usuarioAux.Estado = (bool)data.Reader["ESTADO"];
                 }
+
                 return usuarioAux;
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
             {
                 data.Close();
             }
-            
+
         }
         public static Usuario UsuarioPorEmail(string email, string password)
         {
@@ -162,8 +153,8 @@ namespace Business
                 data.SetQuery("UPDATE USUARIOS SET NOMBRE = @Nombre, APELLIDO = @Apellido, EMAIL = @Email, ROL = @Rol WHERE LEGAJO = @Legajo");
                 data.AddParameter("@Legajo", legajo);
                 data.AddParameter("@Nombre", nombre);
-                data.AddParameter("@Apellido", apellido);
                 data.AddParameter("@Email", email);
+                data.AddParameter("@Apellido", apellido);
 
                 return data.ExecuteNonQuery();
             }

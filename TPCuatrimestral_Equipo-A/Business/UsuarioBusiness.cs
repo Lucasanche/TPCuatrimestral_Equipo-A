@@ -186,10 +186,11 @@ namespace Business
             try
             {
                 // Actualiza
-                data.SetQuery("INSERT INTO USUARIOS (NOMBRE, APELLIDO, EMAIL, PASSWORD, FECHA_ALTA, ROL) VALUES (@Nombre, @Apellido, @Email, @Password , @FechaAlta, @Rol)");
+                data.SetQuery("INSERT INTO USUARIOS (LEGAJO, NOMBRE, APELLIDO, EMAIL, PASSWORD, ROL) VALUES (@Legajo, @Nombre, @Apellido, @Email, @Password , @Rol)");
+                data.AddParameter("@Legajo", legajo);
                 data.AddParameter("@Nombre", nombre);
-                data.AddParameter("@Apellido", apellido);
                 data.AddParameter("@Email", email);
+                data.AddParameter("@Apellido", apellido);
                 data.AddParameter("@Password", password);
                 data.AddParameter("@FechaAlta", fechaAlta);
                 data.AddParameter("@Rol", rolBase); 
@@ -198,7 +199,8 @@ namespace Business
             }
             catch (Exception ex)
             {
-                throw ex;
+                return -1;
+                
             }
             finally
             {

@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business;
 using Microsoft.CodeAnalysis.FlowAnalysis;
+using System.Web.Caching;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -17,7 +18,7 @@ namespace TPCuatrimestral_Equipo_A
         protected void Page_Load(object sender, EventArgs e)
         {
             tipos = TipoTicketBusiness.List();
-            //roles = RolBusiness.List();
+            roles = RolBusiness.List();
 
             ddlEditarTipoTicket.DataSource = tipos;
             ddlEditarTipoTicket.DataTextField = "Nombre";
@@ -28,11 +29,9 @@ namespace TPCuatrimestral_Equipo_A
             ddlEliminarTipoTicket.DataTextField = "Nombre";
             ddlEliminarTipoTicket.DataBind();
 
-            /*
             ddlRol.DataSource = roles;
             ddlRol.DataTextField = "Descripcion";
             ddlRol.DataBind();
-            */
         }
         protected void GuardarUsuario_Click(object sender, EventArgs e)
         {
@@ -67,7 +66,18 @@ namespace TPCuatrimestral_Equipo_A
 
                 if (UsuarioBusiness.AgregarUsuario(legajo, nombre, apellido, email) == 1)
                 {
+                    txtLegajo.Enabled = false;
+                    txtNombre.Enabled = false;
+                    txtApellido.Enabled = false;
+                    txtEmail.Enabled = false;
+                    ddlEditarTipoTicket.Enabled = false;
                     txtAgregaCliente.Text = "Cliente agregado exitosamente";
+                    btnGuardar.Visible= false;
+                    btnRecargar.Visible = true;
+                }
+                else
+                {
+                    txtAgregaCliente.Text = "Ocurrió un error, intentelo nuevamente";
                 }
             }
         }
@@ -169,5 +179,9 @@ namespace TPCuatrimestral_Equipo_A
 
         }
 
+        protected void btnRecargar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PanelAdmin.aspx");
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace TPCuatrimestral_Equipo_A
     {
 
         /// <summary>
-        /// Control txtLegajo.
+        /// txtLegajo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -24,7 +24,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtLegajo;
 
         /// <summary>
-        /// Control txtValidarLegajo.
+        /// txtValidarLegajo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -33,7 +33,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarLegajo;
 
         /// <summary>
-        /// Control txtNombre.
+        /// txtNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -42,7 +42,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
-        /// Control txtValidarNombre.
+        /// txtValidarNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -51,7 +51,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarNombre;
 
         /// <summary>
-        /// Control txtApellido.
+        /// txtApellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -60,7 +60,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
 
         /// <summary>
-        /// Control txtValidarApellido.
+        /// txtValidarApellido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -87,7 +87,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarEmail;
 
         /// <summary>
-        /// Control ddlRol.
+        /// ddlRol control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -96,13 +96,22 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.DropDownList ddlRol;
 
         /// <summary>
-        /// Control btnGuardar.
+        /// btnGuardar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
+
+        /// <summary>
+        /// btnRecargar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRecargar;
 
         /// <summary>
         /// txtAgregaCliente control.
@@ -150,7 +159,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control txtValidarGuardado.
+        /// txtValidarGuardado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -159,7 +168,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarGuardado;
 
         /// <summary>
-        /// Control txtLegajoUsuarioEditar.
+        /// txtLegajoUsuarioEditar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -168,7 +177,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtLegajoUsuarioEditar;
 
         /// <summary>
-        /// Control BuscarUsuario.
+        /// BuscarUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -177,7 +186,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.LinkButton BuscarUsuario;
 
         /// <summary>
-        /// Control txtValidarUserEditar.
+        /// txtValidarUserEditar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -186,7 +195,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarUserEditar;
 
         /// <summary>
-        /// Control txtNombreEditarUsuario.
+        /// txtNombreEditarUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -195,7 +204,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtNombreEditarUsuario;
 
         /// <summary>
-        /// Control txtValidarNombreEdit.
+        /// txtValidarNombreEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -204,7 +213,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarNombreEdit;
 
         /// <summary>
-        /// Control txtApellidoEditarUsuario.
+        /// txtApellidoEditarUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -213,7 +222,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtApellidoEditarUsuario;
 
         /// <summary>
-        /// Control txtValidarApellidoEdit.
+        /// txtValidarApellidoEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -222,7 +231,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarApellidoEdit;
 
         /// <summary>
-        /// Control txtEmailEditarUsuario.
+        /// txtEmailEditarUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -240,7 +249,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarEmailEdit;
 
         /// <summary>
-        /// Control Button2.
+        /// Button2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -249,7 +258,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
-        /// Control ddlEditarTipoTicket.
+        /// ddlEditarTipoTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -258,7 +267,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.DropDownList ddlEditarTipoTicket;
 
         /// <summary>
-        /// Control txtNombreTipoTicketEditar.
+        /// txtNombreTipoTicketEditar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -267,7 +276,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtNombreTipoTicketEditar;
 
         /// <summary>
-        /// Control txtLegajoEliminarUsuario.
+        /// txtLegajoEliminarUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -276,7 +285,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.TextBox txtLegajoEliminarUsuario;
 
         /// <summary>
-        /// Control BuscarUsuario2.
+        /// BuscarUsuario2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -285,7 +294,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.LinkButton BuscarUsuario2;
 
         /// <summary>
-        /// Control txtValidarUsuarioEliminar.
+        /// txtValidarUsuarioEliminar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -294,7 +303,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label txtValidarUsuarioEliminar;
 
         /// <summary>
-        /// Control ddlEliminarTipoTicket.
+        /// ddlEliminarTipoTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -303,7 +312,7 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.DropDownList ddlEliminarTipoTicket;
 
         /// <summary>
-        /// Control txtValidarEliminado.
+        /// txtValidarEliminado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.

@@ -11,14 +11,14 @@ namespace Business
     public class RolBusiness
     {
         
-        /*
+       
         public static List<Rol> List()
         {
             List<Rol> ListaRol = new List<Rol>();
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery("SELECT DESCRIPCION FROM ROLES");
+                data.SetQuery("SELECT * FROM ROLES");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
@@ -40,7 +40,6 @@ namespace Business
                 data.Close();
             }
         }
-        */
         public static Rol RolPorID(byte ID)
         {
             Rol rol = new Rol();

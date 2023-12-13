@@ -86,13 +86,13 @@ namespace TPCuatrimestral_Equipo_A
             
             string nuevoNombre;
 
-            if (string.IsNullOrEmpty(txtNombreIncidencia.Text))
+            if (string.IsNullOrEmpty(txtIncidencia.Text))
             {
                 txtValidarNombreIncidencia.Text = "Falta Nombre de Tipo Ticket";
             }
-            if (txtNombreIncidencia.Text != "")
+            if (txtIncidencia.Text != "")
             {
-                nuevoNombre = txtNombreIncidencia.Text;
+                nuevoNombre = txtIncidencia.Text;
 
                 if (TipoTicketBusiness.AgregarTipoTicket(nuevoNombre) == 1)
                 {

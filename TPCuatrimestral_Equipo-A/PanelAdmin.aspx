@@ -99,7 +99,7 @@
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Rol:</label>
                     <div class="uk-form-controls">
-                        <asp:DropDownList runat="server" ID="ddlRol" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required></asp:DropDownList>>
+                        <asp:DropDownList runat="server" ID="ddlRol" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required></asp:DropDownList>
                     </div>
                 </div>
                

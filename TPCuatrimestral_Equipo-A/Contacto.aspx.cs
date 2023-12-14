@@ -19,11 +19,11 @@ namespace TPCuatrimestral_Equipo_A
             if (!IsPostBack)
             {
                 Cliente cliente = new Cliente();
-                if (Request.QueryString["DNI"] != null)
+                if (Request.QueryString["ID"] != null)
                 {
-                    string clienteDNI = Request.QueryString["DNI"];
+                    int clienteID = Convert.ToInt32(Request.QueryString["ID"]);
 
-                    cliente = ClientesBusiness.ClientePorDNI(clienteDNI);
+                    cliente = ClientesBusiness.ClientePorID(clienteID);
 
                     if (!cliente.Estado)
                     {

@@ -36,14 +36,21 @@ namespace TPCuatrimestral_Equipo_A
             {
                 txtValidarApellido.Visible = false;
             }
-            if (string.IsNullOrEmpty(ExtraerNumeros(txtDNI.Text)))
+            if (string.IsNullOrEmpty(txtDNI.Text))
             {
-                txtValidarDNI.ForeColor = System.Drawing.Color.Red;
                 txtValidarDNI.Text = "Campo obligatorio";
+                txtValidarDNI.ForeColor = System.Drawing.Color.Red;
             }
             else
             {
-                txtValidarDNI.Visible = false;
+                if (string.IsNullOrEmpty(ExtraerNumeros(txtDNI.Text))){
+                    txtValidarDNI.Text = "Sólo se permiten números";
+                    txtValidarDNI.ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    txtValidarDNI.Visible = false;
+                }
             }
             if (string.IsNullOrEmpty(txtEmail.Text))
             {
@@ -95,7 +102,8 @@ namespace TPCuatrimestral_Equipo_A
                     // guardo correctamente
                     txtAgregaCliente.ForeColor = System.Drawing.Color.Green;
                     txtAgregaCliente.Text = "Cliente guardado exitosamente.";
-
+                    btnGuardar.Visible = false;
+                    btnRecargar.Visible = true;
                 }
                 else
                 {
@@ -114,7 +122,7 @@ namespace TPCuatrimestral_Equipo_A
 
         protected void btnRecargar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PanelAdmin.aspx");
+            Response.Redirect("CrearCliente.aspx");
         }
     }
 }

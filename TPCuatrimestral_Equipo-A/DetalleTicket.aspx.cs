@@ -22,6 +22,10 @@ namespace TPCuatrimestral_Equipo_A
             { 
                 bool cerrado = false;
                 bool supervisor = (byte)Session["rol"] > 1;
+                if (!supervisor)
+                {
+                    btnGuardarCambios.Visible= false;
+                }
                 Session.Add("cerrado", cerrado);
                 int ticketID = Convert.ToInt32(Request.QueryString["ID"]);
                 ticket = TicketBusiness.BuscarTicketPorID(ticketID);
@@ -35,7 +39,9 @@ namespace TPCuatrimestral_Equipo_A
                         btnCambioEstado1.Text = "Aprobar";
                         if (!supervisor)
                         {
-                            btnCambioEstado1.Enabled = false;
+                            btnCambioEstado1.Visible = false;
+                            tituloComentario.Visible = false;
+                            textComentario.Visible = false;
                         }
                         Session.Add("estadoTicket", 1);
                         btnCambioEstado2.Visible = false;
@@ -56,10 +62,14 @@ namespace TPCuatrimestral_Equipo_A
                     case 4:
                         btnCambioEstado1.Visible = false;
                         btnCambioEstado2.Visible = false;
+                        tituloComentario.Visible = false;
+                        textComentario.Visible = false;
                         break;
                     case 5:
                         btnCambioEstado1.Visible = false;
                         btnCambioEstado2.Visible = false;
+                        tituloComentario.Visible = false;
+                        textComentario.Visible = false;
                         break;
                 }
                 lblID.Text = ticket.ID.ToString();

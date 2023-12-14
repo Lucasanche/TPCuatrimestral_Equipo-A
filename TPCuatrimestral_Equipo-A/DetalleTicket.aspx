@@ -62,7 +62,7 @@
                 <dt>Comentarios</dt>
                 <dd>
                     <asp:Label runat="server" ID="labelComentarios" /></dd>
-                <dt>Añadir comentario</dt>
+                <dt runat="server" id="tituloComentario">Añadir comentario</dt>
                 <dd class="uk-margin col-11">
                     <div class="uk-form-controls">
                         <asp:TextBox ID="textComentario" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4" />

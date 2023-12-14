@@ -9,7 +9,8 @@
     <%
         int a = 0;
     %>
-    <% }%>
+    <% }
+%>
     <h1 class="uk-heading-divider">Tickets</h1>
 
     <div class="row-accion">
@@ -35,15 +36,15 @@
 
         </div>
     </div>
-    <asp:GridView ID="TicketsGV" CssClass="uk-table uk-table-striped uk-table-hover" runat="server" OnRowCommand="TicketsGV_RowCommand" AutoGenerateColumns="false">
+    <asp:GridView ID="TicketsGV" CssClass="uk-table uk-table-striped uk-table-hover" runat="server" OnRowCommand="TicketsGV_RowCommand" AutoGenerateColumns="false" AllowSorting="true" OnSorting="TicketsGV_Sorting">
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID"/>
-            <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo"/>
-            <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
-            <asp:BoundField DataField="NombreUsuario" HeaderText="Usuario Responsable"/>
-            <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="DNI Cliente Afectado" />
-            <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha De Creacion" />
-            <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
+            <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" SortExpression="TIPO"/>
+            <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" SortExpression="PRIORIDAD"/>
+            <asp:BoundField DataField="NombreUsuario" HeaderText="Usuario Responsable" SortExpression="USUARIO"/>
+            <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="DNI Cliente Afectado" SortExpression="CLIENTE"/>
+            <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha De Creacion" SortExpression="FECHA_CREACION"/>
+            <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" SortExpression="ESTADO"/>
             <asp:BoundField DataField="FechaCierre" HeaderText="Fecha de cierre" />
             <asp:TemplateField HeaderText="Opciones">
                 <ItemTemplate>

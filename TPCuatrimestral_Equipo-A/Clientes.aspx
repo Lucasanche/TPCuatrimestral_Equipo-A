@@ -48,7 +48,7 @@
             <asp:TemplateField HeaderText="Opciones">
             <ItemTemplate>
                  <div class="container-detalles">
-                    <asp:LinkButton runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("DNI") %>' CssClass="ver-clientes">
+                    <asp:LinkButton runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' CssClass="ver-clientes">
                         <img class="imagen-primaria" src="imagenes/ojo.svg" style="width: 2.7vh; height: 1.8vh;" alt="" />
                         <img class="imagen-secundaria" src="imagenes/abrir-documento.svg" alt="" />
                         <span class="texto-button" style="margin-right: -25px;">Ver</span>

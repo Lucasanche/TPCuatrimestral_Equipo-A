@@ -47,10 +47,10 @@ namespace TPCuatrimestral_Equipo_A
             if (e.CommandName == "VerDetalles")
             {
                 // Aquí obtienes el ID del cliente desde el CommandArgument
-                string clienteDNI = e.CommandArgument.ToString();
+                int clienteID = Convert.ToInt32(e.CommandArgument);
 
                 // Redirige a la página de detalles pasando el ID como parámetro
-                Response.Redirect($"Contacto.aspx?DNI={clienteDNI}");
+                Response.Redirect($"Contacto.aspx?ID={clienteID}");
             }
         }
 

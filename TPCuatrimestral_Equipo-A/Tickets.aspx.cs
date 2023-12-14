@@ -44,7 +44,7 @@ namespace TPCuatrimestral_Equipo_A
                 List<Ticket> listAux = new List<Ticket>();
                 foreach (Ticket ticket in list)
                 {
-                    if (ticket.LegajoUsuario == usuario.Legajo && !ticket.Estado.Nombre.Contains("Cerrado"))
+                    if (ticket.LegajoUsuario == usuario.Legajo)
                     {
                         listAux.Add(ticket);
                     }

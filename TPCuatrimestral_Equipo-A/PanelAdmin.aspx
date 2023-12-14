@@ -158,12 +158,12 @@
                     </div>
 
 
-                     <div class="uk-margin">
+<%--                     <div class="uk-margin">
                          <label class="uk-form-label" for="form-stacked-text">Rol:</label>
                          <div class="uk-form-controls">
                              <asp:DropDownList runat="server" ID="DropDownList1" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required></asp:DropDownList>
                          </div>
-                     </div>
+                     </div>--%>
 
                     <asp:Button ID="Button2" runat="server" Text="Editar Usuario" OnClick="EditarUsuario_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
                 </div>

@@ -67,9 +67,9 @@ namespace Business
             try
             {
                 string query = "SELECT * FROM USUARIOS WHERE LEGAJO = @Legajo";
-                data.SetQuery(query);
                 data.AddParameter("@Legajo", legajo);
-
+                data.SetQuery(query);
+                data.ExecuteQuery();
                 while (data.Reader.Read())
                 {
                     usuarioAux.Legajo = data.Reader["LEGAJO"].ToString();

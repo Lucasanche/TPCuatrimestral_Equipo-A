@@ -32,6 +32,13 @@ namespace TPCuatrimestral_Equipo_A
             ddlRol.DataSource = roles;
             ddlRol.DataTextField = "Descripcion";
             ddlRol.DataBind();
+            if (Session["usuarioEdit"] != null)
+            {
+                Usuario usuarioEdit = (Usuario)Session["usuarioEdit"];
+                txtNombreEditarUsuario.Text = usuarioEdit.Nombre;
+                txtApellidoEditarUsuario.Text = usuarioEdit.Apellido;
+                txtEmailEditarUsuario.Text = usuarioEdit.Email;
+            }
         }
         protected void GuardarUsuario_Click(object sender, EventArgs e)
         {
@@ -108,9 +115,10 @@ namespace TPCuatrimestral_Equipo_A
         protected void BuscarUsuarioEditar_Click(object sender, EventArgs e)
         {
 
-            if (txtLegajoUsuarioEditar.Text == null)
+            if (string.IsNullOrEmpty(txtLegajoUsuarioEditar.Text))
             {
                 txtValidarUserEditar.Text = "Complete con el Legajo del usuario";
+                return;
             }
             else
             {
@@ -120,9 +128,8 @@ namespace TPCuatrimestral_Equipo_A
 
                 usuario = UsuarioBusiness.UsuarioPorLegajo(legajo);
 
-                txtNombreEditarUsuario.Text = usuario.Nombre;
-                txtApellidoEditarUsuario.Text = usuario.Apellido;
-                txtEmailEditarUsuario.Text = usuario.Email;
+                Session.Add("usuarioEdit", usuario);
+
 
             }
 

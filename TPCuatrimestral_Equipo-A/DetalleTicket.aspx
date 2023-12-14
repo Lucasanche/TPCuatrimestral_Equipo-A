@@ -12,10 +12,24 @@
             <dl class="uk-description-list uk-description-list-divider">
                 <dt>ID</dt>
                 <asp:Label runat="server" ID="lblID"></asp:Label>
-                <dt>Descripcion De Inicial</dt>
-                <dd>
-                    <asp:Label runat="server" ID="lblDescripcionInicial" /></dd>
+                <%if ((byte)Session["rol"] == 1)
+                    { %>
                 <dd class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">TIPO:</label>
+                    <div class="uk-form-controls">
+                        <asp:Label Text="" ID="labelTipoTicket" runat="server" />
+                    </div>
+                </dd>
+                <dd class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">PRIORIDAD:</label>
+                    <div class="dropdown">
+                        <asp:Label Text="" ID="labelPrioridad" runat="server" />
+                    </div>
+                </dd>
+                    <%}
+                                    else
+                                    {%>
+                 <dd class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Usuario:</label>
                     <div class="uk-form-controls">
                         <asp:DropDownList ID="ddlUsuario" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" OnSelectedIndexChanged="ddlUsuario_SelectedIndexChanged" AutoPostBack="true" form-check-input required></asp:DropDownList>
@@ -34,6 +48,8 @@
                         </asp:DropDownList>
                     </div>
                 </dd>
+                <%}%>
+               
                 <dt>Cliente Afectado</dt>
                 <dd>
                     <asp:Label runat="server" ID="lblClienteAfectado" /></dd>

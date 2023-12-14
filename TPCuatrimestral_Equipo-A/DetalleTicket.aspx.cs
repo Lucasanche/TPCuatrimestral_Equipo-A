@@ -18,10 +18,10 @@ namespace TPCuatrimestral_Equipo_A
                 Response.Redirect("Error404.aspx");
             }
             Ticket ticket = new Ticket();
-            if (Request.QueryString["ID"] != null && !IsPostBack)
-            {
+            if (Request.QueryString["ID"] != null)
+            { 
                 bool cerrado = false;
-                bool supervisor = ((Usuario)Session["usuario"]).Rol.ID == 2 || ((Usuario)Session["usuario"]).Rol.ID == 3;
+                bool supervisor = (byte)Session["rol"] > 1;
                 Session.Add("cerrado", cerrado);
                 int ticketID = Convert.ToInt32(Request.QueryString["ID"]);
                 ticket = TicketBusiness.BuscarTicketPorID(ticketID);
@@ -63,16 +63,12 @@ namespace TPCuatrimestral_Equipo_A
                         break;
                 }
                 lblID.Text = ticket.ID.ToString();
-                labelComentarios.Text = ticket.DescripcionInicial;
                 lblFechaCreacion.Text = ticket.FechaCreacion.ToString();
                 lblEstadoTicket.Text = ticket.Estado.Nombre;
-                if (((Usuario)Session["usuario"]).Rol.ID == 1)
+                if ((byte)Session["rol"] == 1)
                 {
-                    usuarios.Add((Usuario)Session["usuario"]);
-                    ddlUsuario.DataSource = usuarios;
-                    ddlTipoTicket.DataSource = ticket.Tipo;
-                    ddlPrioridad.DataSource = ticket.Prioridad;
-
+                    labelPrioridad.Text = ticket.Prioridad.Nombre;
+                    labelTipoTicket.Text = ticket.Tipo.Nombre;
                 }
                 else
                 {
@@ -82,23 +78,23 @@ namespace TPCuatrimestral_Equipo_A
                     ddlTipoTicket.DataSource = tipos;
                     ddlPrioridad.DataSource = prioridades;
                     ddlUsuario.DataSource = usuarios;
-
+                    ddlTipoTicket.DataTextField = "Nombre";
+                    ddlTipoTicket.DataValueField = "ID";
+                    ddlTipoTicket.SelectedValue = ticket.Tipo.ID.ToString();
+                    ddlTipoTicket.DataBind();
+                    ddlPrioridad.DataTextField = "Nombre";
+                    ddlPrioridad.DataValueField = "ID";
+                    ddlPrioridad.SelectedValue = ticket.Prioridad.ID.ToString();
+                    ddlPrioridad.DataBind();
+                    ddlUsuario.DataTextField = "NombreCompleto";
+                    ddlUsuario.DataValueField = "Legajo";
+                    ddlUsuario.SelectedValue = ticket.LegajoUsuario.ToString();
+                    ddlUsuario.DataBind();
                 }
-                ddlTipoTicket.DataTextField = "Nombre";
-                ddlTipoTicket.DataValueField = "ID";
-                ddlTipoTicket.SelectedValue = ticket.Tipo.ID.ToString();
-                ddlTipoTicket.DataBind();
-                ddlPrioridad.DataTextField = "Nombre";
-                ddlPrioridad.DataValueField = "ID";
-                ddlPrioridad.SelectedValue = ticket.Prioridad.ID.ToString();
-                ddlPrioridad.DataBind();
-                ddlUsuario.DataTextField = "NombreCompleto";
-                ddlUsuario.DataValueField = "Legajo";
-                ddlUsuario.SelectedValue = ticket.LegajoUsuario.ToString();
-                ddlUsuario.DataBind();
+                
 
                 lblClienteAfectado.Text = ticket.ClienteAfectado.DNI;
-                lblDescripcionInicial.Text = ticket.DescripcionInicial;
+                labelComentarios.Text = ticket.DescripcionInicial;
 
                 //Textos
             }
@@ -109,22 +105,26 @@ namespace TPCuatrimestral_Equipo_A
             Ticket ticket = new Ticket((Ticket)Session["ticket"]);
             Ticket ticketNuevo = new Ticket((Ticket)Session["ticket"]);
             bool modificado = false;
-            if (ddlTipoTicket.SelectedItem.Text != ticket.Tipo.Nombre)
+            if ((byte)Session["rol"] > 1)
             {
-                TipoTicket tipo = TipoTicketBusiness.TipoTicketPorID(Byte.Parse(ddlTipoTicket.SelectedValue));
-                ticketNuevo.Tipo = tipo;
-                modificado = true;
-            }
-            if (ddlUsuario.SelectedValue.ToString() != ticket.LegajoUsuario)
-            {
-                ticketNuevo.LegajoUsuario = ddlUsuario.SelectedValue.ToString();
-                modificado = true;
-            }
-            if (ddlPrioridad.SelectedItem.Text != ticket.Prioridad.Nombre)
-            {
-                Prioridad prioridad = PrioridadBusiness.PrioridadPorID(Byte.Parse(ddlPrioridad.SelectedValue));
-                ticketNuevo.Prioridad = prioridad;
-                modificado = true;
+                if (ddlTipoTicket.SelectedItem.Text != ticket.Tipo.Nombre)
+                {
+                    TipoTicket tipo = TipoTicketBusiness.TipoTicketPorID(Byte.Parse(ddlTipoTicket.SelectedValue));
+                    ticketNuevo.Tipo = tipo;
+                    modificado = true;
+                }
+                if (ddlUsuario.SelectedValue.ToString() != ticket.LegajoUsuario)
+                {
+                    ticketNuevo.LegajoUsuario = ddlUsuario.SelectedValue.ToString();
+                    modificado = true;
+                }
+                if (ddlPrioridad.SelectedItem.Text != ticket.Prioridad.Nombre)
+                {
+                    Prioridad prioridad = PrioridadBusiness.PrioridadPorID(Byte.Parse(ddlPrioridad.SelectedValue));
+                    ticketNuevo.Prioridad = prioridad;
+                    modificado = true;
+                }
+                
             }
             if (ticket.Estado.ID != (Byte)Session["estadoTicket"] && Session["estadoTicket"] != null)
             {
@@ -182,7 +182,11 @@ namespace TPCuatrimestral_Equipo_A
                     if (String.IsNullOrEmpty(textEnvioMail.Text))
                     {
                         labelVerificacionEmail.Visible = true;
-                        break;
+                        return;
+                    }
+                    else
+                    {
+                        labelVerificacionEmail.Visible = false;
                     }
                     if (EnviarEmail(textEnvioMail.Text,((Ticket)Session["ticket"]).ClienteAfectado.Email)) {
                         labelVerificacionEmail.Text = "Email enviado correctamente";
@@ -198,7 +202,7 @@ namespace TPCuatrimestral_Equipo_A
                     break;
             }
             btnGuardarCambios_Click(sender, e);
-            Page_Load(sender, e);
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void btnCambioEstado2_Click(object sender, EventArgs e)
@@ -221,7 +225,7 @@ namespace TPCuatrimestral_Equipo_A
             Byte estado = 5;
             Session["estadoTicket"] = estado;
             btnGuardarCambios_Click(sender, e);
-            Page_Load(sender, e);
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void textComentario_TextChanged(object sender, EventArgs e)

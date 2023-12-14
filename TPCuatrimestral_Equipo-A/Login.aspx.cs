@@ -8,11 +8,11 @@ namespace TPCuatrimestral_Equipo_A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = "lucas@sanchez.com";
-            string password = "password";
-            Usuario usuario = UsuarioBusiness.UsuarioPorEmail(email, password);
-            Session.Add("usuario", usuario);
-            Response.Redirect("Tickets.aspx", false);
+            //string email = "lucas@sanchez.com";
+            //string password = "password";
+            //Usuario usuario = UsuarioBusiness.UsuarioPorEmail(email, password);
+            //Session.Add("usuario", usuario);
+            //Response.Redirect("Tickets.aspx", false);
             textError.Visible = true;
         }
 
@@ -27,6 +27,7 @@ namespace TPCuatrimestral_Equipo_A
                 if (usuario != null)
                 {
                     Session.Add("usuario", usuario);
+                    Session.Add("rol", usuario.Rol.ID);
                     Response.Redirect("Tickets.aspx", false);
                     textError.Text = "Usuario existente";
                 }

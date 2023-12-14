@@ -24,13 +24,22 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Label lblID;
 
         /// <summary>
-        /// lblDescripcionInicial control.
+        /// labelTipoTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcionInicial;
+        protected global::System.Web.UI.WebControls.Label labelTipoTicket;
+
+        /// <summary>
+        /// labelPrioridad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelPrioridad;
 
         /// <summary>
         /// ddlUsuario control.

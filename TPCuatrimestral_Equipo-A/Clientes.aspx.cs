@@ -47,10 +47,10 @@ namespace TPCuatrimestral_Equipo_A
             if (e.CommandName == "VerDetalles")
             {
                 // Aquí obtienes el ID del cliente desde el CommandArgument
-                int clienteID = Convert.ToInt32(e.CommandArgument);
+                string clienteDNI = e.CommandArgument.ToString();
 
                 // Redirige a la página de detalles pasando el ID como parámetro
-                Response.Redirect($"Contacto.aspx?ID={clienteID}");
+                Response.Redirect($"Contacto.aspx?DNI={clienteDNI}");
             }
         }
 
@@ -66,7 +66,7 @@ namespace TPCuatrimestral_Equipo_A
                 string dniBuscado;
                 dniBuscado = ExtraerNumeros(txtBusquedaClientesDNI.Text);
                 ClientesGV.BorderColor = System.Drawing.Color.Blue;
-                ClientesGV.DataSource = ClientesBusiness.ClientePorDNI(dniBuscado);
+                ClientesGV.DataSource = ClientesBusiness.ClientePorDNIParaDGV(dniBuscado);
                 ClientesGV.DataBind();
 
                 // Registrar para validación de eventos

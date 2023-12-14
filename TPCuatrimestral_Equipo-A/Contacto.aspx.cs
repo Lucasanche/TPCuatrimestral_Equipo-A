@@ -67,6 +67,7 @@ namespace TPCuatrimestral_Equipo_A
                 // guardo correctamente
                 txtEditado.ForeColor = System.Drawing.Color.Green;
                 txtEditado.Text = "Cliente guardado exitosamente.";
+                Response.Redirect("Clientes.aspx");
 
             }
             else

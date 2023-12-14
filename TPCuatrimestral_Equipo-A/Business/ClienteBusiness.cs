@@ -153,6 +153,57 @@ namespace Business
             return cliente;
         }
 
+        public static List<Cliente> ClientePorDNI(string DNI)
+        {
+            List<Cliente> cliente = new List<Cliente>();
+            AccessData data = new AccessData();
+            try
+            {
+                data.SetQuery(@"SELECT ID
+                                , DNI
+                                ,  NOMBRE 
+                                , APELLIDO
+                                , EMAIL
+                                , TELEFONO_1
+                                , ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
+                                , FECHA_NACIMIENTO
+                                , FECHA_ALTA
+                                , FECHA_BAJA
+                                , ESTADO 
+                                FROM CLIENTES WHERE DNI = '" + DNI.ToString() + "'");
+                data.ExecuteQuery();
+
+                while (data.Reader.Read())
+                {
+                    Cliente clienteAux = new Cliente();
+                    //{
+                    clienteAux.ID = (int)data.Reader["Id"];
+                    clienteAux.DNI = data.Reader["DNI"].ToString();
+                    clienteAux.Nombre = data.Reader["NOMBRE"].ToString();
+                    clienteAux.Apellido = data.Reader["APELLIDO"].ToString();
+                    clienteAux.Email = data.Reader["EMAIL"].ToString();
+                    clienteAux.Telefono1 = data.Reader["TELEFONO_1"].ToString();
+                    clienteAux.Telefono2 = data.Reader["TELEFONO2"].ToString();
+                    clienteAux.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
+                    clienteAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
+                    clienteAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
+                    clienteAux.Estado = (bool)data.Reader["ESTADO"];
+                    //};
+                    cliente.Add(clienteAux);
+                }
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+
         public static int GuardarCliente(string nombre, string apellido, string dni, string email, string telefono, DateTime fechaNacimiento)
         {
 

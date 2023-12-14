@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Text.RegularExpressions;
 using Domain;
+using System.Numerics;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -53,7 +54,32 @@ namespace TPCuatrimestral_Equipo_A
             }
         }
 
+        protected void btnBusquedaClientesDNI_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtBusquedaClientesDNI.Text))
+            {
+                txtValidarBusquedaClienteDNI.ForeColor = System.Drawing.Color.Red;
+                txtValidarBusquedaClienteDNI.Text = "Complete con numeros, no puede quedar vacio";
+            }
+            if(ExtraerNumeros(txtBusquedaClientesDNI.Text) != "")
+            {
+                string dniBuscado;
+                dniBuscado = ExtraerNumeros(txtBusquedaClientesDNI.Text);
+                ClientesGV.BorderColor = System.Drawing.Color.Blue;
+                ClientesGV.DataSource = ClientesBusiness.ClientePorDNI(dniBuscado);
+                ClientesGV.DataBind();
 
-
+                // Registrar para validación de eventos
+                foreach (GridViewRow row in ClientesGV.Rows)
+                {
+                    Button btnVerDetalles = (Button)row.FindControl("VerDetalles");
+                    if (btnVerDetalles != null)
+                    {
+                        ClientScript.RegisterForEventValidation(btnVerDetalles.UniqueID, "VerDetalles");
+                    }
+                }
+            }
+          
+        }
     }
 }

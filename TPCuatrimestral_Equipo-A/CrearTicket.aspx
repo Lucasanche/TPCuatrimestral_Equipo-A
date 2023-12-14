@@ -5,7 +5,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="col-2"></div>
     <div class="container">
-        <form novalidate>
             <h3 class="uk-heading-divider">Agregar Ticket</h3>
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Cliente:</label>
@@ -71,7 +70,6 @@
                     <asp:Button ID="btnVolver" runat="server" Text="Volver" CssClass="uk-button uk-button-secondary uk-width-1-1" OnClick="btnVolver_Click" Visible="false" />
                 </div>
             </div>
-        </form>
     </div>
     <div class="col-2"></div>
 </asp:Content>

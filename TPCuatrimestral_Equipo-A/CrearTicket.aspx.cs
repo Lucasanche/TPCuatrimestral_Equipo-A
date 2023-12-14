@@ -90,16 +90,10 @@ namespace TPCuatrimestral_Equipo_A
         protected void buttonBuscarPorDNI_Click(object sender, EventArgs e)
         {
             string DNIformateado = ExtraerNumeros(tbBuscarPorDNI.Text);
-            int DNI;
-            try
-            {
-                DNI = int.Parse(DNIformateado);
-            }
-            catch { DNI = 0; }
-            if (DNI != 0)
+            if (DNIformateado != "")
             {
                 ticket = new Ticket();
-                ticket.ClienteAfectado = ClientesBusiness.ClientePorDNI(DNI);
+                ticket.ClienteAfectado = ClientesBusiness.ClientePorDNI(DNIformateado);
                 Session.Add("ticket", ticket);
                 if (ticket.ClienteAfectado.ID != 0)
                 {

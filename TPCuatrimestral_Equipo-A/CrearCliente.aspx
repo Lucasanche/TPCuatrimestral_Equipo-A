@@ -51,21 +51,22 @@
                 </div>
 
                 <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
+                    <label class="uk-form-label" for="form-stacked-text">Télefono:</label>
                     <div class="uk-form-controls">
                         <asp:TextBox ID="txtTelefono" runat="server" CssClass="uk-input" />
                         <asp:Label Text="" ID="txtValidarTelefono" runat="server" CssClass="warning" />
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Telefono:</label>
+                    <label class="uk-form-label" for="form-stacked-text">Fecha de Nacimiento:</label>
                     <div class="uk-form-controls">
-                        <asp:Calendar ID="CalendarioFechaNacimiento" runat="server"></asp:Calendar>
+                        <asp:Calendar ID="CalendarioFechaNacimiento" runat="server" ></asp:Calendar>
                         <asp:Label Text="" ID="txtValidarFechaNacimiento" runat="server" CssClass="warning" />
                     </div>
                 </div>
                 
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cliente" OnClick="btnGuardar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" />
+                <asp:Button ID="btnRecargar" runat="server" Text="Cargar otro usuario" OnClick="btnRecargar_Click" CssClass="uk-button uk-button-secondary uk-width-1-1" UseSubmitBehavior="false" visible="false"/>
                 <asp:Label Text="" runat="server" ID="txtAgregaCliente" />
             </div>
         </form>

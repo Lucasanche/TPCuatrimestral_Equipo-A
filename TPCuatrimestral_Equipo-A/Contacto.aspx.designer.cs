@@ -69,6 +69,24 @@ namespace TPCuatrimestral_Equipo_A
         protected global::System.Web.UI.WebControls.Button btnEditarCliente;
 
         /// <summary>
+        /// Control btnCrearTicketSobreCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCrearTicketSobreCliente;
+
+        /// <summary>
+        /// Control btnEliminarCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnEliminarCliente;
+
+        /// <summary>
         /// Control EliminarCliente.
         /// </summary>
         /// <remarks>

@@ -25,13 +25,6 @@ namespace TPCuatrimestral_Equipo_A
                 ddlEditarTipoTicket.DataSource = tipos;
                 ddlEditarTipoTicket.DataTextField = "Nombre";
                 ddlEditarTipoTicket.DataBind();
-                ddlEditarTipoTicket.SelectedIndex = 1;
-
-
-                ddlEliminarTipoTicket.DataSource = tipos;
-                ddlEliminarTipoTicket.DataTextField = "Nombre";
-                ddlEliminarTipoTicket.DataBind();
-                ddlEliminarTipoTicket.SelectedIndex = 1;
 
                 ddlRol.DataSource = roles;
                 ddlRol.DataTextField = "Descripcion";
@@ -274,23 +267,6 @@ namespace TPCuatrimestral_Equipo_A
 
             }
 
-        }
-        protected void EliminarTipoTicket_Click(object sender, EventArgs e)
-        {
-            string ticketEliminar;
-            ticketEliminar = ddlEliminarTipoTicket.Text;
-
-            if (TipoTicketBusiness.EliminarTipoTicket(ticketEliminar) == 1)
-            {
-                txtValidarEliminado.ForeColor = System.Drawing.Color.Green;
-                txtValidarEliminado.Text = "Tipo de Ticket Eliminado exitosamente.";
-            }
-            else
-            {
-                txtValidarEliminado.ForeColor = System.Drawing.Color.Red;
-                txtValidarEliminado.Text = "Tipo de Ticket NO se pudo eliminar, intente nuevamente.";
-
-            }
         }
 
         protected void BuscarUsuarioEliminar_Click(object sender, EventArgs e)

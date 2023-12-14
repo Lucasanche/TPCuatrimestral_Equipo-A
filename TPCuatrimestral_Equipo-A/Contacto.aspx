@@ -25,8 +25,8 @@
 
         <div class="uk-container">
             <asp:Button Text="Editar Cliente" ID="btnEditarCliente" AutoPostBack="false" OnClick="btnEditarCliente_Click" CssClass="uk-button uk-button-secondary uk-button-large" runat="server" />
-            <asp:LinkButton runat="server" CommandName="CrearTicket" OnCommand="CrearTicket_Command" class="uk-button uk-button-primary uk-button-large">Agregar Incidente</asp:LinkButton>
-            <button class="uk-button uk-button-danger uk-button-large" type="button" uk-toggle="target: #modal-eliminar">Eliminar Cliente</button>
+            <asp:LinkButton runat="server" ID="btnCrearTicketSobreCliente" CommandName="CrearTicket" OnCommand="CrearTicket_Command" class="uk-button uk-button-primary uk-button-large">Agregar Incidente</asp:LinkButton>
+            <button id="btnEliminarCliente" runat="server" class="uk-button uk-button-danger uk-button-large" type="button" uk-toggle="target: #modal-eliminar">Eliminar Cliente</button>
         </div>
     </form>
 

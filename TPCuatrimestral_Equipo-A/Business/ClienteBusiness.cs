@@ -160,60 +160,7 @@ namespace Business
             List<SqlParameter> parameters = new List<SqlParameter>();
             try
             {
-                string columns, values;
-                columns = values = "";
-                if (nombre != null)
-                {
-                    columns += "Nombre,";
-                    values += $"@Nombre,";
-                    parameters.Add(new SqlParameter("@Nombre", nombre));
-                }
-                else { return -1;}
-                if (apellido != null)
-                {
-                    columns += "Apellido,";
-                    values += $"@Apellido,";
-                    parameters.Add(new SqlParameter("@Apellido", apellido));
-                }
-                else { return -1;}
-                if (dni != null)
-                {
-                    columns += "DNI,";
-                    values += $"@Dni,";
-                    parameters.Add(new SqlParameter("@Dni", dni));
-                }
-                else { return -1;}
-                if (email != null)
-                {
-                    columns += "Email,";
-                    values += $"@Email,";
-                    parameters.Add(new SqlParameter("@Email", email));
-                }
-                else { return -1;}
-                if (telefono != null)
-                {
-                    columns += "TELEFONO_1,";
-                    values += $"@Telefono,";
-                    parameters.Add(new SqlParameter("@Telefono", telefono));
-                }
-                else { return -1;}
-                if (fechaNacimiento != DateTime.MinValue)
-                {
-                    columns += "FECHA_NACIMIENTO,";
-                    values += $"@FechaNacimiento,";
-                    parameters.Add(new SqlParameter("@FechaNacimiento", fechaNacimiento));
-                }
-                else { return -1;}
-
-                string query = $@"
-                    INSERT INTO Clientes
-                        ({columns})
-                    VALUES
-                        ({values})";
-
-                data.SetQuery(query, parameters);
-                return data.ExecuteNonQuery();
-                /*
+                
                 // guardar cliente en la base de datos.
                 data.SetQuery("INSERT INTO Clientes (Nombre, Apellido, DNI, Email, TELEFONO_1, FECHA_NACIMIENTO) VALUES (@Nombre, @Apellido, @Dni, @Email, @Telefono , @FechaNacimiento)");
                 data.AddParameter("@Nombre", nombre);
@@ -222,7 +169,7 @@ namespace Business
                 data.AddParameter("@Email", email);
                 data.AddParameter("@Telefono", telefono);
                 data.AddParameter("@FechaNacimiento", fechaNacimiento);
-                */
+                return data.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

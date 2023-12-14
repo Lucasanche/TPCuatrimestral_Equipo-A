@@ -25,6 +25,13 @@ namespace TPCuatrimestral_Equipo_A
 
                     cliente = ClientesBusiness.ClientePorID(clienteID);
 
+                    if (!cliente.Estado)
+                    {
+                        btnCrearTicketSobreCliente.Visible = false;
+                        btnEditarCliente.Visible = false;
+                        btnEliminarCliente.Visible = false;
+                    }
+
                     //Cargar los label de descripcion
                     lblDNI.Text = cliente.DNI;
                     txtNombre.Text = cliente.Nombre;
@@ -46,7 +53,6 @@ namespace TPCuatrimestral_Equipo_A
             string apellido = txtApellido.Text;
             string email = txtEmail.Text;
             string telefono = txtTelefono.Text;
-            string mensaje = "";
 
             //Validar los datos (puedes agregar más validaciones según sea necesario)
 
@@ -59,16 +65,17 @@ namespace TPCuatrimestral_Equipo_A
             if (ClientesBusiness.ModificarCliente(nombre, apellido, email, telefono, id) == 1)
             {
                 // guardo correctamente
-                mensaje = "Cliente guardado exitosamente.";
+                txtEditado.ForeColor = System.Drawing.Color.Green;
+                txtEditado.Text = "Cliente guardado exitosamente.";
 
             }
             else
             {
                 //error al guardar el usuario
-                mensaje = "Error al guardar el cliente. Por favor, inténtalo nuevamente.";
+                txtEditado.ForeColor = System.Drawing.Color.Red;
+                txtEditado.Text = "Error al guardar el cliente. Por favor, inténtalo nuevamente.";
 
             }
-            txtEditado.Text = mensaje;
         }
 
 
@@ -79,14 +86,14 @@ namespace TPCuatrimestral_Equipo_A
             if (ClientesBusiness.BajaLogicaCliente(clienteID) == 1)
             {
                 // Cliente eliminado correctamente
-                string mensaje = "Cliente eliminado exitosamente.";
-                txtEliminado.Text = mensaje;
+                txtEliminado.ForeColor = System.Drawing.Color.Green;
+                txtEliminado.Text = "Cliente eliminado exitosamente.";
             }
             else
             {
                 // Error al eliminar
-                string mensaje = "Error al eliminar el cliente. Por favor, inténtalo nuevamente.";
-                txtEliminado.Text = mensaje;
+                txtEliminado.ForeColor = System.Drawing.Color.Red;
+                txtEliminado.Text = "Error al eliminar el cliente. Por favor, inténtalo nuevamente.";
             }
 
         }

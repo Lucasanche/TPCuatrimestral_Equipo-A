@@ -15,22 +15,6 @@
         <div class="col-2"></div>
         <div class="container">
 
-
-            <!--
-
-    [LEGAJO]     VARCHAR (10) NOT NULL, no se modifica, preguntar como se compone si es PK pero sin numero
-    [NOMBRE]     VARCHAR (40) NOT NULL, modificable
-    [APELLIDO]   VARCHAR (40) NOT NULL, modificable
-    [EMAIL]      VARCHAR (70) NOT NULL, modificable
-    [PASSWORD]   VARCHAR (40) NOT NULL, modificable??
-    [FECHA_ALTA] DATE         DEFAULT (getdate()) NOT NULL, no se modifica
-    [FECHA_BAJA] DATE         NULL, no se modifica
-    [ROL]        TINYINT      NOT NULL,  modificable
-    [ESTADO]     BIT          DEFAULT ((1)) NOT NULL, no se modifica??
-
--->
-
-
             <form novalidate>
                 <h3 class="uk-heading-divider">Agregar Usuario</h3>
 
@@ -215,25 +199,6 @@
                 </div>
             </div>
         </div>
-
-        <h3 class="uk-heading-divider">Eliminar Tipo Ticket</h3>
-
-        <div class="col-2"></div>
-        <div class="container">
-            <label class="uk-form-label" for="form-stacked-text">Seleccione Tipo:</label>
-            <div class="uk-margin">
-                <asp:DropDownList ID="ddlEliminarTipoTicket" runat="server" CssClass="btn btn-secondary dropdown-toggle" Style="text-align: left;" form-check-input required></asp:DropDownList>
-            </div>
-        </div>
-
-        <div class="col-2"></div>
-        <div class="container" style="display: flex; justify-content: center;">
-            <div class="uk-margin">
-                <asp:Button Text="Eliminar Tipo de Ticket Seleccionado" runat="server" OnClick="EliminarTipoTicket_Click" CssClass="uk-button uk-button-danger uk-button-large" />
-            </div>
-        </div>
-        <asp:Label Text="" ID="txtValidarEliminado" runat="server" CssClass="warning" />
-
     </div>
 
 

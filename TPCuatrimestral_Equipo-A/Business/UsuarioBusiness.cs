@@ -144,7 +144,7 @@ namespace Business
             }
         }
 
-        public static int ModificarUsuario(string legajo, string nombre, string apellido, string email)
+        public static int ModificarUsuario(string legajo, string nombre, string apellido, string email, int rol)
         {
             AccessData data = new AccessData();
             try
@@ -153,8 +153,9 @@ namespace Business
                 data.SetQuery("UPDATE USUARIOS SET NOMBRE = @Nombre, APELLIDO = @Apellido, EMAIL = @Email, ROL = @Rol WHERE LEGAJO = @Legajo");
                 data.AddParameter("@Legajo", legajo);
                 data.AddParameter("@Nombre", nombre);
-                data.AddParameter("@Email", email);
                 data.AddParameter("@Apellido", apellido);
+                data.AddParameter("@Email", email);
+                data.AddParameter("@Rol", rol);
 
                 return data.ExecuteNonQuery();
             }
@@ -168,12 +169,11 @@ namespace Business
             }
         }
 
-        public static int AgregarUsuario(string legajo, string nombre, string apellido, string email)
+        public static int AgregarUsuario(string legajo, string nombre, string apellido, string email, int rol)
         {
             AccessData data = new AccessData();
             string password = "password";
             DateTime fechaAlta = DateTime.Now;
-            int rolBase = 1;
             try
             {
                 // Actualiza
@@ -184,7 +184,7 @@ namespace Business
                 data.AddParameter("@Apellido", apellido);
                 data.AddParameter("@Password", password);
                 data.AddParameter("@FechaAlta", fechaAlta);
-                data.AddParameter("@Rol", rolBase); 
+                data.AddParameter("@Rol", rol); 
 
                 return data.ExecuteNonQuery();
             }

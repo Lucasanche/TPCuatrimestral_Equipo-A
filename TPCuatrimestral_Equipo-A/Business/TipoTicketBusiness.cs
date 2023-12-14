@@ -66,7 +66,7 @@ namespace Business
             }
             return tipoTicket;
         }
-        public static int AgregarTipoTicket(string desc)
+        public static int AgregarTipoTicket(string nombre)
         {
             AccessData data = new AccessData();
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -74,8 +74,8 @@ namespace Business
             try
             {
                 // Actualiza
-                data.SetQuery("INSERT INTO TIPOS_INCIDENCIA (Descripcion) VALUES (@Descripcion)");
-                data.AddParameter("@Descripcion", desc);
+                data.SetQuery("INSERT INTO TIPOS_INCIDENCIA (NOMBRE) VALUES ('@Nombre')");
+                data.AddParameter("@Nombre", nombre);
 
                 return data.ExecuteNonQuery();
             }
@@ -110,5 +110,29 @@ namespace Business
                 data.Close();
             }
         }
+        public static int ModificarTipoTicket(string ticket, string nuevaDesc)
+        {
+            AccessData data = new AccessData();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            try
+            {
+                // Actualiza
+                data.SetQuery("UPDATE TIPOS_INCIDENCIA SET NOMBRE = @NuevaDescripcion WHERE NOMBRE = @Ticket");
+                data.AddParameter("@Ticket", ticket);
+                data.AddParameter("@NuevaDescripcion", nuevaDesc);
+
+                return data.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                data.Close();
+            }
+        }
+
     }
 }

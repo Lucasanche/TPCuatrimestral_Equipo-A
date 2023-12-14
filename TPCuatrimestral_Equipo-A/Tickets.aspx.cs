@@ -2,6 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Web.UI.WebControls;
@@ -24,7 +25,6 @@ namespace TPCuatrimestral_Equipo_A
                 List<Ticket> list = TicketBusiness.List();
                 list = list.OrderByDescending(ticket => ticket.ID).ToList();
                 Usuario usuario = (Usuario)Session["usuario"];
-               
                 if (usuario.Rol.ID == 1)
                 {
                     TicketsGV.Columns.Cast<DataControlField>().First(column => column.HeaderText == "Usuario Responsable").Visible = false;

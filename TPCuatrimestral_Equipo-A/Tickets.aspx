@@ -37,8 +37,8 @@
     </div>
     <asp:GridView ID="TicketsGV" CssClass="uk-table uk-table-striped uk-table-hover" runat="server" OnRowCommand="TicketsGV_RowCommand" AutoGenerateColumns="false">
         <Columns>
-            <asp:BoundField DataField="ID" HeaderText="ID" />
-            <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
+            <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID"/>
+            <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo"/>
             <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
             <asp:BoundField DataField="NombreUsuario" HeaderText="Usuario Responsable"/>
             <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="DNI Cliente Afectado" />

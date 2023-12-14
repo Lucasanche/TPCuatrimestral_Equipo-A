@@ -37,7 +37,7 @@
 
                         </div>
                         <div>
-                            <asp:Label ID="textError" runat="server" Text="El usuario no existe" Visible="false"></asp:Label>
+                            <asp:Label ID="textError" runat="server" Text="" Visible="false"></asp:Label>
                         </div>
                     </div>
                 </div>

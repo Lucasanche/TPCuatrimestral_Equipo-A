@@ -67,15 +67,12 @@ namespace TPCuatrimestral_Equipo_A
                 // guardo correctamente
                 txtEditado.ForeColor = System.Drawing.Color.Green;
                 txtEditado.Text = "Cliente guardado exitosamente.";
-                Response.Redirect("Clientes.aspx");
-
             }
             else
             {
                 //error al guardar el usuario
                 txtEditado.ForeColor = System.Drawing.Color.Red;
                 txtEditado.Text = "Error al guardar el cliente. Por favor, inténtalo nuevamente.";
-
             }
         }
 
@@ -89,6 +86,7 @@ namespace TPCuatrimestral_Equipo_A
                 // Cliente eliminado correctamente
                 txtEliminado.ForeColor = System.Drawing.Color.Green;
                 txtEliminado.Text = "Cliente eliminado exitosamente.";
+                Response.Redirect(Request.RawUrl);
             }
             else
             {

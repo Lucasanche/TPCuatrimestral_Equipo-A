@@ -17,7 +17,7 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT ID, NOMBRE, ESTADO FROM TIPOS_INCIDENCIA WHERE ESTADO = 1;");
+                data.SetQuery(@"SELECT ID, NOMBRE, ESTADO FROM TIPOS WHERE ESTADO = 1;");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())

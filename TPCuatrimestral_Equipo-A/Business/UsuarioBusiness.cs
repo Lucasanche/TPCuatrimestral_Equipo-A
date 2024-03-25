@@ -29,7 +29,7 @@ namespace Business
                                      , FECHA_ALTA
                                      , ROL
                                      , ESTADO 
-                                     FROM USUARIOS");
+                                     FROM USUARIOS;");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
@@ -42,7 +42,7 @@ namespace Business
                     usuarioAux.Email = data.Reader["EMAIL"].ToString();
                     usuarioAux.Password = data.Reader["PASSWORD"].ToString();
                     usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
-                    usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
+                    usuarioAux.Rol = RolBusiness.RolPorID((sbyte)data.Reader["ROL"]);
                     usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
 
                     usuarioAux.Estado = (sbyte)data.Reader["ESTADO"];
@@ -78,7 +78,7 @@ namespace Business
                     usuarioAux.Email = data.Reader["EMAIL"].ToString();
                     usuarioAux.Password = data.Reader["PASSWORD"].ToString();
                     usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
-                    usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
+                    usuarioAux.Rol = RolBusiness.RolPorID((sbyte)data.Reader["ROL"]);
                     usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
                     usuarioAux.Estado = (sbyte)data.Reader["ESTADO"];
                 }

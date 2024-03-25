@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-11">
                     <asp:Label Text="" runat="server" ID="txtAgregaCliente" Visible="false" />
-                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cliente" CssClass="uk-button uk-button-secondary uk-width-1-1" OnClick="btnGuardar_Click" />
+                    <asp:Button ID="btnGuardar" runat="server" Text="Crear Ticket" CssClass="uk-button uk-button-secondary uk-width-1-1" OnClick="btnGuardar_Click" />
                     <asp:Button ID="btnVolver" runat="server" Text="Volver" CssClass="uk-button uk-button-secondary uk-width-1-1" OnClick="btnVolver_Click" Visible="false" />
                 </div>
             </div>

@@ -80,7 +80,7 @@ namespace Business
                                 FROM CLIENTES WHERE ID = " + ID.ToString() +";");
                 data.ExecuteQuery();
 
-                while (data.Reader.Read())
+                 while (data.Reader.Read())
                 {
                     cliente.ID = (int)data.Reader["Id"];
                     cliente.DNI = data.Reader["DNI"].ToString();
@@ -165,12 +165,12 @@ namespace Business
                                 , APELLIDO
                                 , EMAIL
                                 , TELEFONO_1
-                                , ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
+                                , IFNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
                                 , FECHA_NACIMIENTO
                                 , FECHA_ALTA
                                 , FECHA_BAJA
                                 , ESTADO 
-                                FROM CLIENTES WHERE DNI = '" + DNI.ToString() + "'");
+                                FROM CLIENTES WHERE DNI = '" + DNI.ToString() + "';");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())

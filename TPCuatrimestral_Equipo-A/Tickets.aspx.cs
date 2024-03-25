@@ -4,9 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace TPCuatrimestral_Equipo_A
 {
@@ -188,3 +192,36 @@ namespace TPCuatrimestral_Equipo_A
         }
     }
 }
+// TODO:
+//-Ver usuarios responsables de tickets
+//- Botón VER y Agregar Ticket no funciona en Tickets
+//- Modificar columna "Tipo" por "Tipo de incidente"
+//- Flechita de ordenamiento de filas
+//- Usuario responsable -> Agente responsable
+//- Cambiar columna "Opciones" a "Detalles" y sacarle el "Ver" al botón
+//- Añadir "marca" a la derecha de la barra de navegación.
+//- Añadir filtros al buscador de clientes
+//- Añadir buscador a Tickets
+//- Sacar botón "login"
+//- Añadir "Cliente encontrado" en "Agregar Cliente"
+//- Colores según el estado del ticket
+//- Tickets tarda mucho ????????????????????????????????????????????????????????
+//- Que no desaparezca el botón de "Agregar ticket".
+
+//AGREGAR TICKET
+//- botón de guardar dice "guardar cliente"
+//- Agente responsable en vez de "usuario"
+//- Tipo de incidente en vez de "tipo"
+
+//AGREGAR CLIENTES:
+//-Cambiar calendario fecha nacimiento
+
+//CLIENTES:
+//-Añadir servicios contratados
+//- Cambiar "VER" Por EDITAR (lapicito)
+
+//DETALLE DE CLIENTE
+//- Botón "eliminar cliente" abre un aviso que dice "Headline"
+//- No funca eliminar cliente
+//- Avisos no se borran
+//- Cambiar botón "Editar cliente" por "confirmar cambios"

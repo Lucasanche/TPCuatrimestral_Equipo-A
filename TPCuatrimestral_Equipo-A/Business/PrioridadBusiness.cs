@@ -22,7 +22,7 @@ namespace Business
                 while (data.Reader.Read())
                 {
                     Prioridad prioridadAux = new Prioridad();
-                    prioridadAux.ID = (byte)data.Reader["ID"];
+                    prioridadAux.ID = (sbyte)data.Reader["ID"];
                     prioridadAux.Nombre = data.Reader["NOMBRE"].ToString();
                     prioridadesLista.Add(prioridadAux);
                 }
@@ -46,12 +46,12 @@ namespace Business
             {
                 data.SetQuery(@"SELECT ID
                                 , NOMBRE
-                                FROM PRIORIDADES WHERE ID = " + ID.ToString());
+                                FROM PRIORIDADES WHERE ID = " + ID.ToString() + ";");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
-                    prioridad.ID = (byte)data.Reader["ID"];
+                    prioridad.ID = (sbyte)data.Reader["ID"];
                     prioridad.Nombre = data.Reader["NOMBRE"].ToString();
                 }
             }

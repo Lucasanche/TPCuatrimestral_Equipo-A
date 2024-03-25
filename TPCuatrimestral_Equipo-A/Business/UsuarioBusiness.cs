@@ -2,7 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +45,7 @@ namespace Business
                     usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
                     usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
 
-                    usuarioAux.Estado = (bool)data.Reader["ESTADO"];
+                    usuarioAux.Estado = (sbyte)data.Reader["ESTADO"];
                     usuarioLista.Add(usuarioAux);
                 }
                 return usuarioLista;
@@ -80,7 +80,7 @@ namespace Business
                     usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
                     usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
                     usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    usuarioAux.Estado = (bool)data.Reader["ESTADO"];
+                    usuarioAux.Estado = (sbyte)data.Reader["ESTADO"];
                 }
 
                 return usuarioAux;
@@ -99,7 +99,7 @@ namespace Business
         {
             Usuario usuarioAux = new Usuario();
             AccessData data = new AccessData();
-            string query = $"SELECT * FROM USUARIOS WHERE EMAIL = '{email}' AND PASSWORD = '{password}'";
+            string query = $"SELECT * FROM USUARIOS WHERE EMAIL = '{email}' AND PASSWORD = '{password}';";
             try
             {
                 data.SetQuery(query);
@@ -107,16 +107,17 @@ namespace Business
                 if(data.Reader !=  null) {
                     while (data.Reader.Read())
                     {
-                        Rol rolAux = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
+                        sbyte rol = (sbyte)data.Reader["ROL"];
+                        Rol rolAux = RolBusiness.RolPorID(rol);
+                        usuarioAux.Rol = rolAux;
                         usuarioAux.Legajo = data.Reader["LEGAJO"].ToString();
                         usuarioAux.Nombre = data.Reader["NOMBRE"].ToString();
                         usuarioAux.Apellido = data.Reader["APELLIDO"].ToString();
                         usuarioAux.Email = data.Reader["EMAIL"].ToString();
                         usuarioAux.Password = data.Reader["PASSWORD"].ToString();
                         usuarioAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
-                        usuarioAux.Rol = RolBusiness.RolPorID((byte)data.Reader["ROL"]);
                         usuarioAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                        usuarioAux.Estado = (bool)data.Reader["ESTADO"];
+                        usuarioAux.Estado = (sbyte)data.Reader["ESTADO"];
                     }
                 }
                 else
@@ -150,7 +151,7 @@ namespace Business
             try
             {
                 // Actualiza
-                data.SetQuery("UPDATE USUARIOS SET NOMBRE = @Nombre, APELLIDO = @Apellido, EMAIL = @Email, ROL = @Rol WHERE LEGAJO = @Legajo");
+                data.SetQuery("UPDATE USUARIOS SET NOMBRE = @Nombre, APELLIDO = @Apellido, EMAIL = @Email, ROL = @Rol WHERE LEGAJO = @Legajo;");
                 data.AddParameter("@Legajo", legajo);
                 data.AddParameter("@Nombre", nombre);
                 data.AddParameter("@Apellido", apellido);
@@ -177,7 +178,7 @@ namespace Business
             try
             {
                 // Actualiza
-                data.SetQuery("INSERT INTO USUARIOS (LEGAJO, NOMBRE, APELLIDO, EMAIL, PASSWORD, ROL) VALUES (@Legajo, @Nombre, @Apellido, @Email, @Password , @Rol)");
+                data.SetQuery("INSERT INTO USUARIOS (LEGAJO, NOMBRE, APELLIDO, EMAIL, PASSWORD, ROL) VALUES (@Legajo, @Nombre, @Apellido, @Email, @Password , @Rol);");
                 data.AddParameter("@Legajo", legajo);
                 data.AddParameter("@Nombre", nombre);
                 data.AddParameter("@Email", email);
@@ -202,11 +203,11 @@ namespace Business
         public static int Remove(Usuario usuario)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
             try
             {
-                string query = "DELETE FROM USUARIOS WHERE LEGAJO = @Legajo";
-                parameters.Add(new SqlParameter("@Legajo", usuario.Legajo));
+                string query = "DELETE FROM USUARIOS WHERE LEGAJO = @Legajo;";
+                parameters.Add(new MySqlParameter("@Legajo", usuario.Legajo));
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
             }
@@ -223,11 +224,11 @@ namespace Business
         public static int EliminarUsuario(string legajo)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
             try
             {
-                string query = "DELETE FROM USUARIOS WHERE LEGAJO = @Legajo";
-                parameters.Add(new SqlParameter("@Legajo", legajo));
+                string query = "DELETE FROM USUARIOS WHERE LEGAJO = @Legajo;";
+                parameters.Add(new MySqlParameter("@Legajo", legajo));
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
             }

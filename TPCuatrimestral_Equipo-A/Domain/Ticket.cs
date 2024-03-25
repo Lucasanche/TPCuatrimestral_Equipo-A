@@ -26,7 +26,7 @@ namespace Domain
         [DisplayName("Fecha de cierre")]
         public DateTime? FechaCierre { get; set; }
         [DisplayName("Estado")]
-        public byte IdEstadoReclamo { get; set; }
+        public sbyte IdEstadoReclamo { get; set; }
         public EstadoReclamo Estado { get; set; }
         public Ticket()
         {

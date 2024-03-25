@@ -2,7 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace Business
 {
@@ -14,26 +14,27 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT 
-                                ticket.ID
-                                , tipo.ID AS ID_TIPO
-                                , tipo.NOMBRE AS TIPO
-                                , priori.ID AS ID_PRIORIDAD
-                                , priori.NOMBRE AS PRIORIDAD
-                                , ticket.DESCRIPCION_INICIAL
-                                , ISNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE
-                                , usuario.LEGAJO AS LEGAJO_USUARIO
-                                , CONCAT(usuario.NOMBRE,' ', usuario.APELLIDO) AS USUARIO
-                                , CLIENTE_AFECTADO
-                                , ticket.FECHA_INICIO
-                                , FECHA_FIN
-                                , estado.ID AS ID_ESTADO
-                                , estado.NOMBRE AS ESTADO
+                data.SetQuery(@"use effort_callCenter;
+                                SELECT
+                                    ticket.ID,
+                                    tipo.ID AS ID_TIPO,
+                                    tipo.NOMBRE AS TIPO,
+                                    priori.ID AS ID_PRIORIDAD,
+                                    priori.NOMBRE AS PRIORIDAD,
+                                    ticket.DESCRIPCION_INICIAL,
+                                    IFNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE,
+                                    usuario.LEGAJO AS LEGAJO_USUARIO,
+                                    CONCAT(usuario.NOMBRE, ' ', usuario.APELLIDO) AS USUARIO,
+                                    CLIENTE_AFECTADO,
+                                    ticket.FECHA_INICIO,
+                                    ticket.FECHA_FIN,
+                                    estado.ID AS ID_ESTADO,
+                                    estado.NOMBRE AS ESTADO
                                 FROM TICKETS ticket
-                                LEFT JOIN TIPOS_INCIDENCIA AS tipo ON ticket.ID_TIPO = tipo.ID
+                                LEFT JOIN TIPOS AS tipo ON ticket.ID_TIPO = tipo.ID
                                 LEFT JOIN PRIORIDADES AS priori ON ticket.ID_PRIORIDAD = priori.ID
                                 LEFT JOIN ESTADOS_TICKET AS estado ON ticket.ID_ESTADO = estado.ID
-                                LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.LEGAJO");
+                                LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.LEGAJO;");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
@@ -42,19 +43,20 @@ namespace Business
                     ticketAux.ID = (int)data.Reader["Id"];
                     ticketAux.Tipo = new TipoTicket
                     {
-                        ID = (byte)data.Reader["ID_TIPO"],
+                        ID = (sbyte)data.Reader["ID_TIPO"],
                         Nombre = data.Reader["TIPO"].ToString()
                     };
                     ticketAux.Prioridad = new Prioridad
                     {
-                        ID = (byte)data.Reader["ID_PRIORIDAD"],
+                        ID = (sbyte)data.Reader["ID_PRIORIDAD"],
                         Nombre = data.Reader["PRIORIDAD"].ToString()
                     };
                     ticketAux.DescripcionInicial = data.Reader["DESCRIPCION_INICIAL"].ToString();
                     ticketAux.DescripcionCierre = data.Reader["DESCRIPCION_CIERRE"].ToString();
                     ticketAux.LegajoUsuario = data.Reader["LEGAJO_USUARIO"].ToString();
                     ticketAux.NombreUsuario = data.Reader["USUARIO"].ToString();
-                    ticketAux.ClienteAfectado = ClientesBusiness.ClientePorID((int)data.Reader["CLIENTE_AFECTADO"]);
+                    int clienteAfectado = (int)data.Reader["CLIENTE_AFECTADO"];
+                    ticketAux.ClienteAfectado = ClientesBusiness.ClientePorID(clienteAfectado);
                     ticketAux.FechaCreacion = (DateTime)data.Reader["FECHA_INICIO"];
                     if (!data.Reader.IsDBNull(data.Reader.GetOrdinal("FECHA_FIN")))
                     {
@@ -66,7 +68,7 @@ namespace Business
                     }
                     ticketAux.Estado = new EstadoReclamo()
                     {
-                        ID = (byte)data.Reader["ID_ESTADO"],
+                        ID = (sbyte)data.Reader["ID_ESTADO"],
                         Nombre = data.Reader["ESTADO"].ToString()
                     };
                     ticketLista.Add(ticketAux);
@@ -86,11 +88,11 @@ namespace Business
         public static int Remove(Ticket ticket)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
             try
             {
-                string query = "DELETE FROM TICKETS WHERE ID = @Id";
-                parameters.Add(new SqlParameter("@Id", ticket.ID));
+                string query = "DELETE FROM TICKETS WHERE ID = @Id;";
+                parameters.Add(new MySqlParameter("@Id", ticket.ID));
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
             }
@@ -106,7 +108,7 @@ namespace Business
         public static int Agregar(Ticket ticket)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
             try
             {
                 string columns, values;
@@ -115,7 +117,7 @@ namespace Business
                 {
                     columns += "ID_TIPO,";
                     values += $"@Id_tipo,";
-                    parameters.Add(new SqlParameter("@Id_tipo", ticket.Tipo.ID));
+                    parameters.Add(new MySqlParameter("@Id_tipo", ticket.Tipo.ID));
                 }
                 else
                 {
@@ -125,7 +127,7 @@ namespace Business
                 {
                     columns += "ID_PRIORIDAD,";
                     values += $"@Id_prioridad,";
-                    parameters.Add(new SqlParameter("@Id_prioridad", ticket.Prioridad.ID));
+                    parameters.Add(new MySqlParameter("@Id_prioridad", ticket.Prioridad.ID));
                 }
                 else
                 {
@@ -135,27 +137,27 @@ namespace Business
                 {
                     columns += "DESCRIPCION_INICIAL,";
                     values += $"@Descripcion_inicial,";
-                    parameters.Add(new SqlParameter("@Descripcion_inicial", ticket.DescripcionInicial));
+                    parameters.Add(new MySqlParameter("@Descripcion_inicial", ticket.DescripcionInicial));
                 }
                 else { return -1; }
                 if (ticket.DescripcionCierre != null && ticket.DescripcionCierre != "")
                 {
                     columns += "DESCRIPCION_CIERRE,";
                     values += $"@Descripcion_cierre,";
-                    parameters.Add(new SqlParameter("@Descripcion_cierre", ticket.DescripcionCierre));
+                    parameters.Add(new MySqlParameter("@Descripcion_cierre", ticket.DescripcionCierre));
                 }
                 if (ticket.LegajoUsuario != null && ticket.LegajoUsuario != "")
                 {
                     columns += "USUARIO_ASIGNADO,";
                     values += $"@Legajo_usuario,";
-                    parameters.Add(new SqlParameter("@Legajo_usuario", ticket.LegajoUsuario));
+                    parameters.Add(new MySqlParameter("@Legajo_usuario", ticket.LegajoUsuario));
                 }
                 else { return -1; }
                 if (ticket.ClienteAfectado != null)
                 {
                     columns += "CLIENTE_AFECTADO,";
                     values += $"@Cliente_afectado,";
-                    parameters.Add(new SqlParameter("@Cliente_afectado", ticket.ClienteAfectado.ID));
+                    parameters.Add(new MySqlParameter("@Cliente_afectado", ticket.ClienteAfectado.ID));
                 }
                 else { return -1; }
                 // Se crea por default - Lucas
@@ -163,13 +165,13 @@ namespace Business
                 //{
                 //    columns += "FECHA_CREACION,";
                 //    values += $"@Descripcion_cierre,";
-                //    parameters.Add(new SqlParameter("@Descripcion_cierre", ticket.DescripcionCierre));
+                //    parameters.Add(new MySqlParameter("@Descripcion_cierre", ticket.DescripcionCierre));
                 //}
                 if (ticket.Estado != null)
                 {
                     columns += "ID_ESTADO";
                     values += $"@Id_estado";
-                    parameters.Add(new SqlParameter("@Id_estado", ticket.Estado.ID));
+                    parameters.Add(new MySqlParameter("@Id_estado", ticket.Estado.ID));
                 }
                 else { return -1; }
 
@@ -178,7 +180,7 @@ namespace Business
                     INSERT INTO TICKETS 
                         ({columns})
                     VALUES
-                        ({values})";
+                        ({values});";
 
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
@@ -195,48 +197,48 @@ namespace Business
         public static int ModificarTicket(Ticket ticket, Ticket ticketNuevo)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
             try
             {
                 string values = "";
-                parameters.Add(new SqlParameter("Id", ticketNuevo.ID));
+                parameters.Add(new MySqlParameter("Id", ticketNuevo.ID));
                 if (ticket.Tipo.ID != ticketNuevo.Tipo.ID)
                 {
                     values += "ID_TIPO = @Id_tipo,";
-                    parameters.Add(new SqlParameter("@Id_tipo", ticketNuevo.Tipo.ID));
+                    parameters.Add(new MySqlParameter("@Id_tipo", ticketNuevo.Tipo.ID));
                 }
                 if (ticket.Prioridad.ID != ticketNuevo.Prioridad.ID)
                 {
                     values += "ID_PRIORIDAD = @Id_prioridad,";
-                    parameters.Add(new SqlParameter("@Id_prioridad", ticketNuevo.Prioridad.ID));
+                    parameters.Add(new MySqlParameter("@Id_prioridad", ticketNuevo.Prioridad.ID));
                 }
 
                 //TODO: Enviar email acá
                 if (!string.IsNullOrEmpty(ticketNuevo.DescripcionCierre) && !ticketNuevo.DescripcionCierre.Contains("Sin asignar"))
                 {
                     values += "DESCRIPCION_CIERRE = @Descripcion_cierre,";
-                    parameters.Add(new SqlParameter("@Descripcion_cierre", ticketNuevo.DescripcionCierre));
+                    parameters.Add(new MySqlParameter("@Descripcion_cierre", ticketNuevo.DescripcionCierre));
                 }
                 if (!string.IsNullOrEmpty(ticketNuevo.DescripcionInicial) && !ticketNuevo.DescripcionInicial.Contains("Sin asignar"))
                 {
                     values += "DESCRIPCION_INICIAL = @Descripcion_inicial,";
-                    parameters.Add(new SqlParameter("@Descripcion_inicial", ticketNuevo.DescripcionInicial));
+                    parameters.Add(new MySqlParameter("@Descripcion_inicial", ticketNuevo.DescripcionInicial));
                 }
                 if (ticket.LegajoUsuario != ticketNuevo.LegajoUsuario)
                 {
                     values += "USUARIO_ASIGNADO = @Legajo_usuario,";
-                    parameters.Add(new SqlParameter("@Legajo_usuario", ticketNuevo.LegajoUsuario));
+                    parameters.Add(new MySqlParameter("@Legajo_usuario", ticketNuevo.LegajoUsuario));
                 }
                 if (ticket.Estado.ID != ticketNuevo.Estado.ID)
                 {
                     values += " ID_ESTADO = @Id_estado,";
-                    parameters.Add(new SqlParameter("@Id_estado", ticketNuevo.Estado.ID));
+                    parameters.Add(new MySqlParameter("@Id_estado", ticketNuevo.Estado.ID));
                 }
                 if (values.EndsWith(","))
                 {
                     values = values.Substring(0, values.Length - 1);
                 }
-                string query = $@"UPDATE TICKETS SET {values} WHERE ID = @Id";
+                string query = $@"UPDATE TICKETS SET {values} WHERE ID = @Id;";
 
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
@@ -257,7 +259,7 @@ namespace Business
             try
             {
                 // Baja logica
-                data.SetQuery("UPDATE Tickets SET ESTADO = 0 WHERE ID = @Id");
+                data.SetQuery("UPDATE Tickets SET ESTADO = 0 WHERE ID = @Id;");
                 data.AddParameter("@Id", ticketID);
 
                 data.ExecuteQuery();
@@ -300,7 +302,7 @@ namespace Business
                             LEFT JOIN PRIORIDADES AS priori ON ticket.ID_PRIORIDAD = priori.ID
                             LEFT JOIN ESTADOS_TICKET AS estado ON ticket.ID_ESTADO = estado.ID
                             LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.LEGAJO
-                            WHERE ticket.ID = @TicketID"); // Utiliza un parámetro para evitar SQL injection
+                            WHERE ticket.ID = @TicketID;"); // Utiliza un parámetro para evitar SQL injection
                 data.AddParameter("@TicketID", ticketID); // Agrega el parámetro al comando
                 data.ExecuteQuery();
 
@@ -310,12 +312,12 @@ namespace Business
                     ticket.ID = (int)data.Reader["Id"];
                     ticket.Tipo = new TipoTicket
                     {
-                        ID = (byte)data.Reader["ID_TIPO"],
+                        ID = (sbyte)data.Reader["ID_TIPO"],
                         Nombre = data.Reader["TIPO"].ToString()
                     };
                     ticket.Prioridad = new Prioridad
                     {
-                        ID = (byte)data.Reader["ID_PRIORIDAD"],
+                        ID = (sbyte)data.Reader["ID_PRIORIDAD"],
                         Nombre = data.Reader["PRIORIDAD"].ToString()
                     };
                     ticket.DescripcionInicial = data.Reader["DESCRIPCION_INICIAL"].ToString();
@@ -334,7 +336,7 @@ namespace Business
                     }
                     ticket.Estado = new EstadoReclamo()
                     {
-                        ID = (byte)data.Reader["ID_ESTADO"],
+                        ID = (sbyte)data.Reader["ID_ESTADO"],
                         Nombre = data.Reader["ESTADO"].ToString()
                     };
                 }
@@ -356,7 +358,7 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT MIN(FECHA_INICIO) FROM TICKETS");
+                data.SetQuery(@"SELECT MIN(FECHA_INICIO) FROM TICKETS;");
                 data.ExecuteQuery();
                 data.Reader.Read();
                 return (int)data.Reader.GetInt32(0);

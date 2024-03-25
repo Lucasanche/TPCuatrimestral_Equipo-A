@@ -2,7 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +17,13 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT ID, NOMBRE, ESTADO FROM TIPOS_INCIDENCIA WHERE ESTADO = 1");
+                data.SetQuery(@"SELECT ID, NOMBRE, ESTADO FROM TIPOS_INCIDENCIA WHERE ESTADO = 1;");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
                     TipoTicket tipoTicketAux = new TipoTicket();
-                    tipoTicketAux.ID = (byte)data.Reader["ID"];
+                    tipoTicketAux.ID = (sbyte)data.Reader["ID"];
                     tipoTicketAux.Nombre = data.Reader["NOMBRE"].ToString();
                     tipoTicketLista.Add(tipoTicketAux);
                 }
@@ -47,12 +47,12 @@ namespace Business
             {
                 data.SetQuery(@"SELECT ID
                                 , NOMBRE
-                                FROM TIPOS_INCIDENCIA WHERE ID = " + ID.ToString());
+                                FROM TIPOS_INCIDENCIA WHERE ID = " + ID.ToString()+ ";");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
-                    tipoTicket.ID = (byte)data.Reader["ID"];
+                    tipoTicket.ID = (sbyte)data.Reader["ID"];
                     tipoTicket.Nombre = data.Reader["NOMBRE"].ToString();
                 }
             }
@@ -69,12 +69,12 @@ namespace Business
         public static int AgregarTipoTicket(string nombre)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
 
             try
             {
                 // Actualiza
-                data.SetQuery("INSERT INTO TIPOS_INCIDENCIA (NOMBRE) VALUES ('@Nombre')");
+                data.SetQuery("INSERT INTO TIPOS_INCIDENCIA (NOMBRE) VALUES ('@Nombre');");
                 data.AddParameter("@Nombre", nombre);
 
                 return data.ExecuteNonQuery();
@@ -91,12 +91,12 @@ namespace Business
         public static int EliminarTipoTicket(string desc)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
 
             try
             {
                 // Actualiza
-                data.SetQuery("DELETE FROM TIPOS_INCIDENCIA WHERE DESCRIPCION = @Descripcion");
+                data.SetQuery("DELETE FROM TIPOS_INCIDENCIA WHERE DESCRIPCION = @Descripcion;");
                 data.AddParameter("@Descripcion", desc);
 
                 return data.ExecuteNonQuery();
@@ -113,12 +113,12 @@ namespace Business
         public static int ModificarTipoTicket(string ticket, string nuevaDesc)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
 
             try
             {
                 // Actualiza
-                data.SetQuery("UPDATE TIPOS_INCIDENCIA SET NOMBRE = @NuevaDescripcion WHERE NOMBRE = @Ticket");
+                data.SetQuery("UPDATE TIPOS_INCIDENCIA SET NOMBRE = @NuevaDescripcion WHERE NOMBRE = @Ticket;");
                 data.AddParameter("@Ticket", ticket);
                 data.AddParameter("@NuevaDescripcion", nuevaDesc);
 

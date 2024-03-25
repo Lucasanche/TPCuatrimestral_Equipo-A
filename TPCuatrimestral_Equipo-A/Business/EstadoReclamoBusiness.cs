@@ -16,13 +16,13 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT ID, NOMBRE FROM ESTADOS_TICKET WHERE ESTADO = 1");
+                data.SetQuery(@"SELECT ID, NOMBRE FROM ESTADOS_TICKET WHERE ESTADO = 1;");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
                     EstadoReclamo estadoReclamoAux = new EstadoReclamo();
-                    estadoReclamoAux.ID = (byte)data.Reader["ID"];
+                    estadoReclamoAux.ID = (sbyte)data.Reader["ID"];
                     estadoReclamoAux.Nombre = data.Reader["NOMBRE"].ToString();
                     estadoReclamoesLista.Add(estadoReclamoAux);
                 }
@@ -46,12 +46,12 @@ namespace Business
             {
                 data.SetQuery(@"SELECT ID
                                 , NOMBRE
-                                FROM ESTADOS_TICKET WHERE ID = " + ID.ToString());
+                                FROM ESTADOS_TICKET WHERE ID = " + ID.ToString() +";");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
-                    estadoReclamo.ID = (byte)data.Reader["ID"];
+                    estadoReclamo.ID = (sbyte)data.Reader["ID"];
                     estadoReclamo.Nombre = data.Reader["NOMBRE"].ToString();
                 }
             }

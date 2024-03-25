@@ -18,7 +18,7 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery("SELECT * FROM ROLES");
+                data.SetQuery("SELECT * FROM ROLES;");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
@@ -40,20 +40,20 @@ namespace Business
                 data.Close();
             }
         }
-        public static Rol RolPorID(byte ID)
+        public static Rol RolPorID(int ID)
         {
             Rol rol = new Rol();
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"SELECT ID
-                                , DESCRIPCION
-                                FROM ROLES WHERE ID = " + ID.ToString());
+                string query = "SELECT ID, DESCRIPCION FROM ROLES WHERE ID = " + ID.ToString() + ";";
+                data.SetQuery(query);
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
                 {
-                    rol.ID = (byte)data.Reader["ID"];
+                    sbyte rolID = (sbyte)data.Reader["ID"];
+                    rol.ID = rolID;
                     rol.Descripcion = data.Reader["DESCRIPCION"].ToString();
                 }
             }

@@ -25,7 +25,7 @@ namespace TPCuatrimestral_Equipo_A
 
                     cliente = ClientesBusiness.ClientePorID(clienteID);
 
-                    if (!cliente.Estado)
+                    if (cliente.Estado == 0)
                     {
                         btnCrearTicketSobreCliente.Visible = false;
                         btnEditarCliente.Visible = false;

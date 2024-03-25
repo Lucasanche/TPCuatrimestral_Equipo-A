@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
     public class AccessData
     {
-        private readonly SqlConnection connection;
-        private readonly SqlCommand command;
-        private SqlDataReader reader;
-        private string connectionString = @"Server=tcp:brasil.database.windows.net,1433;Initial Catalog=CALL_CENTER;Persist Security Info=False;User ID=GrupoA;Password=utnpachecoA1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        public SqlDataReader Reader
+        private readonly MySqlConnection connection;
+        private readonly MySqlCommand command;
+        private MySqlDataReader reader;
+        private string connectionString = "server=190.61.250.150;user=effort_admin;database=effort_callCenter;port=3306;password=EffortDB123;";
+
+        public MySqlDataReader Reader
         {
             get { return reader; }
         }
 
         public AccessData()
         {
-            this.connection = new SqlConnection(connectionString);
-            this.command = new SqlCommand();
+            this.connection = new MySqlConnection(connectionString);
+            this.command = new MySqlCommand();
         }
 
-        public void SetQuery(string query, List<SqlParameter> parameters = null)
+        public void SetQuery(string query, List<MySqlParameter> parameters = null)
         {
             this.command.CommandType = CommandType.Text;
+            this.command.CommandText = query;
+
             if (parameters != null)
             {
                 foreach (var parameter in parameters)
@@ -32,7 +35,6 @@ namespace Data
                     command.Parameters.Add(parameter);
                 }
             }
-            this.command.CommandText = query;
         }
 
         public bool ExecuteQuery()
@@ -49,10 +51,12 @@ namespace Data
                 return false;
             }
         }
+
         public void AddParameter(string parameterName, object value)
         {
             command.Parameters.AddWithValue(parameterName, value);
         }
+
         public int ExecuteNonQuery()
         {
             try
@@ -66,6 +70,7 @@ namespace Data
                 return -1;
             }
         }
+
         public int GetLastId(string table)
         {
             SetQuery($"SELECT MAX(Id) FROM {table}");
@@ -73,6 +78,7 @@ namespace Data
             reader.Read();
             return Reader.GetInt32(0);
         }
+
         public void Close()
         {
             if (this.reader != null)
@@ -84,7 +90,5 @@ namespace Data
                 this.connection.Close();
             }
         }
-
-
     }
 }

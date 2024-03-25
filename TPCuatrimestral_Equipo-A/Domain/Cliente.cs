@@ -17,6 +17,6 @@ namespace Domain
         public DateTime FechaNacimiento { get; set; }
         public DateTime FechaAlta { get; set; }
         public DateTime? FechaBaja { get; set; }
-        public bool Estado { get; set; }
+        public sbyte Estado { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Net.Sockets;
 
 namespace Business
@@ -22,7 +22,7 @@ namespace Business
                                        APELLIDO,
                                        EMAIL, 
                                        TELEFONO_1, 
-                                       ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2,
+                                       IFNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2,
                                        FECHA_NACIMIENTO,
                                        FECHA_ALTA,
                                        FECHA_BAJA,
@@ -44,7 +44,7 @@ namespace Business
                     clienteAux.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
                     clienteAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
                     clienteAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    clienteAux.Estado = (bool)data.Reader["ESTADO"];
+                    clienteAux.Estado = (sbyte)data.Reader["ESTADO"];
                     //};
                     clienteLista.Add(clienteAux);
                 }
@@ -72,12 +72,12 @@ namespace Business
                                 , APELLIDO
                                 , EMAIL
                                 , TELEFONO_1
-                                , ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
+                                , IFNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
                                 , FECHA_NACIMIENTO
                                 , FECHA_ALTA
                                 , FECHA_BAJA
                                 , ESTADO 
-                                FROM CLIENTES WHERE ID = " + ID.ToString());
+                                FROM CLIENTES WHERE ID = " + ID.ToString() +";");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
@@ -92,7 +92,7 @@ namespace Business
                     cliente.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
                     cliente.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
                     cliente.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    cliente.Estado = (bool)data.Reader["ESTADO"];
+                    cliente.Estado = (sbyte)data.Reader["ESTADO"];
                 }
             }
             catch (Exception ex)
@@ -138,7 +138,7 @@ namespace Business
                     cliente.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
                     cliente.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
                     cliente.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    cliente.Estado = (bool)data.Reader["ESTADO"];
+                    cliente.Estado = (sbyte)data.Reader["ESTADO"];
                 }
             }
             catch (Exception ex)
@@ -185,7 +185,7 @@ namespace Business
                     cliente.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
                     cliente.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
                     cliente.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    cliente.Estado = (bool)data.Reader["ESTADO"];
+                    cliente.Estado = (sbyte)data.Reader["ESTADO"];
                 }
                 return cliente;
             }
@@ -233,7 +233,7 @@ namespace Business
                     clienteAux.FechaNacimiento = (DateTime)data.Reader["FECHA_NACIMIENTO"];
                     clienteAux.FechaAlta = (DateTime)data.Reader["FECHA_ALTA"];
                     clienteAux.FechaBaja = data.Reader["FECHA_BAJA"] != DBNull.Value ? (DateTime)data.Reader["FECHA_BAJA"] : (DateTime?)null;
-                    clienteAux.Estado = (bool)data.Reader["ESTADO"];
+                    clienteAux.Estado = (sbyte)data.Reader["ESTADO"];
                     //};
                     clienteLista.Add(clienteAux);
                 }
@@ -254,12 +254,12 @@ namespace Business
         {
 
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
             try
             {
                 
                 // guardar cliente en la base de datos.
-                data.SetQuery("INSERT INTO Clientes (Nombre, Apellido, DNI, Email, TELEFONO_1, FECHA_NACIMIENTO) VALUES (@Nombre, @Apellido, @Dni, @Email, @Telefono , @FechaNacimiento)");
+                data.SetQuery("INSERT INTO Clientes (Nombre, Apellido, DNI, Email, TELEFONO_1, FECHA_NACIMIENTO) VALUES (@Nombre, @Apellido, @Dni, @Email, @Telefono , @FechaNacimiento);");
                 data.AddParameter("@Nombre", nombre);
                 data.AddParameter("@Apellido", apellido);
                 data.AddParameter("@Dni", dni);
@@ -282,7 +282,7 @@ namespace Business
         {
             string DNIcliente = "";
             AccessData data = new AccessData();
-            string query = $"SELECT DNI FROM CLIENTES WHERE {parametro} = {valor}";
+            string query = $"SELECT DNI FROM CLIENTES WHERE {parametro} = {valor};";
 
             try
             {
@@ -310,7 +310,7 @@ namespace Business
             try
             {
                 // Actualiza
-                data.SetQuery("UPDATE CLIENTES SET NOMBRE = @Nombre, APELLIDO = @Apellido, EMAIL = @Email, TELEFONO_1 = @Telefono WHERE ID = @Id");
+                data.SetQuery("UPDATE CLIENTES SET NOMBRE = @Nombre, APELLIDO = @Apellido, EMAIL = @Email, TELEFONO_1 = @Telefono WHERE ID = @Id;");
                 data.AddParameter("@Id", id);
                 data.AddParameter("@Nombre", nombre);
                 data.AddParameter("@Apellido", apellido);
@@ -336,7 +336,7 @@ namespace Business
             {
                 DateTime fechaBaja = DateTime.Now;
 
-                data.SetQuery("UPDATE Clientes SET ESTADO = 0, FECHA_BAJA = @FechaBaja WHERE ID = @Id");
+                data.SetQuery("UPDATE Clientes SET ESTADO = 0, FECHA_BAJA = @FechaBaja WHERE ID = @Id;");
                 data.AddParameter("@Id", id);
                 data.AddParameter("@FechaBaja", fechaBaja);
 
@@ -354,11 +354,11 @@ namespace Business
         public static int Remove(Cliente cliente)
         {
             AccessData data = new AccessData();
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
             try
             {
-                string query = "DELETE FROM CLIENTES WHERE ID = @Id";
-                parameters.Add(new SqlParameter("@Id", cliente.ID));
+                string query = "DELETE FROM CLIENTES WHERE ID = @Id;";
+                parameters.Add(new MySqlParameter("@Id", cliente.ID));
                 data.SetQuery(query, parameters);
                 return data.ExecuteNonQuery();
             }

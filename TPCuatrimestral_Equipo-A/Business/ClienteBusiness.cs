@@ -27,7 +27,7 @@ namespace Business
                                        FECHA_ALTA,
                                        FECHA_BAJA,
                                        ESTADO 
-                                FROM CLIENTES");
+                                FROM CLIENTES;");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())

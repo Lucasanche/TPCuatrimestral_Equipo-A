@@ -39,14 +39,14 @@
     <asp:GridView ID="TicketsGV" CssClass="uk-table uk-table-striped uk-table-hover" runat="server" OnRowCommand="TicketsGV_RowCommand" AutoGenerateColumns="false" AllowSorting="true" OnSorting="TicketsGV_Sorting">
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID"/>
-            <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" SortExpression="TIPO"/>
+            <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo de incidente" SortExpression="TIPO"/>
             <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" SortExpression="PRIORIDAD"/>
-            <asp:BoundField DataField="NombreUsuario" HeaderText="Usuario Responsable" SortExpression="USUARIO"/>
+            <asp:BoundField DataField="NombreUsuario" HeaderText="Agente Responsable" SortExpression="USUARIO"/>
             <asp:BoundField DataField="ClienteAfectado.DNI" HeaderText="DNI Cliente Afectado" SortExpression="CLIENTE"/>
             <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha De Creacion" SortExpression="FECHA_CREACION"/>
             <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" SortExpression="ESTADO"/>
             <asp:BoundField DataField="FechaCierre" HeaderText="Fecha de cierre" />
-            <asp:TemplateField HeaderText="Opciones">
+            <asp:TemplateField HeaderText="Ver Detalles">
                 <ItemTemplate>
                     <div class="container-detalles">
                         <asp:LinkButton runat="server" CommandName="VerDetalles" CommandArgument='<%# Eval("ID") %>' CssClass="ver-clientes">

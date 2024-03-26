@@ -193,8 +193,6 @@ namespace TPCuatrimestral_Equipo_A
     }
 }
 // TODO:
-//-Ver usuarios responsables de tickets
-//- Modificar columna "Tipo" por "Tipo de incidente"
 //- Flechita de ordenamiento de filas
 //- Usuario responsable -> Agente responsable
 //- Cambiar columna "Opciones" a "Detalles" y sacarle el "Ver" al botón

@@ -194,7 +194,6 @@ namespace TPCuatrimestral_Equipo_A
 }
 // TODO:
 //-Ver usuarios responsables de tickets
-//- Botón VER y Agregar Ticket no funciona en Tickets
 //- Modificar columna "Tipo" por "Tipo de incidente"
 //- Flechita de ordenamiento de filas
 //- Usuario responsable -> Agente responsable

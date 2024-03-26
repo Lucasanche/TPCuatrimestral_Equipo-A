@@ -118,7 +118,7 @@ namespace Business
                                 , APELLIDO
                                 , EMAIL
                                 , TELEFONO_1
-                                , ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
+                                , IFNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
                                 , FECHA_NACIMIENTO
                                 , FECHA_ALTA
                                 , FECHA_BAJA
@@ -211,7 +211,7 @@ namespace Business
                                 , APELLIDO
                                 , EMAIL
                                 , TELEFONO_1
-                                , ISNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
+                                , IFNULL(TELEFONO_2, 'Sin asignar') as TELEFONO2
                                 , FECHA_NACIMIENTO
                                 , FECHA_ALTA
                                 , FECHA_BAJA

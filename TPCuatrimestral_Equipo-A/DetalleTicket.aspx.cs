@@ -21,7 +21,7 @@ namespace TPCuatrimestral_Equipo_A
             if (Request.QueryString["ID"] != null)
             { 
                 bool cerrado = false;
-                bool supervisor = (byte)Session["rol"] > 1;
+                bool supervisor = (int)Session["rol"] > 1;
                 if (!supervisor)
                 {
                     btnGuardarCambios.Visible= false;
@@ -75,7 +75,7 @@ namespace TPCuatrimestral_Equipo_A
                 lblID.Text = ticket.ID.ToString();
                 lblFechaCreacion.Text = ticket.FechaCreacion.ToString();
                 lblEstadoTicket.Text = ticket.Estado.Nombre;
-                if ((byte)Session["rol"] == 1)
+                if ((int)Session["rol"] == 1)
                 {
                     labelPrioridad.Text = ticket.Prioridad.Nombre;
                     labelTipoTicket.Text = ticket.Tipo.Nombre;
@@ -115,7 +115,7 @@ namespace TPCuatrimestral_Equipo_A
             Ticket ticket = new Ticket((Ticket)Session["ticket"]);
             Ticket ticketNuevo = new Ticket((Ticket)Session["ticket"]);
             bool modificado = false;
-            if ((byte)Session["rol"] > 1)
+            if ((int)Session["rol"] > 1)
             {
                 if (ddlTipoTicket.SelectedItem.Text != ticket.Tipo.Nombre)
                 {

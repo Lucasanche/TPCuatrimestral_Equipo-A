@@ -12,7 +12,7 @@
             <dl class="uk-description-list uk-description-list-divider">
                 <dt>ID</dt>
                 <asp:Label runat="server" ID="lblID"></asp:Label>
-                <%if ((byte)Session["rol"] == 1)
+                <%if ((int)Session["rol"] == 1)
                     { %>
                 <dd class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">TIPO:</label>

@@ -14,8 +14,7 @@ namespace Business
             AccessData data = new AccessData();
             try
             {
-                data.SetQuery(@"use effort_callCenter;
-                                SELECT
+                data.SetQuery(@"SELECT
                                     ticket.ID,
                                     tipo.ID AS ID_TIPO,
                                     tipo.NOMBRE AS TIPO,
@@ -34,7 +33,7 @@ namespace Business
                                 LEFT JOIN TIPOS AS tipo ON ticket.ID_TIPO = tipo.ID
                                 LEFT JOIN PRIORIDADES AS priori ON ticket.ID_PRIORIDAD = priori.ID
                                 LEFT JOIN ESTADOS_TICKET AS estado ON ticket.ID_ESTADO = estado.ID
-                                LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.LEGAJO;");
+                                LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.ID;");
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())
@@ -289,7 +288,7 @@ namespace Business
                             , priori.ID AS ID_PRIORIDAD
                             , priori.NOMBRE AS PRIORIDAD
                             , ticket.DESCRIPCION_INICIAL
-                            , ISNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE
+                            , IFNULL(ticket.DESCRIPCION_CIERRE, 'Sin asignar') AS DESCRIPCION_CIERRE
                             , usuario.LEGAJO AS LEGAJO_USUARIO
                             , CONCAT(usuario.NOMBRE,' ', usuario.APELLIDO) AS USUARIO
                             , CLIENTE_AFECTADO
@@ -298,7 +297,7 @@ namespace Business
                             , estado.ID AS ID_ESTADO
                             , estado.NOMBRE AS ESTADO
                             FROM TICKETS ticket
-                            LEFT JOIN TIPOS_INCIDENCIA AS tipo ON ticket.ID_TIPO = tipo.ID
+                            LEFT JOIN TIPOS AS tipo ON ticket.ID_TIPO = tipo.ID
                             LEFT JOIN PRIORIDADES AS priori ON ticket.ID_PRIORIDAD = priori.ID
                             LEFT JOIN ESTADOS_TICKET AS estado ON ticket.ID_ESTADO = estado.ID
                             LEFT JOIN USUARIOS AS usuario ON ticket.USUARIO_ASIGNADO = usuario.LEGAJO
